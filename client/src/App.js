@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import About from "./components/about";
-import Users from "./components/users";
+import LogIn from "./components/LogIn.js";
 import "./App.css";
 
 import productService from "./services/productService";
@@ -22,20 +21,14 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
+              <Link to="/LogIn">LogIn</Link>
             </li>
           </ul>
         </nav>
 
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/LogIn">
+            <LogIn />
           </Route>
         </Switch>
       </div>
