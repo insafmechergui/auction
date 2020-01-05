@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import About from "./components/about";
 import Users from "./components/users";
 import "./App.css";
+import SignUp from "./components/signup";
 
 import productService from "./services/productService";
 
@@ -27,6 +28,9 @@ function App() {
             <li>
               <Link to="/users">Users</Link>
             </li>
+            <li>
+              <Link to="/signup">signup</Link>
+            </li>
           </ul>
         </nav>
 
@@ -37,9 +41,14 @@ function App() {
           <Route path="/users">
             <Users />
           </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
         </Switch>
       </div>
     </Router>
+
+
   );
 }
 
