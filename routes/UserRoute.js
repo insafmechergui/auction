@@ -7,14 +7,11 @@ const bodyParser = require("body-parser");
 module.exports = app => {
 	//signup for a new user
 	//save name email and hashed password to database
-	app.post('/api/signup', (req, res, next) => {
+	app.post('/signup', (req, res, next) => {
 		var name = req.body.name; 
 		var email = req.body.email; 
 		var password = req.body.password; 
-	// var name = "name11111"; 
-	// 	var email = "email@gmail.com"; 
-	// 	var password = "helooo"; 
-	
+
 		const user = new User({
 			name: name, 
 			email: email, 
