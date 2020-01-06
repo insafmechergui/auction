@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Button, Form } from 'react-bootstrap';
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class SignUp extends React.Component {
 
     handleSubmit(event) {
         event.prenventDefault();
+
         axios.post('/signupDb', this.state)
             .then(function (response) {
                 console.log(response);
@@ -24,6 +26,9 @@ class SignUp extends React.Component {
             .catch(function (error) {
                 console.log(error);
             });
+
+
+
 
     }
 
@@ -48,24 +53,31 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label form="name">name:*</label>
-                        <input id="name" type="text" value={this.state.value} onChange={this.nameChange}></input>
-                    </div>
-                    <div>
-                        <label form="email">email:*</label>
-                        <input id="email" type="text" value={this.state.value} onChange={this.emailChange}></input>
-                    </div>
-                    <div>
-                        <label form="password">password:*</label>
-                        <input id="password" type="text" value={this.state.value} onChange={this.passwordChange}></input>
-                    </div>
 
-                    <button type="submit">SignUp</button>
-                </form>
-            </div>
+            < Form onSubmit={this.handleSubmit}>
+                <Form.Group controlId="name">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control name="name" value={this.state.value} onChange={this.nameChange} type="text" placeholder="Enter name" />
+                </Form.Group>
+
+                <Form.Group controlId="email">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control name="email" value={this.state.value} onChange={this.emailChange} type="email" placeholder="Enter email" />
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+    </Form.Text>
+                </Form.Group>
+
+                <Form.Group controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control name="password" value={this.state.value} onChange={this.passwordChange} type="password" placeholder="Password" />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">
+                    Submit
+  </Button>
+            </Form >
+
         )
     }
 }
