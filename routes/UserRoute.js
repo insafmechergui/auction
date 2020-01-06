@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = mongoose.model("user");
 const bodyParser = require("body-parser");
 
@@ -17,35 +17,31 @@ module.exports = app => {
 			email: email, 
 			password: password
 		});
-
-		user.findOne({
-			email: req.body.email
-		})
-		.then(user=> {
-			if(!user) {
+		User.findOne({email},	(err, data) => {
+			if (data) {
+				res.json({
+					user: true
+				})
+			} else {
 				bcrypt.hash(password, 10, (err, hash) => {
-          user.password = hash
-          User.create(user)
-						.then(user => {
-							res.json({
-								status: user.email + 'registered!'
+					if (err) {
+						console.log(hash)
+					} else {
+						var user = new User({
+							username: username,
+							password: hash
+						})
+						user.save((err) => {
+							if (err) throw err;
+							res.send({
+								saved: true
 							})
 						})
-						.catch(err => {
-							res.send('error: ' + err)
-						})
-      	})
-   		} else {
-				 res.json({
-					 error: 'User already exists'
-				 })
-			 }
+					}
+				});
+			}
 		})
-		.catch(err => {
-			res.send('error: ' + err)
-		})
-	});
-
+	})
 }
 // module.exports = app => { //example
 //   app.get(`/api/product`, async (req, res) => {

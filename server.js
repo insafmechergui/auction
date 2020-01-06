@@ -14,6 +14,7 @@ mongoose.connect(
 );
 
 app.use(bodyParser.json());
+// app.use(express.static(__dirname + './client/public'));
 
 //exemple for useing routes files
 // require("./routes/productRoutes")(app);
