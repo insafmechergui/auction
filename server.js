@@ -9,10 +9,16 @@ const app = express();
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`,
+  process.env.MONGODB_URI || `mongodb://localhost:27017/auctionProject`,
   { useUnifiedTopology: true, useNewUrlParser: true }
 );
 
+var db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => console.log("mongoose is connected connected"));
+
+app.use(bodyParser.json());
 app.use(bodyParser.json());
 
 //exemple for useing routes files
