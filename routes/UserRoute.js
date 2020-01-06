@@ -1,5 +1,55 @@
 const mongoose = require("mongoose");
+const express = require('express');
+const bcrypt = require('bcrypt');
 const User = mongoose.model("user");
+const bodyParser = require("body-parser");
+
+module.exports = app => {
+	//signup for a new user
+	//save name email and hashed password to database
+	app.post('/api/signup', (req, res, next) => {
+		var name = req.body.name; 
+		var email = req.body.email; 
+		var password = req.body.password; 
+	// var name = "name11111"; 
+	// 	var email = "email@gmail.com"; 
+	// 	var password = "helooo"; 
+	
+		const user = new User({
+			name: name, 
+			email: email, 
+			password: password
+		});
+
+		user.findOne({
+			email: req.body.email
+		})
+		.then(user=> {
+			if(!user) {
+				bcrypt.hash(password, 10, (err, hash) => {
+          user.password = hash
+          User.create(user)
+						.then(user => {
+							res.json({
+								status: user.email + 'registered!'
+							})
+						})
+						.catch(err => {
+							res.send('error: ' + err)
+						})
+      	})
+   		} else {
+				 res.json({
+					 error: 'User already exists'
+				 })
+			 }
+		})
+		.catch(err => {
+			res.send('error: ' + err)
+		})
+	});
+
+}
 // module.exports = app => { //example
 //   app.get(`/api/product`, async (req, res) => {
 //     let products = await Product.find();
