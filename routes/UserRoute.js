@@ -17,6 +17,7 @@ module.exports = app => {
 			email: email, 
 			password: password
 		});
+	
 		User.findOne({email},	(err, data) => {
 			if (data) {
 				res.json({
