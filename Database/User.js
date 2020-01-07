@@ -9,6 +9,6 @@ const userSchema = new Schema({
   password: String
 });
 
-mongoose.model("user", userSchema);
+var User = mongoose.model("user", userSchema);
 //  function find make this
 
