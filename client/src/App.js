@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import About from "./components/about";
 import Users from "./components/users";
+import Product from "./components/Product/Product";
+import MiniaturProduct from "./components/Product/MiniaturProduct";
+
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import productService from "./services/productService";
+
 
 function App() {
   // const getProducts = async () => { // exemple for using axios from servesie
@@ -15,6 +20,8 @@ function App() {
 
   return (
     <Router>
+      {/* <MiniaturProduct></MiniaturProduct> */}
+      <Product></Product>
       <div>
         <nav>
           <ul>
