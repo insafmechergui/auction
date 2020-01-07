@@ -9,12 +9,17 @@ const app = express();
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://localhost:27017/auction`,
+  process.env.MONGODB_URI || `mongodb://localhost:27017/auctionProject`,
   { useUnifiedTopology: true, useNewUrlParser: true }
 );
 
+var db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => console.log("mongoose is connected connected"));
+
 app.use(bodyParser.json());
-// app.use(express.static(__dirname + './client/public'));
+app.use(bodyParser.json());
 
 //exemple for useing routes files
 // require("./routes/productRoutes")(app);
@@ -31,3 +36,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
 });
+
