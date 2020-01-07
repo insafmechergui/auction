@@ -28,39 +28,3 @@ const userSchema = new Schema({
 });
 
 var User = mongoose.model("user", userSchema);
-
-const createUser = (userInfo, callback) => {
-  var user = new User({
-    name: userInfo.name,
-    email: userInfo.email,
-    password: userpassword
-  });
-  user.save(callback);
-};
-
-const findUser = (userEmail, callback) => {
-  User.findOne({ email: userEmail }, callback);
-};
-
-const generateAuthToken = (user, callback) => {
-  // prive key should be  {process.env.JWT_KEY}
-  jwt.sign(
-    { _id: user._id },
-    "private key",
-    { expiresIn: "5m" },
-    (err, token) => {
-      if (err) throw err;
-      user.tokens = user.tokens.concat({ token });
-      user
-        .save()
-        .then(user => callback(user, token))
-        .catch(err => {
-          throw err;
-        });
-    }
-  );
-};
-
-exports.createUser = createUser;
-exports.findUser = findUser;
-exports.generateAuthToken = generateAuthToken;

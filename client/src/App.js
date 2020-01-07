@@ -2,13 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LogIn from "./components/LogIn.js";
 import checkToken from "./services/checkToken";
+import Product from "./components/Product/Product";
+import MiniaturProduct from "./components/Product/MiniaturProduct";
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = { userName: null };
-
     this.changeUserName = this.changeUserName.bind(this);
   }
 
@@ -16,7 +18,6 @@ class App extends React.Component {
     //updates the page with the user
     this.setState({ userName });
   }
-
   componentDidMount() {
     //checks if the token is valid
     checkToken.checkAuth(window.localStorage.getItem("token")).then(res => {
