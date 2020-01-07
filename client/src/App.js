@@ -19,23 +19,31 @@ function App() {
   // };
 
   return (
-    <Router>
-      <MiniaturProduct></MiniaturProduct>
-      <Product></Product>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+
+    <React.Fragment>
+      <Layout>
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/signup">signup</Link>
+                </li>
+              </ul>
+            </nav>
+
+            <Switch>
+              <Route path="/signup">
+                <SignUp />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </Layout>
+    </React.Fragment>
 
         <Switch>
           <Route path="/about">

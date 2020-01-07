@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.json());
 
 //exemple for useing routes files
-// require("./routes/productRoutes")(app);
+require("./routes/UserRoute")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
