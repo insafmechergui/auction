@@ -8,27 +8,34 @@ const bodyParser = require("body-parser");
 module.exports = app => {
 	//signup for a new user
 	//save name email and hashed password to database
-	app.post("/signup", (req, res, next) => {
+	app.post("/api/signup", (req, res, next) => {
+
 		var name = req.body.name;
 		var email = req.body.email;
 	
     User.findOne({ email : email}, (err, data) => {
       if (err) res.status(404).send(err);
-      if (data) res.json("user already exists");
-      bcrypt.hash(req.body.password, 10, (err, hash) => {
-        if (err) res.status(404).send(err);
-        var user = new User({
-          name: name,
-          email: email,
-          password: hash
-        });
-        user.save(err => {
-          if (err) res.send(err);
-          res.status(201).send({
-            saved: true
+      if (!data) {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          if (err) res.status(404).send(err);
+          var user = new User({
+            name: name,
+            email: email,
+            password: hash
+          });
+          user.save(err => {
+            if (err) res.json({
+              saved: false
+            });
+            res.status(201).json({
+              saved: true
+            });
           });
         });
-      });
+      } 
+      else {
+        res.json("user already exists");
+      }
     });
   });
 }

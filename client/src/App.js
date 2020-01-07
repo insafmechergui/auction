@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import About from "./components/about";
-import Users from "./components/users";
+
 import "./App.css";
 import SignUp from "./components/signup";
 import { Container } from 'react-bootstrap';
 import productService from "./services/productService";
+import userService from "./services/userService";
 import { Layout } from "./components/layout";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
             </nav>
 
             <Switch>
-              <Route path="/signup">
+              <Route path="/signup" >
                 <SignUp />
               </Route>
             </Switch>
