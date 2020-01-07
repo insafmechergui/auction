@@ -1,61 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import About from "./components/about";
-import Users from "./components/users";
+import LogIn from "./components/LogIn.js";
+import checkToken from "./services/checkToken";
 import Product from "./components/Product/Product";
 import MiniaturProduct from "./components/Product/MiniaturProduct";
-
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import productService from "./services/productService";
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { userName: null };
+    this.changeUserName = this.changeUserName.bind(this);
+  }
 
-
-function App() {
-  // const getProducts = async () => { // exemple for using axios from servesie
-  //   let res = await productService.getAll();
-  //   console.log(res);
-  //   setproducts(res);
-  // };
-
-  return (
-
-    <React.Fragment>
-      <Layout>
-        <Router>
+  changeUserName(userName) {
+    //updates the page with the user
+    this.setState({ userName });
+  }
+  componentDidMount() {
+    //checks if the token is valid
+    checkToken.checkAuth(window.localStorage.getItem("token")).then(res => {
+      if (res) {
+        this.changeUserName(res.data.name);
+      }
+    });
+  }
+  render() {
+    //merge this part
+    return (
+      <Router>
+        <Switch>
           <div>
             <nav>
               <ul>
                 <li>
                   <Link to="/">Home</Link>
                 </li>
-                <li>
-                  <Link to="/signup">signup</Link>
-                </li>
+                {!this.state.userName ? (
+                  <Route exact path="/">
+                    <li>
+                      <Link to="/LogIn">LogIn</Link>
+                    </li>
+                    <li>
+                      <Link to="/">signUp</Link>
+                    </li>
+                    <div>not logged in</div>
+                  </Route>
+                ) : (
+                  <div> {this.state.userName} </div>
+                )}
               </ul>
             </nav>
-
-            <Switch>
-              <Route path="/signup">
-                <SignUp />
-              </Route>
-            </Switch>
+            <Route path="/Login" exact>
+              <LogIn changeUserName={this.changeUserName} />
+            </Route>
           </div>
-        </Router>
-      </Layout>
-    </React.Fragment>
-
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
         </Switch>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
 export default App;
