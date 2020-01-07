@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export default {
-  checkForLogIn({ email, password }) {
+  checkAuth(token) {
     return axios
-      .post("/api/logIn", { email, password })
+      .post("/api/me", { token })
       .then(res => res)
       .catch(err => {
         console.log(err);

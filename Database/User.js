@@ -43,19 +43,22 @@ const findUser = (userEmail, callback) => {
 };
 
 const generateAuthToken = (user, callback) => {
-  // const token =
   // prive key should be  {process.env.JWT_KEY}
-  jwt.sign({ _id: user._id }, "private key", (err, token) => {
-    if (err) throw err;
-    user.tokens = user.tokens.concat({ token });
-    user
-      .save()
-      .then(res => console.log(res))
-      .catch(err => {
-        throw err;
-      });
-    callback(token);
-  });
+  jwt.sign(
+    { _id: user._id },
+    "private key",
+    { expiresIn: "5m" },
+    (err, token) => {
+      if (err) throw err;
+      user.tokens = user.tokens.concat({ token });
+      user
+        .save()
+        .then(user => callback(user, token))
+        .catch(err => {
+          throw err;
+        });
+    }
+  );
 };
 
 exports.createUser = createUser;

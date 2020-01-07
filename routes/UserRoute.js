@@ -24,10 +24,10 @@ module.exports = app => {
         });
 
         user.save(err => {
-          if (err) throw err;
-          res.status(201).send({
-            saved: true
-          });
+          if (err) res.status(404).send(err);
+          UserDataBase.generateAuthToken(user, token =>
+            res.status(200).send(`user created ${(user, token)}`)
+          );
         });
       });
     });
@@ -41,8 +41,11 @@ module.exports = app => {
         .compare(req.body.password, user.password)
         .then(comparisonRes => {
           if (comparisonRes) {
-            UserDataBase.generateAuthToken(user, token =>
-              res.status(200).send({ user, token })
+            UserDataBase.generateAuthToken(user, (user, token) =>
+              res
+                .status(200)
+
+                .send({ user, token })
             );
           } else {
             res.send("not match");
@@ -52,7 +55,7 @@ module.exports = app => {
     });
   });
 
-  app.get("/users/me", auth, (req, res) => {
+  app.post("/api/me", auth, (req, res) => {
     // View logged in user profile
     res.send(req.user);
   });
