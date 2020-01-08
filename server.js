@@ -16,7 +16,7 @@ mongoose.connect(
 app.use(bodyParser.json());
 
 //exemple for useing routes files
-// require("./routes/productRoutes")(app);
+require("./routes/ProductRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
