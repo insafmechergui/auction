@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LogIn from "./components/User/LogIn.js";
-import SignUp from "./components/signup";
+import SignUp from "./components/User/signup";
 import Product from "./components/Product/Product";
 import AddProduct from "./components/Product/addProduct";
 import checkToken from "./services/checkToken";
@@ -31,7 +31,7 @@ class App extends React.Component {
     //merge this part
     return (
       <Router>
-        <AddProduct></AddProduct>
+
 
         <Switch>
           <div>
@@ -43,7 +43,7 @@ class App extends React.Component {
                 {!this.state.userName ? (
                   <Route exact path="/">
                     <li>
-                      <Link to="/LogIn">LogIn</Link>
+                      <Link to="/Login">LogIn</Link>
                     </li>
                     <li>
                       <Link to="/SignUp">signUp</Link>
@@ -56,8 +56,9 @@ class App extends React.Component {
               </ul>
             </nav>
 
-            <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route>
+
             <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
+            <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route>
 
           </div>
         </Switch>
