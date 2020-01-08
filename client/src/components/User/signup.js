@@ -97,7 +97,7 @@
 
 // export default SignUp;
 import React from "react";
-import { Button, Form, Alert } from "react-bootstrap";
+import { Button, Form, Alert, Modal } from "react-bootstrap";
 import signUpService from "../../services/signUpService.js";
 
 class SignUp extends React.Component {
@@ -109,7 +109,8 @@ class SignUp extends React.Component {
       password: "",
       show: false,
       alert: 'success',
-      message: 'Email already exist'
+      message: 'Email already exist',
+      showModal: true
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -149,18 +150,20 @@ class SignUp extends React.Component {
     });
 
   }
-
+  handleClose() {
+    this.setState({ showModal: false })
+  }
   render() {
     return (
-      <div className='signup'>
-      
+      // <div className='signup'>
 
+      <Modal className='signup' show={this.props.showModal} onHide={() => { this.props.onHide() }}>
         <Form onSubmit={this.handleSubmit}>
-        <Alert variant={this.state.alert} show={this.state.show} dismissible>
+          <Alert variant={this.state.alert} show={this.state.show} dismissible>
 
-{this.state.message}
+            {this.state.message}
 
-</Alert>
+          </Alert>
           <div id="dataError"></div>
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>
@@ -205,7 +208,8 @@ class SignUp extends React.Component {
             SugnUp
         </Button>
         </Form>
-      </div>
+      </Modal>
+      // </div>
     );
   }
 }
