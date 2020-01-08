@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Button, Form, Alert, Modal } from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
 import Product from "./components/Product/Product";
@@ -10,7 +11,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { userName: null };
+    this.state = {
+      userName: null,
+      showModalSignUp: false,
+      showModalLogin: false
+
+    };
     this.changeUserName = this.changeUserName.bind(this);
   }
 
@@ -27,12 +33,33 @@ class App extends React.Component {
       }
     });
   }
+
+  hundleShowSignUp() {
+    this.setState({
+      showModalSignUp: true
+    })
+  }
+  hundleCloseSignUp() {
+    this.setState({
+      showModalSignUp: false
+    })
+  }
+  hundleCloseLogin() {
+    this.setState({
+      showModalLogin: false
+    })
+  }
+  hundleShowLogin() {
+    this.setState({
+      showModalLogin: true
+    })
+  }
   render() {
     //merge this part
     return (
       <Router>
-
-
+        <SignUp showModal={this.state.showModalSignUp} onHide={() => { this.hundleCloseSignUp() }} changeUserName={this.changeUserName} />
+        <LogIn showModal={this.state.showModalLogin} onHide={() => { this.hundleCloseLogin() }} changeUserName={this.changeUserName} />
         <Switch>
           <div>
             <nav>
@@ -43,9 +70,11 @@ class App extends React.Component {
                 {!this.state.userName ? (
                   <Route exact path="/">
                     <li>
+                      <Button onClick={() => { this.hundleShowLogin() }} >Login</Button>
                       <Link to="/Login">LogIn</Link>
                     </li>
                     <li>
+                      <Button onClick={() => { this.hundleShowSignUp() }} >signUp</Button>
                       <Link to="/SignUp">signUp</Link>
                     </li>
                     <div>not logged in</div>
