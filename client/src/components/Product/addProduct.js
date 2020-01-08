@@ -35,7 +35,6 @@ class AddProduct extends React.Component {
 
     render() {
         return (
-
             <Form onSubmit={this.handleSubmit}>
                 <Form.Row>
                     <Form.Group controlId="formGridName">
