@@ -13,7 +13,9 @@ class App extends React.Component {
     super();
     this.state = {
       userName: null,
-      showModalSignUp: false
+      showModalSignUp: false,
+      showModalLogin: false
+
     };
     this.changeUserName = this.changeUserName.bind(this);
   }
@@ -31,6 +33,7 @@ class App extends React.Component {
       }
     });
   }
+
   hundleShowSignUp() {
     this.setState({
       showModalSignUp: true
@@ -41,12 +44,22 @@ class App extends React.Component {
       showModalSignUp: false
     })
   }
+  hundleCloseLogin() {
+    this.setState({
+      showModalLogin: false
+    })
+  }
+  hundleShowLogin() {
+    this.setState({
+      showModalLogin: true
+    })
+  }
   render() {
     //merge this part
     return (
       <Router>
         <SignUp showModal={this.state.showModalSignUp} onHide={() => { this.hundleCloseSignUp() }} changeUserName={this.changeUserName} />
-
+        <LogIn showModal={this.state.showModalLogin} onHide={() => { this.hundleCloseLogin() }} changeUserName={this.changeUserName} />
         <Switch>
           <div>
             <nav>
@@ -57,6 +70,7 @@ class App extends React.Component {
                 {!this.state.userName ? (
                   <Route exact path="/">
                     <li>
+                      <Button onClick={() => { this.hundleShowLogin() }} >Login</Button>
                       <Link to="/Login">LogIn</Link>
                     </li>
                     <li>

@@ -178,7 +178,7 @@ class SignUp extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email </Form.Label>
             <Form.Control
               name="email"
               value={this.state.value}

@@ -1,6 +1,6 @@
 import React from "react";
 import logInServices from "../../services/logInservice.js";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 class LogIn extends React.Component {
   constructor(props) {
     super(props);
@@ -55,29 +55,29 @@ class LogIn extends React.Component {
       //   <input type="submit" value="Submit" />
       // </form>
 
-
-      <Form onSubmit={this.handleSubmit} className='login'>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control name="email" type="email" placeholder="Enter email" onChange={this.handleChange} />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
+      <Modal className='signup' show={this.props.showModal} onHide={() => { this.props.onHide() }}>
+        <Form onSubmit={this.handleSubmit} >
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control name="email" type="email" placeholder="Enter email" onChange={this.handleChange} />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
             </Form.Text>
-        </Form.Group>
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control name="password" type="password" placeholder="Password" onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Form.Group className='text-center'>
-          <Button variant="primary" type="submit">
-            Login
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control name="password" type="password" placeholder="Password" onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Check me out" />
+          </Form.Group>
+          <Form.Group className='text-center'>
+            <Button variant="primary" type="submit">
+              Login
           </Button></Form.Group>
-      </Form>
-
+        </Form>
+      </Modal>
 
     );
   }
