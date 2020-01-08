@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/signup";
 import Product from "./components/Product/Product";
-import MiniaturProduct from "./components/Product/MiniaturProduct";
+import AddProduct from "./components/Product/addProduct";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -31,9 +31,8 @@ class App extends React.Component {
     //merge this part
     return (
       <Router>
-        <Product></Product>
-        <SignUp></SignUp>
-        <MiniaturProduct></MiniaturProduct>
+        <AddProduct></AddProduct>
+
         <Switch>
           <div>
             <nav>
@@ -47,7 +46,7 @@ class App extends React.Component {
                       <Link to="/LogIn">LogIn</Link>
                     </li>
                     <li>
-                      <Link to="/">signUp</Link>
+                      <Link to="/SignUp">signUp</Link>
                     </li>
                     <div>not logged in</div>
                   </Route>
@@ -56,9 +55,10 @@ class App extends React.Component {
                   )}
               </ul>
             </nav>
-            <Route path="/Login" exact>
-              <LogIn changeUserName={this.changeUserName} />
-            </Route>
+
+            <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route>
+            <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
+
           </div>
         </Switch>
       </Router>
