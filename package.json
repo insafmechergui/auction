@@ -16,9 +16,11 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.4.1",
     "express": "^4.17.1",
     "grunt": "^1.0.4",
-    "mongoose": "^5.8.4"
+    "mongoose": "^5.8.4",
+    "react-bootstrap": "^1.0.0-beta.16"
   },
   "devDependencies": {
     "concurrently": "^5.0.2",
