@@ -5,7 +5,6 @@ const User = mongoose.model("user");
 
 const auth = (req, res, next) => {
   // const token = req.header("Authorization").replace("Bearer ", "");
-  console.log(req.body);
   const token = req.body.token;
   if (token !== null) {
     //should be process.env.JWT_KEY
