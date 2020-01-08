@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/signup";
-// import Product from "./components/Product/Product";
-// import MiniaturProduct from "./components/Product/MiniaturProduct";
+import Product from "./components/Product/Product";
+import MiniaturProduct from "./components/Product/MiniaturProduct";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,7 +11,6 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = { userName: null };
-
     this.changeUserName = this.changeUserName.bind(this);
   }
 
@@ -32,6 +31,9 @@ class App extends React.Component {
     //merge this part
     return (
       <Router>
+        <Product></Product>
+        <SignUp></SignUp>
+        <MiniaturProduct></MiniaturProduct>
         <Switch>
           <div>
             <nav>
@@ -50,8 +52,8 @@ class App extends React.Component {
                     <div>not logged in</div>
                   </Route>
                 ) : (
-                  <div> {this.state.userName} </div>
-                )}
+                    <div> {this.state.userName} </div>
+                  )}
               </ul>
             </nav>
             <Route path="/Login" exact>
