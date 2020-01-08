@@ -5,31 +5,33 @@ const User = mongoose.model("user");
 const auth = require("./middleware/auth");
 const router = require("router");
 module.exports = app => {
-  //example
-  app.post("/signup", (req, res, next) => {
+  app.post("/api/signup", (req, res, next) => {
     var name = req.body.name;
     var email = req.body.email;
 
-    User.findOne({ email }, (err, data) => {
+    User.findOne({ email: email }, (err, data) => {
       if (err) res.status(404).send(err);
-      if (data) res.json("user already exists");
-
-      bcrypt.hash(req.body.password, 10, (err, hash) => {
-        if (err) res.status(404).send(err);
-
-        var user = new User({
-          name: name,
-          email: email,
-          password: hash
-        });
-
-        user.save(err => {
+      if (!data) {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) res.status(404).send(err);
-          UserDataBase.generateAuthToken(user, token =>
-            res.status(200).send(`user created ${(user, token)}`)
-          );
+          var user = new User({
+            name: name,
+            email: email,
+            password: hash
+          });
+          user.save(err => {
+            if (err)
+              res.json({
+                saved: false
+              });
+            UserDataBase.generateAuthToken(user, token =>
+              res.status(200).send(`user created ${(user, token)}`)
+            );
+          });
         });
-      });
+      } else {
+        res.json("user already exists");
+      }
     });
   });
 
