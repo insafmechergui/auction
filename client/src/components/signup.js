@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import { Button, Form } from "react-bootstrap";
+import signUpService from "../services/signUpService";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -10,53 +10,38 @@ class SignUp extends React.Component {
       email: "",
       password: ""
     };
-    this.nameChange = this.nameChange.bind(this);
-    this.passwordChange = this.passwordChange.bind(this);
-    this.emailChange = this.emailChange.bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
-    event.prenventDefault();
-
-    axios
-      .post("/signupDb", this.state)
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    event.preventDefault();
+    signUpService.getAll(this.state).then(res => {
+      if (res.data === "user already exists") {
+        document.getElementById("dataError").textContent =
+          "Email already exist";
+      }
+      if (res.data.saved === true) {
+        document.getElementById("dataError").textContent = "";
+      }
+    });
   }
 
-  nameChange(event) {
-    event.preventDefault();
-
-    this.setState({ name: event.target.value });
-    console.log(this.state);
-  }
-
-  emailChange(event) {
-    event.preventDefault();
-    this.setState({ email: event.target.value });
-    console.log(this.state);
-  }
-
-  passwordChange(event) {
-    event.preventDefault();
-    this.setState({ password: event.target.value });
-    console.log(this.state);
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
+        <div id="dataError"></div>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
             name="name"
             value={this.state.value}
-            onChange={this.nameChange}
+            onChange={this.handleChange}
             type="text"
             placeholder="Enter name"
           />
@@ -67,7 +52,7 @@ class SignUp extends React.Component {
           <Form.Control
             name="email"
             value={this.state.value}
-            onChange={this.emailChange}
+            onChange={this.handleChange}
             type="email"
             placeholder="Enter email"
           />
@@ -81,14 +66,15 @@ class SignUp extends React.Component {
           <Form.Control
             name="password"
             value={this.state.value}
-            onChange={this.passwordChange}
+            onChange={this.handleChange}
             type="password"
             placeholder="Password"
           />
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Submit
+          {" "}
+          Submit{" "}
         </Button>
       </Form>
     );
