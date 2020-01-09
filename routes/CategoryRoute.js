@@ -34,10 +34,17 @@ module.exports = app => {
         })
     })
 
-    app.get('/categories', (req, res) => {
+    app.get('/api/categories', (req, res) => {
+        console.log('cateeeeeeeeeeeeeee')
         Category.getAll((err, data) => {
-            if (err) res.status(404).send(err)
-            else res.status(200).send(data)
+            if (err) {
+                res.status(404).send(err)
+            }
+            else {
+                console.log(data)
+                res.status(200).send(data)
+                res.end()
+            }
         })
     })
 }
