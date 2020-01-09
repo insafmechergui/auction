@@ -15,10 +15,10 @@ const productSchema = new Schema({
     }
   },
   category: [{ type: Schema.Types.ObjectId, ref: "Categorie" }],
-  last_auction_price: { type: Number, required: true },
+  last_auction_price: { type: Number },
   value: { type: Number, required: true },
   initial_date: { type: Date, required: true },
-  Duration: { type: String, required: true },
+  duration: { type: String, required: true },
   participants: [
     {
       user: { type: Schema.Types.ObjectId, ref: "user" },
