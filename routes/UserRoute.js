@@ -1,19 +1,15 @@
 const mongoose = require("mongoose");
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const database = require('../Database/User')
+const UserDataBase = require("../Database/User");
+const bcrypt = require("bcryptjs");
 const User = mongoose.model("user");
-const bodyParser = require("body-parser");
+const auth = require("./middleware/auth");
 
 module.exports = app => {
-	//signup for a new user
-	//save name email and hashed password to database
-	app.post("/api/signup", (req, res, next) => {
+  app.post("/api/signup", (req, res, next) => {
+    var name = req.body.name;
+    var email = req.body.email;
 
-		var name = req.body.name;
-		var email = req.body.email;
-	
-    User.findOne({ email : email}, (err, data) => {
+    User.findOne({ email: email }, (err, data) => {
       if (err) res.status(404).send(err);
       if (!data) {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -24,55 +20,67 @@ module.exports = app => {
             password: hash
           });
           user.save(err => {
-            if (err) res.json({
-              saved: false
-            });
-            res.status(201).json({
-              saved: true
-            });
+            if (err)
+              res.json({
+                saved: false
+              });
+            UserDataBase.generateAuthToken(user, token =>
+              res.status(200).send(`user created ${(user, token)}`)
+            );
           });
         });
-      } 
-      else {
+      } else {
         res.json("user already exists");
       }
     });
   });
-}
 
-// module.exports = app => { //example
-//   app.get(`/api/product`, async (req, res) => {
-//     let products = await Product.find();
-//     return res.status(200).send(products);
-//   });
+  app.post("/api/logIn", (req, res) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
+      if (err) throw err;
+      if (!user) res.status(404).send("user is not found");
+      bcrypt
+        .compare(req.body.password, user.password)
+        .then(comparisonRes => {
+          if (comparisonRes) {
+            UserDataBase.generateAuthToken(user, (user, token) =>
+              res
+                .status(200)
 
-//   app.post(`/api/product`, async (req, res) => {
-//     let product = await Product.create(req.body);
-//     return res.status(201).send({
-//       error: false,
-//       product
-//     });
-//   });
+                .send({ user, token })
+            );
+          } else {
+            res.send("not match");
+          }
+        })
+        .catch(err => err);
+    });
+  });
 
-//   app.put(`/api/product/:id`, async (req, res) => {
-//     const { id } = req.params;
+  app.post("/api/me", auth, (req, res) => {
+    // View logged in user profile
+    res.send(req.user);
+  });
 
-//     let product = await Product.findByIdAndUpdate(id, req.body);
+  //   app.put(`/api/product/:id`, async (req, res) => {
+  //     const { id } = req.params;
 
-//     return res.status(202).send({
-//       error: false,
-//       product
-//     });
-//   });
+  //     let product = await Product.findByIdAndUpdate(id, req.body);
 
-//   app.delete(`/api/product/:id`, async (req, res) => {
-//     const { id } = req.params;
+  //     return res.status(202).send({
+  //       error: false,
+  //       product
+  //     });
+  //   });
 
-//     let product = await Product.findByIdAndDelete(id);
+  //   app.delete(`/api/product/:id`, async (req, res) => {
+  //     const { id } = req.params;
 
-//     return res.status(202).send({
-//       error: false,
-//       product
-//     });
-//   });
-// };
+  //     let product = await Product.findByIdAndDelete(id);
+
+  //     return res.status(202).send({
+  //       error: false,
+  //       product
+  //     });
+  //   });
+};

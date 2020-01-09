@@ -19,10 +19,13 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => console.log("mongoose is connected connected"));
 
 app.use(bodyParser.json());
-app.use(bodyParser.json());
 
 //exemple for useing routes files
-require("./routes/UserRoute")(app);
+require("./routes/UserRoute.js")(app);
+
+require("./routes/ProductRoute.js")(app);
+
+require("./routes/CategoryRoute.js")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -36,4 +39,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
 });
-
