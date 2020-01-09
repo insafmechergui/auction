@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button, Form, Alert, Modal } from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
-import Product from "./components/Product/Product";
 import AddProduct from "./components/Product/addProduct";
+import AddCategory from "./components/category/AddCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -55,11 +55,13 @@ class App extends React.Component {
     })
   }
   render() {
-    //merge this part
+
     return (
       <Router>
         <SignUp showModal={this.state.showModalSignUp} onHide={() => { this.hundleCloseSignUp() }} changeUserName={this.changeUserName} />
         <LogIn showModal={this.state.showModalLogin} onHide={() => { this.hundleCloseLogin() }} changeUserName={this.changeUserName} />
+        <AddCategory></AddCategory>
+        <AddProduct></AddProduct>
         <Switch>
           <div>
             <nav>

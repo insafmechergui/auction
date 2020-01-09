@@ -55,7 +55,8 @@ var getAllProductByCategory = function(categoryName, callback) {
     });
 };
 
-var getAll = function(callback) {
+
+var getAll = function (callback) {
   Category.find({}, (err, data) => {
     if (err) {
       callback(err, null);
@@ -69,3 +70,5 @@ module.exports.deleteCategory = deleteCategory;
 module.exports.createCategory = createCategory;
 module.exports.getAllProductByCategory = getAllProductByCategory;
 module.exports.getAll = getAll;
+
+

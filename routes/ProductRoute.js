@@ -12,7 +12,7 @@ app.use(cors());
 module.exports = app => {
   // all product
   app.get("/api/allProducts", (req, res) => {
-    Product.find(function(err, products) {
+    Product.find(function (err, products) {
       if (err) {
         console.log(err);
       } else {
@@ -24,14 +24,19 @@ module.exports = app => {
   });
 
   //  product by id
-  app.get("/api/:id", (req, res) => {
+  app.get("/api/product/:id", (req, res) => {
+    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
     let id = req.params.id;
     Product.findById(id)
       .populate("participants.user")
       .populate("winner")
       .exec((err, product) => {
-        if (err) res.json(err);
-        res.json(product);
+        if (err) { res.json(err); }
+        else {
+          res.send(product);
+          // console.log(product)
+        }
+        res.end()
       });
   });
 
@@ -39,15 +44,12 @@ module.exports = app => {
   // question if the admin make a mistake on adding a product can he update if ?????
 
   app.post("/api/add", (req, res) => {
+    console.log(req.body)
     let product = new Product(req.body);
     product
-      .save()
-      .then(product => {
-        res.status(200).json({ msg: "product added succesfuly", product });
+      .save((err, result) => {
+        console.log(err, result)
       })
-      .catch(err => {
-        res.status(400).send({ msg: "adding new product failed", err });
-      });
   });
 
   // app.post("/api//update/:id", (req, res) => {   // this function should be reconsidered
