@@ -4,7 +4,7 @@ const validator = require("validator");
 
 const productSchema = new Schema({
   name: { type: String, required: true },
-  descreption: { type: String, required: true },
+  descreption: { type: String },
   image: {
     type: String,
     required: true,
@@ -16,9 +16,9 @@ const productSchema = new Schema({
   },
   category: [{ type: Schema.Types.ObjectId, ref: "Categorie" }],
   last_auction_price: { type: Number },
-  value: { type: Number, required: true },
-  initial_date: { type: Date, required: true },
-  duration: { type: String, required: true },
+  value: { type: Number },
+  initial_date: { type: Date },
+  duration: { type: String },
   participants: [
     {
       user: { type: Schema.Types.ObjectId, ref: "user" },
@@ -28,7 +28,19 @@ const productSchema = new Schema({
   winner: [{ type: Schema.Types.ObjectId, ref: "user" }]
 });
 
+var Product = mongoose.model("Product", productSchema);
 
+var getAll = function (callback) {
+  Product.find((err, data) => {
+    if (err) {
+      console.log('-------------------------------err')
+      callback(err, null)
+    } else {
+      console.log('-------------------------------data', data)
+      callback(null, data)
+    }
 
-mongoose.model("products", productSchema);
-//  function find make this
+  })
+}
+
+module.exports.getAll = getAll;

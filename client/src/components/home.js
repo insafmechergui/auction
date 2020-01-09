@@ -8,7 +8,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: [1, 2, 3]
+            products: []
         }
     }
 

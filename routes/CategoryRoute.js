@@ -34,6 +34,10 @@ module.exports = app => {
         })
     })
 
+    app.get('/api/yes', (req, res) => {
+        res.send('ok')
+        res.end()
+    })
     app.get('/api/categories', (req, res) => {
 
         Category.getAll((err, data) => {
