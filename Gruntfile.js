@@ -17,13 +17,13 @@ module.exports = function(grunt) {
 
     jshint: {
       options: {
-        //     curly: true,
-        //     eqeqeq: true,
-        //     eqnull: true,
-        //     browser: true,
-        //     globals: {
-        //       jQuery: true
-        //     },
+        curly: true,
+        eqeqeq: true,
+        eqnull: true,
+        browser: true,
+        globals: {
+          jQuery: true
+        },
         esversion: 6
       },
       all: ["Gruntfile.js", "client", "routes"]
