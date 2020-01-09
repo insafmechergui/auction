@@ -15,7 +15,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         productServices.getAll().then((res) => {
-            console.log('====>', res)
+
             this.setState({
                 products: res.data
             })
@@ -27,7 +27,7 @@ class Home extends React.Component {
             <Container className="home">
                 {this.state.products.map((product) => {
                     return (
-                        <MiniaturProduct></MiniaturProduct>)
+                        <MiniaturProduct onClick={console.log('ok')} product={product}></MiniaturProduct>)
                 })}
             </Container >
 
