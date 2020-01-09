@@ -1,30 +1,31 @@
 const mongoose = require("mongoose");
-let Product = mongoose.model("products");
+let Product = mongoose.model("Product");
 let User = mongoose.model("user");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const productRoutes = express.Router();
+
+const Products = require('../Database/Product')
+
 
 app.use(cors());
 
 module.exports = app => {
-  // all product
-  app.get("/api/products", (req, res) => {
-    Product.find(function (err, products) {
 
+  app.get('/api/products', (req, res) => {
+
+    Products.getAll((err, data) => {
       if (err) {
         res.status(404).send(err)
-
-      } else {
-        //
-        console.log('===>', products);
-        res.status(200).send(products);
+      }
+      else {
+        res.status(200).send(data)
         res.end()
       }
-    });
-  });
+    })
+  })
+
 
   //  product by id
   app.get("/api/product/:id", (req, res) => {
@@ -46,45 +47,16 @@ module.exports = app => {
   // just for admin add or update in case of error of insertion
   // question if the admin make a mistake on adding a product can he update if ?????
 
-  app.post("/api/add", (req, res) => {
+  app.post("/api/addp", (req, res) => {
     console.log(req.body)
     let product = new Product(req.body);
     product
       .save((err, result) => {
         console.log(err, result)
+        res.send(result)
       })
   });
 
-  // app.post("/api//update/:id", (req, res) => {   // this function should be reconsidered
-  //   console.log("heheh");
-  //   Product.findById(req.params.id, (err, product) => {
-  //     if (err) res.json(err);
-  //     // maybe we should add a condition of there is no auction in this product yet
-  //     if (!product) res.status(404).send("hheey not found");
-  //     else product.name = req.body.name;
-  //     product.descreption = req.body.descreption;
-  //     product.image = req.body.image;
-  //     product.category = req.body.category;
-  //     product.last_auction_price = req.body.last_auction_price;
-  //     product.value = req.body.value;
-  //     product.initial_date = req.body.initial_date;
-  //     product.Duration = req.body.Duration;
-  //     product.availability = true;
-  //     product.participants = [];
-  //     product.winner = {};
-
-  //     product
-  //       .save()
-  //       .then(product => {
-  //         res.json("product updated");
-  //       })
-  //       .catch(err => {
-  //         res.status(400).send("Update not done");
-  //       });
-  //   });
-  // });
-
-  // update current price
   app.put("/api/product/:id/:auction", (req, res) => {
     // the user should be provided for now his id is in the req
     var auc = req.params.auction;
@@ -120,6 +92,10 @@ module.exports = app => {
       }
     });
   });
+
+
+
+
   // update availability
   // app.get("/api/product/:id", (req, res) => { this function might be moved too the front end
   //   // check if the initial_date + duration >= sysdate, if it is
@@ -135,3 +111,33 @@ module.exports = app => {
   //   });
   // });
 };
+  // app.post("/api//update/:id", (req, res) => {   // this function should be reconsidered
+  //   console.log("heheh");
+  //   Product.findById(req.params.id, (err, product) => {
+  //     if (err) res.json(err);
+  //     // maybe we should add a condition of there is no auction in this product yet
+  //     if (!product) res.status(404).send("hheey not found");
+  //     else product.name = req.body.name;
+  //     product.descreption = req.body.descreption;
+  //     product.image = req.body.image;
+  //     product.category = req.body.category;
+  //     product.last_auction_price = req.body.last_auction_price;
+  //     product.value = req.body.value;
+  //     product.initial_date = req.body.initial_date;
+  //     product.Duration = req.body.Duration;
+  //     product.availability = true;
+  //     product.participants = [];
+  //     product.winner = {};
+
+  //     product
+  //       .save()
+  //       .then(product => {
+  //         res.json("product updated");
+  //       })
+  //       .catch(err => {
+  //         res.status(400).send("Update not done");
+  //       });
+  //   });
+  // });
+
+  // update current price
