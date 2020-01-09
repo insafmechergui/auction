@@ -14,10 +14,19 @@ module.exports = function(grunt) {
         command: "git add ."
       },
       commit: {
-        command: msg => `git commit -m \"commited by grunt gang  ${msg} \"`
+        command: msg => {
+          var msg = grunt.option("myParam") || "";
+          return `git commit -m \"commited by grunt gang  ${msg} \"`;
+        }
       },
       push: {
         command: "git push origin master"
+      },
+      echo: {
+        command: msg => {
+          var msg = grunt.option("myParam") || "hello";
+          return `echo ${msg}`;
+        }
       }
     },
 
@@ -39,10 +48,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-shell");
 
   grunt.registerTask("default", ["jshint"]);
-  grunt.registerTask(
-    "git",
-    ["shell:add", "shell:commit:grunsssssst", "shell:push"].join("&&")
-  );
-  grunt.registerTask("git", ["shell:git"]);
+  grunt.registerTask("git", ["shell:add", "shell:commit", "shell:push"]);
+  grunt.registerTask("gitddd", ["shell:echo"]);
   grunt.registerTask("gitchain", ["shell:ls", "shell:ls"]);
 };
