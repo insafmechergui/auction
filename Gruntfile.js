@@ -4,6 +4,13 @@ module.exports = function(grunt) {
       ls: {
         command: "ls"
       },
+      git: {
+        command: [
+          "git add .",
+          'git commit -m "commited by grunt gang"',
+          "git push origin master"
+        ].join("&&")
+      },
       add: {
         command: "git add ."
       },
@@ -33,6 +40,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-shell");
 
   grunt.registerTask("default", ["jshint"]);
-  grunt.registerTask("git", ["shell:add:commit:push"]);
-  grunt.registerTask("gitadd", ["shell:add"]);
+  grunt.registerTask(
+    "git",
+    ["shell:add", "shell:commit", "shell:push"].join("&&")
+  );
+  grunt.registerTask("gitadd", ["shell:git"]);
 };
