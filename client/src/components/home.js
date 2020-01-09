@@ -1,21 +1,35 @@
+
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import MiniaturProduct from './Product/MiniaturProduct'
+import productServices from "../services/productService";
+import { Button, Form, Card, Container } from 'react-bootstrap';
 
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            products: []
         }
-
     }
 
-    componentDidMount() { }
+    componentDidMount() {
+        productServices.getAll().then((res) => {
+            console.log('====>', res)
+            this.setState({
+                products: res.data
+            })
+        })
+    }
 
     render() {
         return (
-            <div></div>
+            <Container className="home">
+                {this.state.products.map((product) => {
+                    return (
+                        <MiniaturProduct></MiniaturProduct>)
+                })}
+            </Container >
 
         )
     }

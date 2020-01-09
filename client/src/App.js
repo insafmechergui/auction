@@ -12,7 +12,11 @@ import {
 } from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
+
 import signOutService from "./services/signOutServices";
+
+import Home from "./components/home"
+
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
 import checkToken from "./services/checkToken";
@@ -99,6 +103,7 @@ class App extends React.Component {
             changeUserName={this.changeUserName}
           />
           <Switch>
+
             <Navbar bg="light" expand="lg">
               <Navbar.Brand>RBK Auction</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -157,6 +162,8 @@ class App extends React.Component {
             </Navbar>
           </Switch>
         </Router>
+
+        <Home></Home>
       </div>
     );
   }
