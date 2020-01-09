@@ -1,14 +1,25 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Button, Form, Alert, Modal, Navbar, Nav, NavDropdown, FormControl } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Alert,
+  Modal,
+  Navbar,
+  Nav,
+  NavDropdown,
+  FormControl
+} from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
+import signOutService from "./services/signOutServices";
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
+import Axios from "axios";
 class App extends React.Component {
   constructor() {
     super();
@@ -16,9 +27,23 @@ class App extends React.Component {
       userName: null,
       showModalSignUp: false,
       showModalLogin: false
-
     };
     this.changeUserName = this.changeUserName.bind(this);
+  }
+
+  hundleSignOut() {
+    const token = localStorage.getItem("token");
+    signOutService
+      .signOut(this.state.userName)
+      .then(res => {
+        if (res.data.deleted === "success") {
+          localStorage.removeItem("token");
+          this.setState({ userName: null });
+        } else {
+          console.log("not deleted");
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   changeUserName(userName) {
@@ -38,50 +63,94 @@ class App extends React.Component {
   hundleShowSignUp() {
     this.setState({
       showModalSignUp: true
-    })
+    });
   }
   hundleCloseSignUp() {
     this.setState({
       showModalSignUp: false
-    })
+    });
   }
   hundleCloseLogin() {
     this.setState({
       showModalLogin: false
-    })
+    });
   }
   hundleShowLogin() {
     this.setState({
       showModalLogin: true
-    })
+    });
   }
   render() {
-
     return (
-      <div >
+      <div>
         <Router>
-          <SignUp showModal={this.state.showModalSignUp} onHide={() => { this.hundleCloseSignUp() }} changeUserName={this.changeUserName} />
-          <LogIn showModal={this.state.showModalLogin} onHide={() => { this.hundleCloseLogin() }} changeUserName={this.changeUserName} />
+          <SignUp
+            showModal={this.state.showModalSignUp}
+            onHide={() => {
+              this.hundleCloseSignUp();
+            }}
+            changeUserName={this.changeUserName}
+          />
+          <LogIn
+            showModal={this.state.showModalLogin}
+            onHide={() => {
+              this.hundleCloseLogin();
+            }}
+            changeUserName={this.changeUserName}
+          />
           <Switch>
             <Navbar bg="light" expand="lg">
-              <Navbar.Brand >RBK Auction</Navbar.Brand>
+              <Navbar.Brand>RBK Auction</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 {!this.state.userName ? (
-
-                  <Nav className="mr-auto" >
-                    <Nav.Link onClick={() => { this.hundleShowSignUp() }}>SignUp</Nav.Link>
-                    <Nav.Link onClick={() => { this.hundleShowLogin() }}>Login</Nav.Link>
-                    <Nav.Link onClick={() => { this.hundleShowLogin() }}>Home</Nav.Link>
+                  <Nav className="mr-auto">
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleShowSignUp();
+                      }}
+                    >
+                      SignUp
+                    </Nav.Link>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleShowLogin();
+                      }}
+                    >
+                      Login
+                    </Nav.Link>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleShowLogin();
+                      }}
+                    >
+                      Home
+                    </Nav.Link>
                   </Nav>
                 ) : (
-                    <Nav>
-                      <Nav.Link onClick={() => { this.hundleShowSignUp() }}>SignOut</Nav.Link>
-                      <Nav.Link onClick={() => { this.hundleShowSignUp() }}>{this.state.userName}</Nav.Link>
-                    </Nav>
-                  )}
+                  <Nav>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleSignOut();
+                      }}
+                    >
+                      SignOut
+                    </Nav.Link>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleShowSignUp();
+                      }}
+                    >
+                      {this.state.userName}
+                    </Nav.Link>
+                  </Nav>
+                )}
                 <Form inline>
-                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                  <FormControl
+                    type="text"
+                    placeholder="Search"
+                    className="mr-sm-2"
+                  />
                   <Button variant="outline-success">Search</Button>
                 </Form>
               </Navbar.Collapse>
@@ -93,9 +162,8 @@ class App extends React.Component {
   }
 }
 
-
-
-{/* <div>
+{
+  /* <div>
             <nav>
               <ul>
                 <li>
@@ -123,5 +191,6 @@ class App extends React.Component {
              <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
             <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route> 
 
-          </div> */}
+          </div> */
+}
 export default App;
