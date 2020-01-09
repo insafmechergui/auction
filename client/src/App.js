@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Button, Form, Alert, Modal, Navbar, Nav, NavDropdown, FormControl } from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
+import Home from "./components/home"
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
 import checkToken from "./services/checkToken";
@@ -88,6 +89,7 @@ class App extends React.Component {
             </Navbar>
           </Switch>
         </Router>
+        <Home></Home>
       </div>
     );
   }
