@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 import {
   Button,
   Form,
@@ -35,6 +36,7 @@ class App extends React.Component {
     this.changeUserName = this.changeUserName.bind(this);
   }
 
+
   hundleSignOut() {
     const token = localStorage.getItem("token");
     signOutService
@@ -49,6 +51,7 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
   }
+
 
   changeUserName(userName) {
     //updates the page with the user
@@ -86,6 +89,7 @@ class App extends React.Component {
   }
   render() {
     return (
+
       <div>
         <Router>
           <SignUp

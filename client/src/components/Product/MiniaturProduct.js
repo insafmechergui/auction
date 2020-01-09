@@ -1,3 +1,4 @@
+
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -51,3 +52,4 @@ class MiniaturProduct extends React.Component {
   }
 }
 export default MiniaturProduct;
+
