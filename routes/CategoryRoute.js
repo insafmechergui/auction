@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 const Category = require("../Database/Category ");
 module.exports = app => {
 
-    app.post('/api/newCategory', (req, res) => {
-        console.log(req.body)
+    app.post('/api/AddCategory', (req, res) => {
+        console.log('yesssssssssssssssssssssssssss')
         Category.createCategory(req.body, (err, data) => {
             if (err) {
-                res.status(404).send('duplicate key')
+                res.status(409).send('duplicate key')
+                console.log('duplicate key')
             } else {
                 res.status(200).send(data)
             }
