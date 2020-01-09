@@ -88,6 +88,8 @@ class App extends React.Component {
 
             <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
             <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route>
+            <Route path="/addproduct" exact component={AddProduct}/> 
+
 
           </div>
         </Switch>
