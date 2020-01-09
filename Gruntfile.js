@@ -1,9 +1,8 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     shell: {
-      ls: {
-        command: "ls"
-      },
+      ls: { command: "ls" },
+      mkdir: { command: "mkdir test" },
       git: {
         command: [
           "git add .",
@@ -15,7 +14,7 @@ module.exports = function(grunt) {
         command: "git add ."
       },
       commit: {
-        command: 'git commit -m "commited by grunt gang"'
+        command: msg => `git commit -m \"commited by grunt gang  ${msg} \"`
       },
       push: {
         command: "git push origin master"
@@ -42,7 +41,8 @@ module.exports = function(grunt) {
   grunt.registerTask("default", ["jshint"]);
   grunt.registerTask(
     "git",
-    ["shell:add", "shell:commit", "shell:push"].join("&&")
+    ["shell:add", "shell:commit:testing grunt", "shell:push"].join("&&")
   );
-  grunt.registerTask("gitadd", ["shell:git"]);
+  grunt.registerTask("git", ["shell:git"]);
+  grunt.registerTask("gitchain", ["shell:ls", "shell:ls"]);
 };
