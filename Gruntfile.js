@@ -41,7 +41,7 @@ module.exports = function(grunt) {
   grunt.registerTask("default", ["jshint"]);
   grunt.registerTask(
     "git",
-    ["shell:add", "shell:commit:testing grunt", "shell:push"].join("&&")
+    ["shell:add", "shell:commit:testing grunsssssst", "shell:push"].join("&&")
   );
   grunt.registerTask("git", ["shell:git"]);
   grunt.registerTask("gitchain", ["shell:ls", "shell:ls"]);
