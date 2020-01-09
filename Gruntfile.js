@@ -13,21 +13,21 @@ module.exports = function(grunt) {
       push: {
         command: "git push origin master"
       }
-    }
+    },
 
-    // jshint: {
-    //   options: {
-    //     curly: true,
-    //     eqeqeq: true,
-    //     eqnull: true,
-    //     browser: true,
-    //     globals: {
-    //       jQuery: true
-    //     },
-    //     esversion: 6
-    //   },
-    //   all: ["Gruntfile.js", "client", "routes"]
-    // }
+    jshint: {
+      options: {
+        //     curly: true,
+        //     eqeqeq: true,
+        //     eqnull: true,
+        //     browser: true,
+        //     globals: {
+        //       jQuery: true
+        //     },
+        esversion: 6
+      },
+      all: ["Gruntfile.js", "client", "routes"]
+    }
   });
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-shell");
