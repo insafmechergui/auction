@@ -1,15 +1,6 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     shell: {
-      ls: { command: "ls" },
-      mkdir: { command: "mkdir test" },
-      git: {
-        command: [
-          "git add .",
-          'git commit -m "commited by grunt gang"',
-          "git push origin master"
-        ].join("&&")
-      },
       add: {
         command: "git add ."
       },
@@ -21,34 +12,64 @@ module.exports = function(grunt) {
       },
       push: {
         command: "git push origin master"
-      },
-      echo: {
-        command: msg => {
-          var msg = grunt.option("myParam") || "hello";
-          return `echo ${msg}`;
-        }
       }
     },
-
+    concat: {
+      options: {
+        separator: ";"
+      },
+      dist: {
+        src: [
+          "*.js",
+          ["Database/**/*.js"],
+          ["routes/**/*.js"],
+          ["client/**/*.js"]
+        ],
+        dest: "dist/built.js"
+      }
+    },
+    uglify: {
+      options: {
+        compress: true,
+        mangle: true,
+        sourceMap: true
+      },
+      target: {
+        src: [
+          "*.js",
+          ["Database/**/*.js"],
+          ["routes/**/*.js"],
+          ["client/public/**/*.js"],
+          ["client/src/**/*.js"]
+        ],
+        dest: "dist/built.js"
+      }
+    },
     jshint: {
       options: {
         curly: true,
-        eqeqeq: true,
         eqnull: true,
-        browser: true,
+        eqeqeq: true,
+        undef: true,
         globals: {
           jQuery: true
         },
         esversion: 6
       },
-      all: ["Gruntfile.js", "client", "routes"]
+      all: [
+        "Gruntfile.js",
+        "client/src/**/*.js",
+        "client/public/**/*.js",
+        "routes/**/*.js"
+      ]
     }
   });
   grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-contrib-concat");
+  grunt.loadNpmTasks("grunt-contrib-uglify-es");
   grunt.loadNpmTasks("grunt-shell");
+  grunt.registerTask("default", ["uglify"]);
 
-  grunt.registerTask("default", ["jshint"]);
-  grunt.registerTask("git", ["shell:add", "shell:commit", "shell:push"]);
-  grunt.registerTask("gitddd", ["shell:echo"]);
-  grunt.registerTask("gitchain", ["shell:ls", "shell:ls"]);
+  grunt.registerTask("jshint", ["jshint"]);
+  grunt.registerTask("git", ["shell:add", "shell:commit", "shell:push"]); //example grunt git --myParam=ur_msg_in_this_form
 };
