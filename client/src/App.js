@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Button, Form, Alert, Modal } from "react-bootstrap";
+import { Button, Form, Alert, Modal, Navbar, Nav, NavDropdown, FormControl } from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
 import AddProduct from "./components/Product/addProduct";
@@ -8,6 +8,7 @@ import AddCategory from "./components/category/AddCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-datepicker/dist/react-datepicker.css";
 class App extends React.Component {
   constructor() {
     super();
@@ -57,13 +58,44 @@ class App extends React.Component {
   render() {
 
     return (
-      <Router>
-        <SignUp showModal={this.state.showModalSignUp} onHide={() => { this.hundleCloseSignUp() }} changeUserName={this.changeUserName} />
-        <LogIn showModal={this.state.showModalLogin} onHide={() => { this.hundleCloseLogin() }} changeUserName={this.changeUserName} />
-        <AddCategory></AddCategory>
-        <AddProduct></AddProduct>
-        <Switch>
-          <div>
+      <div >
+        <Router>
+          <SignUp showModal={this.state.showModalSignUp} onHide={() => { this.hundleCloseSignUp() }} changeUserName={this.changeUserName} />
+          <LogIn showModal={this.state.showModalLogin} onHide={() => { this.hundleCloseLogin() }} changeUserName={this.changeUserName} />
+          <Switch>
+            <Navbar bg="light" expand="lg">
+              <Navbar.Brand >RBK Auction</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                {!this.state.userName ? (
+
+                  <Nav className="mr-auto" >
+                    <Nav.Link onClick={() => { this.hundleShowSignUp() }}>SignUp</Nav.Link>
+                    <Nav.Link onClick={() => { this.hundleShowLogin() }}>Login</Nav.Link>
+                    <Nav.Link onClick={() => { this.hundleShowLogin() }}>Home</Nav.Link>
+                  </Nav>
+                ) : (
+                    <Nav>
+                      <Nav.Link onClick={() => { this.hundleShowSignUp() }}>SignOut</Nav.Link>
+                      <Nav.Link onClick={() => { this.hundleShowSignUp() }}>{this.state.userName}</Nav.Link>
+                    </Nav>
+                  )}
+                <Form inline>
+                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                  <Button variant="outline-success">Search</Button>
+                </Form>
+              </Navbar.Collapse>
+            </Navbar>
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
+}
+
+
+
+{/* <div>
             <nav>
               <ul>
                 <li>
@@ -88,14 +120,8 @@ class App extends React.Component {
             </nav>
 
 
-            <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
-            <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route>
+             <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
+            <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route> 
 
-          </div>
-        </Switch>
-      </Router>
-    );
-  }
-}
-
+          </div> */}
 export default App;

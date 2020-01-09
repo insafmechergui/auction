@@ -150,3 +150,19 @@
  
 }
 
+/******************************/
+.addProduct{
+  transition: box-shadow 0.3s;
+  transition: 0.2s;
+  width: 50rem;
+  height: auto;
+  margin: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  float: left;
+  font-size: 1em;
+}
+
+.addProduct form{
+  padding: 20px;
+}
