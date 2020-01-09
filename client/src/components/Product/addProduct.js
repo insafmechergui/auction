@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import addProductService from "../../services/addProductService.js";
-
+import Datetime from 'react-datetime';
 class AddProduct extends React.Component {
     constructor(props) {
 			super(props);
@@ -58,7 +58,8 @@ class AddProduct extends React.Component {
 
 							<Form.Group controlId="formGridStartDate">
 									<Form.Label>Start Date</Form.Label>
-									<Form.Control name="initial_date" type="date" value={this.state.initial_date} onChange={(e) => { this.onChange(e) }} />
+									<Datetime dateFormat="YYYY-MM" timeFormat={false} />
+									{/* <Form.Control name="initial_date" type="date" value={this.state.initial_date} onChange={(e) => { this.onChange(e) }} /> */}
 							</Form.Group>
 					
 							<Form>

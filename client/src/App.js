@@ -4,6 +4,7 @@ import { Button, Form, Alert, Modal } from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
 import Product from "./components/Product/Product";
+import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
@@ -89,7 +90,7 @@ class App extends React.Component {
 
             <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
             <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route>
-
+            <Route path="/addproduct" exact component={AddProduct}/>
           </div>
         </Switch>
       </Router>

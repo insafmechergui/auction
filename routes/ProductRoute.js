@@ -39,12 +39,15 @@ module.exports = app => {
   // question if the admin make a mistake on adding a product can he update if ?????
 
   app.post("/api/add", (req, res) => {
-    console.log(req.body)
     let product = new Product(req.body);
     product
-      .save((err, result) => {
-        console.log(err, result)
+      .save()
+      .then(product => {
+        res.status(200).json ({ msg: "product added succesfuly", product });
       })
+      .catch(err => {
+        res.status(400).send({ msg: "adding new product failed", err });
+      });
   });
 
   // app.post("/api//update/:id", (req, res) => {   // this function should be reconsidered
