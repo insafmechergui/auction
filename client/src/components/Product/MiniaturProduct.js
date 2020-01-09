@@ -53,3 +53,4 @@ class MiniaturProduct extends React.Component {
   }
 }
 export default MiniaturProduct;
+
