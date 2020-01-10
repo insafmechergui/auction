@@ -27,7 +27,7 @@ class navBarCategory extends React.Component {
       <div>
         <Router>
           <Switch>
-            {/* navbar category change the sticky */}
+            {/* navbar category change the sticky top */}
             <Navbar sticky="top">
               <Navbar.Brand>Category</Navbar.Brand>
               <Nav className="mr-auto">
