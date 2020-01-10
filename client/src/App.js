@@ -19,6 +19,7 @@ import Home from "./components/home"
 
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
+import NavbarCategory from "./components/category/navBarCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -36,6 +37,7 @@ class App extends React.Component {
     this.changeUserName = this.changeUserName.bind(this);
   }
 
+
   hundleSignOut() {
     const token = localStorage.getItem("token");
     signOutService
@@ -50,6 +52,7 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
   }
+
 
   changeUserName(userName) {
     //updates the page with the user
@@ -162,6 +165,7 @@ class App extends React.Component {
               </Navbar.Collapse>
             </Navbar>
           </Switch>
+          <NavbarCategory />
         </Router>
 
 

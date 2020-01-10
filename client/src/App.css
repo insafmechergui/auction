@@ -38,6 +38,7 @@
 }
 /********************************/
 .mProduct {
+
   transition: box-shadow 0.3s;
   transition: 0.2s;
   width: 18rem;
@@ -73,10 +74,12 @@
   transform: translateY(-2px);
 }
 .price {
+
   color: #99f;
 }
 .timer {
   color: #453932;
+
   font-size: 1.2em;
   height: auto;
   font-weight: bold;
@@ -84,18 +87,21 @@
 }
 .auctionPrice {
   color: #fd7e14;
+
   font-size: 1.2em;
   font-weight: 650;
  
 }
 
 /*************************************/
+
 .auction {
   transition: box-shadow 0.3s;
   width: 26rem;
   height: 25rem;
   border: 1px solid #ccc;
   font-size: 1em;
+
   padding-left: 20px;
   margin: 10px;
 }
@@ -176,7 +182,4 @@
   padding: 20px;
 }
 
-.home{
-  width: 200px;
-}
 

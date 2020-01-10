@@ -32,7 +32,7 @@ class Home extends React.Component {
                 {this.state.products.map((product) => {
                     return (
                         // <MiniaturProduct product={product} />
-                        <Link to={`/Product?id=${product}`} > <MiniaturProduct product={product} /> </Link>
+                        <Link to={`/Product?id=${product._id}`} > <MiniaturProduct product={product} /> </Link>
 
                     )
                 })}
