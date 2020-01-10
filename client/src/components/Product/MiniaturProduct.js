@@ -8,15 +8,15 @@ class MiniaturProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: new Date(this.props.product.initil_date).getTime() + 50000000 // Date.now() should be fix for every product date retreav from database
+      timer: new Date(this.props.product.initil_date).getTime()//+duration // Date.now() should be fix for every product date retreav from database
     };
   }
   componentDidMount() {
-    console.log(new Date(this.props.product.initil_date).getTime())
+
   }
   render() {
     return (
-      <div>
+      <div onClick={this.props.onClick}>
         <Card bg="light" className="mProduct">
           <Card.Img className='minImage' variant="top" src={this.props.product.image} />
           {/*dimension photo   288x176*/}

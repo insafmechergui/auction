@@ -24,6 +24,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import Axios from "axios";
+import Product from "./components/Product/Product.js";
 class App extends React.Component {
   constructor() {
     super();
@@ -133,23 +134,23 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                  <Nav>
-                    <Nav.Link
-                      onClick={() => {
-                        this.hundleSignOut();
-                      }}
-                    >
-                      SignOut
+                    <Nav>
+                      <Nav.Link
+                        onClick={() => {
+                          this.hundleSignOut();
+                        }}
+                      >
+                        SignOut
                     </Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.hundleShowSignUp();
-                      }}
-                    >
-                      {this.state.userName}
-                    </Nav.Link>
-                  </Nav>
-                )}
+                      <Nav.Link
+                        onClick={() => {
+                          this.hundleShowSignUp();
+                        }}
+                      >
+                        {this.state.userName}
+                      </Nav.Link>
+                    </Nav>
+                  )}
                 <Form inline>
                   <FormControl
                     type="text"
@@ -163,7 +164,11 @@ class App extends React.Component {
           </Switch>
         </Router>
 
-        <Home></Home>
+
+        <Router>
+          <Route path="/" exact component={Home} />
+          <Route path="/product" component={Product} />
+        </Router>
       </div>
     );
   }
