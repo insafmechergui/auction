@@ -33,10 +33,8 @@ var Product = mongoose.model("Product", productSchema);
 var getAll = function (callback) {
   Product.find((err, data) => {
     if (err) {
-      console.log('-------------------------------err')
       callback(err, null)
     } else {
-      console.log('-------------------------------data', data)
       callback(null, data)
     }
 
