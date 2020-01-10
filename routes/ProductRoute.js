@@ -57,25 +57,21 @@ module.exports = app => {
       });
   });
 
-  app.put("/api/product/:id/:auction", (req, res) => {
+  app.put("/api/updateAuction", (req, res) => {
     // the user should be provided for now his id is in the req
-    var auc = req.params.auction;
-    Product.findById(req.params.id, (err, product) => {
-      if (err) res.json(err);
-      if (!product) res.status(404).send("hheey not found");
-      // verify how to update
-      else {
-        product.last_auction_price += auc;
-        product.participants.push({
-          user: req.body.userId,
-          price: product.last_auction_price
-        });
-        product.save(err => {
-          if (err) res.josn(err);
-          res.json(product);
-        });
-      }
-    });
+    console.log(req.body)
+    Product.findOneAndUpdate({ _id: req.body.id },
+      {
+        last_auction_price: req.body.price,
+        $push: { participants: { user: req.body.idUser, price: req.body.price } }
+      },
+      { new: true },
+      (err, product) => {
+        if (err) { res.status(401).send(err) }
+        else {
+          res.status(200).send(product)
+        }
+      });
   });
 
   //declare a winner for an action

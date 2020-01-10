@@ -30,7 +30,10 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      userName: null,
+      userInfo: {
+        id: null,
+        name: null
+      },
       showModalSignUp: false,
       showModalLogin: false
     };
@@ -41,11 +44,16 @@ class App extends React.Component {
   hundleSignOut() {
     const token = localStorage.getItem("token");
     signOutService
-      .signOut(this.state.userName)
+      .signOut(this.state.userInfo.name)
       .then(res => {
         if (res.data.deleted === "success") {
           localStorage.removeItem("token");
-          this.setState({ userName: null });
+          this.setState({
+            userInfo: {
+              id: null,
+              name: null
+            }
+          });
         } else {
           console.log("not deleted");
         }
@@ -54,16 +62,22 @@ class App extends React.Component {
   }
 
 
-  changeUserName(userName) {
+  changeUserName(id, name) {
     //updates the page with the user
-    this.setState({ userName });
+    this.setState({
+      userInfo: {
+        id, name
+      }
+    });
   }
 
   componentDidMount() {
     //checks if the token is valid
     checkToken.checkAuth(window.localStorage.getItem("token")).then(res => {
+
       if (res) {
-        this.changeUserName(res.data.name);
+
+        this.changeUserName(res.data._id, res.data.name);
       }
     });
   }
@@ -112,7 +126,7 @@ class App extends React.Component {
               <Navbar.Brand>RBK Auction</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                {!this.state.userName ? (
+                {!this.state.userInfo.name ? (
                   <Nav className="mr-auto">
                     <Nav.Link
                       onClick={() => {
@@ -150,7 +164,7 @@ class App extends React.Component {
                           this.hundleShowSignUp();
                         }}
                       >
-                        {this.state.userName}
+                        {this.state.userInfo.name}
                       </Nav.Link>
                     </Nav>
                   )}
@@ -170,7 +184,8 @@ class App extends React.Component {
 
         <Router>
           <Route path="/" exact component={Home} />
-          <Route path="/product" component={Product} />
+          <Route path='/product'
+            component={() => <Product userInfo={this.state.userInfo} />} />
         </Router>
       </div>
     );
@@ -178,7 +193,15 @@ class App extends React.Component {
 }
 
 {
-  /* <div>
+  /*
+  
+  
+    <Route path='/product'
+            component={Product}
+            userInfo={this.state.userInfo} />
+            
+            
+              <div>
             <nav>
               <ul>
                 <li>
