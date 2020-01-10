@@ -1,5 +1,7 @@
 import React from 'react';
 
+import productServices from '../../services/productService'
+import queryString from 'query-string';
 import { Row, Col, Carousel, Container } from 'react-bootstrap'
 
 import Auction from './Auction';
@@ -9,12 +11,22 @@ class Product extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            timer: Date.now() + 50000000,// Date.now() should be fix for every product date retreav from database 
+            // timer: '',// Date.now() + 50000000,// Date.now() should be fix for every product date retreav from database 
+            product: {},
+
         }
     }
 
     componentDidMount() {
+        const { id } = queryString.parse(window.location.search);
+        productServices.getOne(id).then((res) => {
+            this.setState({
+                product: res.data,
 
+            })
+            console.log(this.state.product)
+
+        })
     }
 
     componentDidUpdate() {
@@ -54,7 +66,7 @@ class Product extends React.Component {
                         </Carousel>
                     </div>
                 </Col>
-                <Auction></Auction>
+                <Auction product={this.state.product}></Auction>
 
             </Row>
         )

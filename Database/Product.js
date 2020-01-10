@@ -41,4 +41,22 @@ var getAll = function (callback) {
   })
 }
 
+
+var getOne = function (id, callback) {
+  Product.findById(id)
+    .populate("participants.user")
+    // .populate("winner")
+    .exec((err, product) => {
+      if (err) { callback(err, null) }
+      else {
+        callback(null, product)
+
+      }
+
+    })
+
+}
+
 module.exports.getAll = getAll;
+module.exports.getOne = getOne;
+

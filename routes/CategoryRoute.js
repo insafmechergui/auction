@@ -24,7 +24,7 @@ module.exports = app => {
         });
     })
 
-    app.get('/api/getProducts', (req, res) => {
+    app.get('/api/getProducts', (req, res) => {//get productbycategory
         Category.getAllProductByCategory(req.body.name, (err, data) => {
             if (err) {
                 res.status(401).send(err)
@@ -34,10 +34,7 @@ module.exports = app => {
         })
     })
 
-    app.get('/api/yes', (req, res) => {
-        res.send('ok')
-        res.end()
-    })
+
     app.get('/api/categories', (req, res) => {
 
         Category.getAll((err, data) => {
