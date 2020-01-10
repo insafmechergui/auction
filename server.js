@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const socket = require("socket.io");
 
 require("./Database/Product");
 
@@ -36,6 +37,16 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
 });
+
+let io = socket(server);
+
+io.on("connection", socket => {
+  socket.on("new-auc", data => {
+    io.sockets.emit("new-auc", data);
+  });
+});
+
+// exports.server = server;
