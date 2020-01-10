@@ -61,7 +61,16 @@ module.exports = app => {
     // View logged in user profile
     res.send(req.user);
   });
-
+  app.post("/api/signOut", (req, res) => {
+    User.findOne({ name: req.body.userName }, (err, data) => {
+      if (err) res.json(err);
+      data.token = [];
+      data.save(err => {
+        if (err) res.json(err);
+        res.status(201).json({ deleted: "success" });
+      });
+    });
+  });
   //   app.put(`/api/product/:id`, async (req, res) => {
   //     const { id } = req.params;
 

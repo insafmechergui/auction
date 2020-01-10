@@ -12,6 +12,11 @@ import {
 } from "react-bootstrap";
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
+
+import signOutService from "./services/signOutServices";
+
+import Home from "./components/home"
+
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
 import NavbarCategory from "./components/category/navBarCategory";
@@ -19,6 +24,7 @@ import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
+import Axios from "axios";
 class App extends React.Component {
   constructor() {
     super();
@@ -29,6 +35,23 @@ class App extends React.Component {
     };
     this.changeUserName = this.changeUserName.bind(this);
   }
+
+
+  hundleSignOut() {
+    const token = localStorage.getItem("token");
+    signOutService
+      .signOut(this.state.userName)
+      .then(res => {
+        if (res.data.deleted === "success") {
+          localStorage.removeItem("token");
+          this.setState({ userName: null });
+        } else {
+          console.log("not deleted");
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
 
   changeUserName(userName) {
     //updates the page with the user
@@ -83,6 +106,7 @@ class App extends React.Component {
             changeUserName={this.changeUserName}
           />
           <Switch>
+
             <Navbar bg="light" expand="lg">
               <Navbar.Brand>RBK Auction</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -115,7 +139,7 @@ class App extends React.Component {
                   <Nav>
                     <Nav.Link
                       onClick={() => {
-                        this.hundleShowSignUp();
+                        this.hundleSignOut();
                       }}
                     >
                       SignOut
@@ -142,6 +166,8 @@ class App extends React.Component {
           </Switch>
           <NavbarCategory />
         </Router>
+
+        <Home></Home>
       </div>
     );
   }

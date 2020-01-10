@@ -44,7 +44,7 @@ class AddProduct extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-		productService.getAll(this.state).then(res => {
+		productService.add(this.state).then(res => {
 
 			console.log('res', res)
 
@@ -56,7 +56,6 @@ class AddProduct extends React.Component {
 
 	onChange(e) {
 		this.setState({ [e.target.name]: e.target.value });
-
 	}
 
 
