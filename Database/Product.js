@@ -22,7 +22,8 @@ const productSchema = new Schema({
   participants: [
     {
       user: { type: Schema.Types.ObjectId, ref: "user" },
-      price: { type: Number }
+      price: { type: Number },
+      date: { type: Date }
     }
   ],
   winner: [{ type: Schema.Types.ObjectId, ref: "user" }]

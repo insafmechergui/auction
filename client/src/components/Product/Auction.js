@@ -1,5 +1,8 @@
 import React from "react";
-import productServices from "../../services/productService";
+import productServices from '../../services/productService'
+import auctionServices from '../../services/auctionServices'
+
+
 import ReactDOM from "react-dom";
 import openSocket from "socket.io-client";
 import {
@@ -18,20 +21,14 @@ class Auction extends React.Component {
     super(props);
 
     this.state = {
+      product: {},
       auctionPrice: 0,
-      history: [
-        {
-          price: "20 dt",
-          datetime: "10/02/2020 12:50:20",
-          name: "el 3idoudi ben abdallah"
-        },
-        {
-          price: "25 dt",
-          datetime: "10/02/2020 12:50:40",
-          name: "el hadei  bouchoucha"
-        }
-      ],
+
+  
       socket: openSocket("http://localhost:5000")
+
+      history: []
+
     };
     this.state.socket.on("new-auc", auc => {
       this.setState({
@@ -45,12 +42,27 @@ class Auction extends React.Component {
       });
     });
   }
-  updateAuction() {}
 
-  handleAuction() {
-    var price = this.state.auctionPrice;
-    this.setState({ auctionPrice: 0 });
-    if (price > this.props.product.last_auction_price) {
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      product: newProps.product,
+      history: newProps.product.participants
+    })
+
+  }
+  handleAuction(fastAuction) {
+    var price = (fastAuction + this.state.product.last_auction_price) || this.state.auctionPrice;
+    this.setState({ auctionPrice: 0 })
+
+    if (price > this.state.product.last_auction_price) {
+      auctionServices.updateAuction(this.state.product._id, price, this.props.userInfo.id, Date.now()).then((res) => {
+        this.setState({
+          product: res.data,
+          history: res.data.participants
+        })
+        console.log(res.data.participants)
+      })
+
     } else {
       alert("noooooooooooooooooooooooo");
     }
@@ -59,6 +71,7 @@ class Auction extends React.Component {
   render() {
     return (
       <div>
+
         <button
           onClick={() => {
             this.state.socket.emit("new-auc");
@@ -66,14 +79,15 @@ class Auction extends React.Component {
         >
           hhhhhhhhhhhhh
         </button>
+
         <Card bg="light" className="auction">
           <Card.Body>
             <Card.Title className="text-center">
-              <Card.Text>Value {this.props.product.value} DT</Card.Text>
+              <Card.Text>Value {this.state.product.value} DT</Card.Text>
             </Card.Title>
             <Card.Header className="text-center timer">
               <Countdown
-                date={new Date(this.props.product.initil_date).getTime()}
+                date={new Date(this.state.product.initil_date).getTime()}
                 onComplete={() => {
                   this.setState({ timer: "done" });
                 }}
@@ -82,10 +96,9 @@ class Auction extends React.Component {
             <br />
             <Row>
               <Col className="text-left auctionPrice">
-                <Card.Text>
-                  {" "}
-                  {this.props.product.last_auction_price} DT
-                </Card.Text>
+
+                <Card.Text> {this.state.product.last_auction_price} DT</Card.Text>
+
               </Col>
               <Col className="text-right">
                 <Card.Text>Name.M </Card.Text>
@@ -121,18 +134,23 @@ class Auction extends React.Component {
 
             <Row className="item-left">
               <Col md={2}>
-                <Button variant="warning">
+                <Button onClick={() => { this.handleAuction(1) }} variant="warning">
                   <Card.Text>1dt</Card.Text>
                 </Button>{" "}
               </Col>
               <Col md={2}>
-                <Button variant="warning">
+                <Button onClick={() => { this.handleAuction(10) }} variant="warning">
                   <Card.Text>10dt</Card.Text>
                 </Button>
               </Col>
               <Col md={2}>
-                <Button variant="warning">
+                <Button onClick={() => { this.handleAuction(50) }} variant="warning">
                   <Card.Text>50dt</Card.Text>
+                </Button>
+              </Col>
+              <Col md={2}>
+                <Button onClick={() => { this.handleAuction(100) }} variant="warning">
+                  <Card.Text>100dt</Card.Text>
                 </Button>
               </Col>
             </Row>
@@ -144,7 +162,7 @@ class Auction extends React.Component {
                     type="Number"
                     placeholder="0"
                     aria-describedby="dt"
-                    min={this.props.product.last_auction_price}
+                    min={this.state.product.last_auction_price}
                     value={this.state.auctionPrice}
                     onChange={e =>
                       this.setState({ auctionPrice: e.target.value })
@@ -153,7 +171,7 @@ class Auction extends React.Component {
                   <InputGroup.Append>
                     <InputGroup.Text id="dt">DT</InputGroup.Text>
                   </InputGroup.Append>
-                  {/* <NumericInput */}
+
                 </InputGroup>
               </Col>
               <Col>
@@ -168,7 +186,7 @@ class Auction extends React.Component {
         <Accordion defaultActiveKey="0" className="auctionHistory">
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="0">
-              History of Auction
+              History of Auctions
             </Accordion.Toggle>
 
             <Accordion.Collapse eventKey="0">
@@ -176,11 +194,11 @@ class Auction extends React.Component {
                 {this.state.history.map(auction => {
                   return (
                     <Row>
-                      <Col className="historyPrice">{auction.price}</Col>
+                      <Col className="historyPrice text-left">{auction.price}</Col>
                       <Col>
-                        <Row>{auction.name}</Row>
+                        <Row className='text-right'>{auction.user.name}</Row>
                         <small>
-                          <Row>{auction.datetime}</Row>
+                          <Row>{new Date(auction.date).getFullYear() + "-" + (new Date(auction.date).getMonth() + 1) + "-" + new Date(auction.date).getDate() + " " + new Date(auction.date).getHours() + ":" + new Date(auction.date).getMinutes() + ":" + new Date(auction.date).getSeconds()}</Row>
                         </small>
                         <br />
                       </Col>
@@ -191,7 +209,7 @@ class Auction extends React.Component {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-      </div>
+      </div >
     );
   }
 }

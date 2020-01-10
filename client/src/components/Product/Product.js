@@ -18,19 +18,18 @@ class Product extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props.userInfo)
         const { id } = queryString.parse(window.location.search);
         productServices.getOne(id).then((res) => {
             this.setState({
                 product: res.data,
 
             })
-            console.log(this.state.product)
-
         })
     }
 
-    componentDidUpdate() {
-
+    componentWillReceiveProps(p) {
+        console.log(p.userInfo)
     }
 
     render() {
@@ -66,7 +65,7 @@ class Product extends React.Component {
                         </Carousel>
                     </div>
                 </Col>
-                <Auction product={this.state.product}></Auction>
+                <Auction userInfo={this.props.userInfo} product={this.state.product}></Auction>
 
             </Row>
         )

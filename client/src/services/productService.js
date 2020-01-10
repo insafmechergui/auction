@@ -1,15 +1,5 @@
 import axios from "axios";
 
-// export default {
-//   getAll: async () => {
-//     let res = await axios.get(`/api/product`);
-//     return res.data || [];
-//   }
-// };
-
-
-
-
 export default {
   add: product => {
     return axios
@@ -41,13 +31,7 @@ export default {
       );
   },
 
-  updateAuction: (id, price) => {
-    return axios
-      .put("/api/updateAuction", { params: { id: id, price: price } })
-      .then(response => response)
-      .catch(err => { throw err }
-      );
-  }
+
 
 };
 
