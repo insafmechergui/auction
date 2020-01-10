@@ -28,7 +28,7 @@ class navBarCategory extends React.Component {
         <Router>
           <Switch>
             <Navbar sticky="top">
-              <Navbar.Brand href="#">Category</Navbar.Brand>
+              <Navbar.Brand>Category</Navbar.Brand>
               <Nav className="mr-auto">
                 {this.state.categoryList.map(cat => {
                   return <Nav.Link href="{cat.name}">{cat.name}</Nav.Link>;
