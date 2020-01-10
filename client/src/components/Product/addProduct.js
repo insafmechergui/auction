@@ -102,7 +102,7 @@ class AddProduct extends React.Component {
 
 					<Form.Group controlId="formGridStartDate">
 						<Form.Label>Start Date</Form.Label>
-						//<DatePicker selected={new Date()}></DatePicker>
+						{/* <DatePicker selected={new Date()}></DatePicker> */}
 						<input type='datetime-local' />
 						{/* <Form.Control name="initial_date" type="date" value={this.state.initial_date} onChange={(e) => { this.onChange(e) }} /> */}
 					</Form.Group>

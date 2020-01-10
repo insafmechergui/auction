@@ -47,6 +47,14 @@ module.exports = app => {
   // just for admin add or update in case of error of insertion
   // question if the admin make a mistake on adding a product can he update if ?????
 
+<<<<<<< HEAD
+  app.post("/api/add", (req, res) => {
+    let product = new Product(req.body);
+    product
+      .save()
+      .then(product => {
+        res.status(200).json ({ msg: "product added succesfuly", product });
+=======
   app.post("/api/addp", (req, res) => {
     console.log(req.body)
     let product = new Product(req.body);
@@ -54,7 +62,11 @@ module.exports = app => {
       .save((err, result) => {
         console.log(err, result)
         res.send(result)
+>>>>>>> 0103b7123aacbd974a54c40690186f976c22b5ae
       })
+      .catch(err => {
+        res.status(400).send({ msg: "adding new product failed", err });
+      });
   });
 
   app.put("/api/product/:id/:auction", (req, res) => {

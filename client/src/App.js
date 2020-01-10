@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
 import {
   Button,
   Form,
@@ -20,6 +19,7 @@ import Home from "./components/home"
 
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
+import NavbarCategory from "./components/category/navBarCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -89,7 +89,6 @@ class App extends React.Component {
   }
   render() {
     return (
-
       <div>
         <Router>
           <SignUp
@@ -165,6 +164,7 @@ class App extends React.Component {
               </Navbar.Collapse>
             </Navbar>
           </Switch>
+          <NavbarCategory />
         </Router>
 
         <Home></Home>
