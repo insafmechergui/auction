@@ -11,7 +11,7 @@ import axios from "axios";
 
 
 export default {
-  getAll: product => {
+  add: product => {
     return axios
       .post("/api/add", {
         name: product.name,
@@ -24,6 +24,14 @@ export default {
       })
       .then(response => response)
       .catch(error => error);
+  },
+  getAll: () => {
+    console.log('ggggg')
+    return axios
+      .get("/api/products")
+      .then(response => response)
+      .catch(err => { throw err }
+      );
   }
 
 };
