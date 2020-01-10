@@ -1,5 +1,6 @@
 
 import React from "react";
+import productServices from '../../services/productService'
 import ReactDOM from "react-dom";
 
 import {
@@ -16,8 +17,9 @@ import Countdown from "react-countdown-now";
 class Auction extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      timer: Date.now() + 50000000, // Date.now() should be fix for every product date retreav from database
+      auctionPrice: 0,
       history: [
         {
           price: "20 dt",
@@ -32,31 +34,39 @@ class Auction extends React.Component {
       ]
     };
   }
+  updateAuction() {
 
-  componentDidMount() {}
+  }
 
-  componentDidUpdate() {}
+  handleAuction() {
+    var price = this.state.auctionPrice;
+    this.setState({ auctionPrice: 0 })
+    if (price > this.props.product.last_auction_price) {
 
+    } else {
+      alert('noooooooooooooooooooooooo')
+    }
+  }
   render() {
     return (
       <div>
         <Card bg="light" className="auction">
           <Card.Body>
             <Card.Title className="text-center">
-              <Card.Text>Value 800 dt</Card.Text>
+              <Card.Text>Value {this.props.product.value} DT</Card.Text>
             </Card.Title>
             <Card.Header className="text-center timer">
               <Countdown
-                date={this.state.timer}
+                date={new Date(this.props.product.initil_date).getTime()}
                 onComplete={() => {
-                  alert("done");
+                  this.setState({ timer: 'done' })
                 }}
               />
             </Card.Header>
             <br />
             <Row>
               <Col className="text-left auctionPrice">
-                <Card.Text>200dt</Card.Text>
+                <Card.Text> {this.props.product.last_auction_price} DT</Card.Text>
               </Col>
               <Col className="text-right">
                 <Card.Text>Name.M </Card.Text>
@@ -115,7 +125,9 @@ class Auction extends React.Component {
                     type="Number"
                     placeholder="0"
                     aria-describedby="dt"
-                    min={40}
+                    min={this.props.product.last_auction_price}
+                    value={this.state.auctionPrice}
+                    onChange={(e) => this.setState({ auctionPrice: e.target.value })}
                   />
                   <InputGroup.Append>
                     <InputGroup.Text id="dt">DT</InputGroup.Text>
@@ -125,7 +137,7 @@ class Auction extends React.Component {
               </Col>
               <Col>
                 {" "}
-                <Button variant="success">Auctioning</Button>
+                <Button onClick={() => this.handleAuction()} variant="success">Auctioning</Button>
               </Col>
             </Row>
           </Card.Body>

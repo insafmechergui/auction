@@ -26,9 +26,24 @@ export default {
       .catch(error => error);
   },
   getAll: () => {
-    console.log('ggggg')
+
     return axios
       .get("/api/products")
+      .then(response => response)
+      .catch(err => { throw err }
+      );
+  },
+  getOne: (idp) => {
+    return axios
+      .get("/api/product", { params: { id: idp } })
+      .then(response => response)
+      .catch(err => { throw err }
+      );
+  },
+
+  updateAuction: (id, price) => {
+    return axios
+      .put("/api/updateAuction", { params: { id: id, price: price } })
       .then(response => response)
       .catch(err => { throw err }
       );

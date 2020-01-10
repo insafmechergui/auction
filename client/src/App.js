@@ -168,7 +168,6 @@ class App extends React.Component {
           <NavbarCategory />
         </Router>
 
-
         <Router>
           <Route path="/" exact component={Home} />
           <Route path="/product" component={Product} />

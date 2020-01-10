@@ -28,20 +28,17 @@ module.exports = app => {
 
 
   //  product by id
-  app.get("/api/product/:id", (req, res) => {
-
-    let id = req.params.id;
-    Product.findById(id)
-      .populate("participants.user")
-      .populate("winner")
-      .exec((err, product) => {
-        if (err) { res.json(err); }
-        else {
-          res.send(product);
-          // console.log(product)
-        }
+  app.get("/api/product", (req, res) => {
+    let id = req.query.id;
+    Products.getOne(id, (err, data) => {
+      if (err) {
+        res.status(404).send(err)
+      }
+      else {
+        res.status(200).send(data)
         res.end()
-      });
+      }
+    })
   });
 
   // just for admin add or update in case of error of insertion
@@ -80,6 +77,7 @@ module.exports = app => {
       }
     });
   });
+
   //declare a winner for an action
   app.put("/api/win/:id", (req, res) => {
     //they must be a function to validate id the intial time + duration has passed and there is no winner

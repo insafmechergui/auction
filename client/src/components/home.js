@@ -12,11 +12,13 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: []
+            products: [],
+
         }
     }
 
     componentDidMount() {
+
         productServices.getAll().then((res) => {
 
             this.setState({
@@ -27,7 +29,6 @@ class Home extends React.Component {
 
     render() {
         return (
-
             <Container className="home">
                 {this.state.products.map((product) => {
                     return (
@@ -42,15 +43,3 @@ class Home extends React.Component {
 }
 
 export default Home;
-
-
-{/* <MiniaturProduct onClick={() => console.log('ok')} product={product}></MiniaturProduct>) */ }
-
-
-
-// <Router>
-
-{/* <Route path="/" exact component={Home} ></Route>
-                <Route path="/Product" component={Product} /> */}
-
-{/* </Router > */ }
