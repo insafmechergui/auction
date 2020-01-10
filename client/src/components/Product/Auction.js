@@ -23,35 +23,27 @@ class Auction extends React.Component {
     this.state = {
       product: {},
       auctionPrice: 0,
-      history: [
-        {
-          price: "20 dt",
-          datetime: "10/02/2020 12:50:20",
-          name: "el 3idoudi ben abdallah"
-        },
-        {
-          price: "25 dt",
-          datetime: "10/02/2020 12:50:40",
-          name: "el hadei  bouchoucha"
-        }
-      ]
+      history: []
     };
   }
   componentWillReceiveProps(newProps) {
-
     this.setState({
-      product: newProps.product
+      product: newProps.product,
+      history: newProps.product.participants
     })
+
   }
   handleAuction(fastAuction) {
     var price = (fastAuction + this.state.product.last_auction_price) || this.state.auctionPrice;
     this.setState({ auctionPrice: 0 })
 
     if (price > this.state.product.last_auction_price) {
-      auctionServices.updateAuction(this.state.product._id, price, this.props.userInfo.id).then((res) => {
+      auctionServices.updateAuction(this.state.product._id, price, this.props.userInfo.id, Date.now()).then((res) => {
         this.setState({
-          product: res.data
+          product: res.data,
+          history: res.data.participants
         })
+        console.log(res.data.participants)
       })
     } else {
       alert('noooooooooooooooooooooooo')
@@ -60,6 +52,7 @@ class Auction extends React.Component {
   render() {
     return (
       <div>
+
         <Card bg="light" className="auction">
           <Card.Body>
             <Card.Title className="text-center">
@@ -147,7 +140,7 @@ class Auction extends React.Component {
                   <InputGroup.Append>
                     <InputGroup.Text id="dt">DT</InputGroup.Text>
                   </InputGroup.Append>
-                  {/* <NumericInput */}
+
                 </InputGroup>
               </Col>
               <Col>
@@ -160,7 +153,7 @@ class Auction extends React.Component {
         <Accordion defaultActiveKey="0" className="auctionHistory">
           <Card>
             <Accordion.Toggle as={Card.Header} eventKey="0">
-              History of Auction
+              History of Auctions
             </Accordion.Toggle>
 
             <Accordion.Collapse eventKey="0">
@@ -168,11 +161,11 @@ class Auction extends React.Component {
                 {this.state.history.map(auction => {
                   return (
                     <Row>
-                      <Col className="historyPrice">{auction.price}</Col>
+                      <Col className="historyPrice text-left">{auction.price}</Col>
                       <Col>
-                        <Row>{auction.name}</Row>
+                        <Row className='text-right'>{auction.user.name}</Row>
                         <small>
-                          <Row>{auction.datetime}</Row>
+                          <Row>{new Date(auction.date).getFullYear() + "-" + (new Date(auction.date).getMonth() + 1) + "-" + new Date(auction.date).getDate() + " " + new Date(auction.date).getHours() + ":" + new Date(auction.date).getMinutes() + ":" + new Date(auction.date).getSeconds()}</Row>
                         </small>
                         <br />
                       </Col>
@@ -183,7 +176,7 @@ class Auction extends React.Component {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-      </div>
+      </div >
     );
   }
 }

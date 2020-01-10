@@ -3,7 +3,7 @@ let Product = mongoose.model("Product");
 let User = mongoose.model("user");
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
+
 const cors = require("cors");
 
 const Products = require('../Database/Product')
@@ -63,15 +63,15 @@ module.exports = app => {
     Product.findOneAndUpdate({ _id: req.body.id },
       {
         last_auction_price: req.body.price,
-        $push: { participants: { user: req.body.idUser, price: req.body.price } }
+        $push: { participants: { $each: [{ user: req.body.idUser, price: req.body.price, date: req.body.date }], $position: 0 } },
       },
-      { new: true },
-      (err, product) => {
-        if (err) { res.status(401).send(err) }
-        else {
-          res.status(200).send(product)
-        }
-      });
+      { new: true }).populate('participants.user').exec(
+        (err, product) => {
+          if (err) { res.status(401).send(err) }
+          else {
+            res.status(200).send(product)
+          }
+        });
   });
 
   //declare a winner for an action
