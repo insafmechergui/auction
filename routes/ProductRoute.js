@@ -76,7 +76,7 @@ module.exports = app => {
 
 
   app.get("/api/getwinner", (req, res) => {
-    console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
+
     //they must be a function to validate id the intial time + duration has passed and there is no winner
     Products.findWinner(req.query.id, (err, product) => {
       if (err) {

@@ -154,14 +154,14 @@ class Auction extends React.Component {
 
             <Row className="item-left">
               <Col md={2}>
-                <Button
+                <Button disabled={!this.state.timer}
                   onClick={() => {
                     this.handleAuction(1);
                   }}
                   variant="warning"
                 >
                   <Card.Text>1dt</Card.Text>
-                </Button>{" "}
+                </Button>
               </Col>
               <Col md={2}>
                 <Button
@@ -169,12 +169,13 @@ class Auction extends React.Component {
                     this.handleAuction(10);
                   }}
                   variant="warning"
+                  disabled={!this.state.timer}
                 >
                   <Card.Text>10dt</Card.Text>
                 </Button>
               </Col>
               <Col md={2}>
-                <Button
+                <Button disabled={!this.state.timer}
                   onClick={() => {
                     this.handleAuction(50);
                   }}
@@ -184,7 +185,7 @@ class Auction extends React.Component {
                 </Button>
               </Col>
               <Col md={2}>
-                <Button
+                <Button disabled={!this.state.timer}
                   onClick={() => {
                     this.handleAuction(100);
                   }}
@@ -215,7 +216,7 @@ class Auction extends React.Component {
               </Col>
               <Col>
                 {" "}
-                <Button onClick={() => this.handleAuction()} variant="success">
+                <Button disabled={!this.state.timer} onClick={() => this.handleAuction()} variant="success">
                   Auctioning
                 </Button>
               </Col>
@@ -262,7 +263,7 @@ class Auction extends React.Component {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-      </div>
+      </div >
     );
   }
 }
