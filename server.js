@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const socket = require("socket.io");
 const app = express();
+app.use(bodyParser.json());
 require("./Database/Product");
 require("./routes/UserRoute.js")(app);
 
@@ -23,7 +24,7 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => console.log("mongoose is connected connected"));
 
-app.use(bodyParser.json());
+
 
 //exemple for useing routes files
 
