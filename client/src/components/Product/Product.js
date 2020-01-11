@@ -16,7 +16,6 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userInfo);
     const { id } = queryString.parse(window.location.search);
     productServices.getOne(id).then(res => {
       this.setState({
@@ -25,9 +24,9 @@ class Product extends React.Component {
     });
   }
 
-  componentWillReceiveProps(p) {
-    console.log(p.userInfo);
-  }
+  // componentWillReceiveProps(p) {
+  //   console.log(p.userInfo);
+  // }
 
   render() {
     return (
