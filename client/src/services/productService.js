@@ -1,15 +1,5 @@
 import axios from "axios";
 
-// export default {
-//   getAll: async () => {
-//     let res = await axios.get(`/api/product`);
-//     return res.data || [];
-//   }
-// };
-
-
-
-
 export default {
   add: product => {
     return axios
@@ -26,13 +16,22 @@ export default {
       .catch(error => error);
   },
   getAll: () => {
-    console.log('ggggg')
+
     return axios
       .get("/api/products")
       .then(response => response)
       .catch(err => { throw err }
       );
-  }
+  },
+  getOne: (idp) => {
+    return axios
+      .get("/api/product", { params: { id: idp } })
+      .then(response => response)
+      .catch(err => { throw err }
+      );
+  },
+
+
 
 };
 

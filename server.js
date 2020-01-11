@@ -1,10 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
-require("./Database/Product");
-
+const socket = require("socket.io");
 const app = express();
+app.use(bodyParser.json());
+require("./Database/Product");
+require("./routes/UserRoute.js")(app);
+
+require("./routes/ProductRoute.js")(app);
+
+require("./routes/CategoryRoute.js")(app);
+
 
 mongoose.Promise = global.Promise;
 
@@ -18,14 +24,9 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => console.log("mongoose is connected connected"));
 
-app.use(bodyParser.json());
+
 
 //exemple for useing routes files
-require("./routes/UserRoute.js")(app);
-
-require("./routes/ProductRoute.js")(app);
-
-require("./routes/CategoryRoute.js")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -36,6 +37,16 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
+});
+
+let io = socket(server);
+
+io.on("connection", socket => {
+  socket.on("new-auc", data => {
+    console.log('newwwwwwwwwwwww')
+    io.sockets.emit("new-auc", data);
+
+  });
 });

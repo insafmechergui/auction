@@ -18,29 +18,85 @@ const productSchema = new Schema({
   last_auction_price: { type: Number },
   value: { type: Number },
   initial_date: { type: Date },
-  duration: { type: String },
+  duration: { type: Number },
   participants: [
     {
       user: { type: Schema.Types.ObjectId, ref: "user" },
-      price: { type: Number }
+      price: { type: Number },
+      date: { type: Date }
     }
   ],
   winner: [{ type: Schema.Types.ObjectId, ref: "user" }]
 });
+productSchema.index({ descreption: 'text' });
 
 var Product = mongoose.model("Product", productSchema);
 
 var getAll = function (callback) {
-  Product.find((err, data) => {
+
+  Product.find({ initial_date: { $lte: new Date() } }, (err, data) => {
     if (err) {
-      console.log('-------------------------------err')
       callback(err, null)
     } else {
-      console.log('-------------------------------data', data)
       callback(null, data)
     }
 
   })
 }
 
+
+var getOne = function (id, callback) {
+  Product.findById(id)
+    .populate("participants.user")
+    // .populate("winner")
+    .exec((err, product) => {
+      if (err) { callback(err, null) }
+      else {
+        callback(null, product)
+
+      }
+
+    })
+
+}
+
+var searchFilter = function (descriptionfilter, callback) {
+  console.log(descriptionfilter)
+  // Product.find({$text: {$search: searchString}})
+  // "$text": {"$search": req.body.query}
+  // {$text: {$search: descriptionfilter}}
+  Product.find({ $text: { $search: descriptionfilter } }, (err, data) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, data);
+    }
+  });
+}
+
+
+// var updateWinner = function (idProduct, callback) {
+//   Product.findOneAndUpdate({ _id: idProduct }).populate('participants.user').exec(
+//     (err, product) => {
+//       if (err) { callback(err, null) }
+//       else {
+//         callback(null, product)
+//       }
+//     });
+// }
+
+var findWinner = function (idProduct, callback) {
+  Product.find({ _id: idProduct }).populate('participants.user').exec(
+    (err, product) => {
+      if (err) { callback(err, null) }
+      else {
+        callback(null, product)
+      }
+    });
+
+
+}
 module.exports.getAll = getAll;
+module.exports.getOne = getOne;
+module.exports.searchFilter = searchFilter;
+module.exports.findWinner = findWinner;

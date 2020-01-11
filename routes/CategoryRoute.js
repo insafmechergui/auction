@@ -3,10 +3,11 @@ const Category = require("../Database/Category ");
 module.exports = app => {
 
     app.post('/api/AddCategory', (req, res) => {
-
+        console.log(req.body)
         Category.createCategory(req.body, (err, data) => {
             if (err) {
-                res.status(409).send('duplicate key')
+
+                res.status(404).send(err)
                 console.log('duplicate key')
             } else {
                 res.status(200).send(data)
@@ -24,8 +25,9 @@ module.exports = app => {
         });
     })
 
-    app.get('/api/getProducts', (req, res) => {
-        Category.getAllProductByCategory(req.body.name, (err, data) => {
+    app.get('/api/getProducts', (req, res) => {//get productbycategory
+        console.log(req.query.category)
+        Category.getAllProductByCategory(req.query.category, (err, data) => {
             if (err) {
                 res.status(401).send(err)
             } else {
@@ -34,10 +36,7 @@ module.exports = app => {
         })
     })
 
-    app.get('/api/yes', (req, res) => {
-        res.send('ok')
-        res.end()
-    })
+
     app.get('/api/categories', (req, res) => {
 
         Category.getAll((err, data) => {
@@ -45,7 +44,6 @@ module.exports = app => {
                 res.status(404).send(err)
             }
             else {
-
                 res.status(200).send(data)
                 res.end()
             }
