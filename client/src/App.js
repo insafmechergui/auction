@@ -137,23 +137,23 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                  <Nav>
-                    <Nav.Link
-                      onClick={() => {
-                        this.hundleSignOut();
-                      }}
-                    >
-                      SignOut
+                    <Nav>
+                      <Nav.Link
+                        onClick={() => {
+                          this.hundleSignOut();
+                        }}
+                      >
+                        SignOut
                     </Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.handleShow("SignUp");
-                      }}
-                    >
-                      {this.state.userInfo.name}
-                    </Nav.Link>
-                  </Nav>
-                )}
+                      <Nav.Link
+                        onClick={() => {
+                          this.handleShow("SignUp");
+                        }}
+                      >
+                        {this.state.userInfo.name}
+                      </Nav.Link>
+                    </Nav>
+                  )}
                 <Form inline>
                   <FormControl
                     type="text"
