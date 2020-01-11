@@ -28,6 +28,7 @@ const productSchema = new Schema({
   ],
   winner: [{ type: Schema.Types.ObjectId, ref: "user" }]
 });
+productSchema.index({descreption: 'text'});
 
 var Product = mongoose.model("Product", productSchema);
 
@@ -61,6 +62,20 @@ var getOne = function (id, callback) {
 
 }
 
+var searchFilter = function(descriptionfilter, callback){
+  console.log(descriptionfilter)
+  // Product.find({$text: {$search: searchString}})
+  // "$text": {"$search": req.body.query}
+  // {$text: {$search: descriptionfilter}}
+    Product.find({$text: {$search: descriptionfilter}}, (err,data) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    });
+}
+
 module.exports.getAll = getAll;
 module.exports.getOne = getOne;
-
+module.exports.searchFilter = searchFilter;

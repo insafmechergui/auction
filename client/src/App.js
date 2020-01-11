@@ -15,7 +15,7 @@ import SignUp from "./components/User/signup";
 
 import signOutService from "./services/signOutServices";
 
-import Home from "./components/home"
+import Home from "./components/home";
 
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
@@ -24,8 +24,10 @@ import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
-import Axios from "axios";
+import axios from "axios";
 import Product from "./components/Product/Product.js";
+import Admin from "./components/admin/Admin.js";
+
 class App extends React.Component {
   constructor() {
     super();
@@ -38,8 +40,8 @@ class App extends React.Component {
       showModalLogin: false
     };
     this.changeUserName = this.changeUserName.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
-
 
   hundleSignOut() {
     const token = localStorage.getItem("token");
@@ -61,12 +63,12 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-
   changeUserName(id, name) {
     //updates the page with the user
     this.setState({
       userInfo: {
-        id, name
+        id,
+        name
       }
     });
   }
@@ -74,34 +76,19 @@ class App extends React.Component {
   componentDidMount() {
     //checks if the token is valid
     checkToken.checkAuth(window.localStorage.getItem("token")).then(res => {
-
       if (res) {
-
         this.changeUserName(res.data._id, res.data.name);
       }
     });
   }
 
-  hundleShowSignUp() {
+  handleShow(target) {
+    console.log(this.state);
     this.setState({
-      showModalSignUp: true
+      [`showModal${target}`]: !this.state[`showModal${target}`]
     });
   }
-  hundleCloseSignUp() {
-    this.setState({
-      showModalSignUp: false
-    });
-  }
-  hundleCloseLogin() {
-    this.setState({
-      showModalLogin: false
-    });
-  }
-  hundleShowLogin() {
-    this.setState({
-      showModalLogin: true
-    });
-  }
+
   render() {
     return (
       <div>
@@ -109,19 +96,18 @@ class App extends React.Component {
           <SignUp
             showModal={this.state.showModalSignUp}
             onHide={() => {
-              this.hundleCloseSignUp();
+              this.handleShow("SignUp");
             }}
             changeUserName={this.changeUserName}
           />
           <LogIn
             showModal={this.state.showModalLogin}
             onHide={() => {
-              this.hundleCloseLogin();
+              this.handleShow("Login");
             }}
             changeUserName={this.changeUserName}
           />
           <Switch>
-
             <Navbar bg="light" expand="lg">
               <Navbar.Brand>RBK Auction</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -130,44 +116,44 @@ class App extends React.Component {
                   <Nav className="mr-auto">
                     <Nav.Link
                       onClick={() => {
-                        this.hundleShowSignUp();
+                        this.handleShow("SignUp");
                       }}
                     >
                       SignUp
                     </Nav.Link>
                     <Nav.Link
                       onClick={() => {
-                        this.hundleShowLogin();
+                        this.handleShow("Login");
                       }}
                     >
                       Login
                     </Nav.Link>
                     <Nav.Link
                       onClick={() => {
-                        this.hundleShowLogin();
+                        this.handleShow("Login");
                       }}
                     >
                       Home
                     </Nav.Link>
                   </Nav>
                 ) : (
-                    <Nav>
-                      <Nav.Link
-                        onClick={() => {
-                          this.hundleSignOut();
-                        }}
-                      >
-                        SignOut
+                  <Nav>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleSignOut();
+                      }}
+                    >
+                      SignOut
                     </Nav.Link>
-                      <Nav.Link
-                        onClick={() => {
-                          this.hundleShowSignUp();
-                        }}
-                      >
-                        {this.state.userInfo.name}
-                      </Nav.Link>
-                    </Nav>
-                  )}
+                    <Nav.Link
+                      onClick={() => {
+                        this.handleShow("SignUp");
+                      }}
+                    >
+                      {this.state.userInfo.name}
+                    </Nav.Link>
+                  </Nav>
+                )}
                 <Form inline>
                   <FormControl
                     type="text"
@@ -184,8 +170,15 @@ class App extends React.Component {
 
         <Router>
           <Route path="/" exact component={Home} />
-          <Route path='/product'
-            component={() => <Product userInfo={this.state.userInfo} />} />
+          <Route
+            path="/product"
+            component={() => (
+              <Product
+                userInfo={this.state.userInfo}
+                handleShow={this.handleShow}
+              />
+            )}
+          />
         </Router>
       </div>
     );

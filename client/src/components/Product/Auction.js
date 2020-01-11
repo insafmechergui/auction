@@ -28,42 +28,53 @@ class Auction extends React.Component {
       if (auc._id === this.state.product._id) {
         this.setState({ history: auc.participants });
       }
-      console.log(auc);
     });
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
       product: newProps.product,
-      history: newProps.product.participants
+      history: newProps.product.participants,
+      userInfo: newProps.userInfo,
+      handleShow: newProps.handleShow
     });
   }
-  handleAuction(fastAuction) {
-    var price =
-      fastAuction + this.state.product.last_auction_price ||
-      this.state.auctionPrice;
-    this.setState({ auctionPrice: 0 });
 
-    if (price > this.state.product.last_auction_price) {
-      auctionServices
-        .updateAuction(
-          this.state.product._id,
-          price,
-          this.props.userInfo.id,
-          Date.now()
-        )
-        .then(res => {
-          this.setState({
-            product: res.data,
-            history: res.data.participants
-          });
-          this.state.socket.emit("new-auc", res.data);
-        });
-    } else {
-      alert("noooooooooooooooooooooooo");
+  testLogIn() {
+    if (!this.state.userInfo.id || !this.state.userInfo.id) {
+      this.state.handleShow("Login");
+      return false;
     }
+    return true;
   }
 
+  handleAuction(fastAuction) {
+    if (this.testLogIn()) {
+      var price =
+        fastAuction + this.state.product.last_auction_price ||
+        this.state.auctionPrice;
+      this.setState({ auctionPrice: 0 });
+
+      if (price > this.state.product.last_auction_price) {
+        auctionServices
+          .updateAuction(
+            this.state.product._id,
+            price,
+            this.props.userInfo.id,
+            Date.now()
+          )
+          .then(res => {
+            this.setState({
+              product: res.data,
+              history: res.data.participants
+            });
+            this.state.socket.emit("new-auc", res.data);
+          });
+      } else {
+        alert("noooooooooooooooooooooooo");
+      }
+    }
+  }
   render() {
     return (
       <div>
