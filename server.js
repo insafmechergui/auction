@@ -45,7 +45,6 @@ let io = socket(server);
 
 io.on("connection", socket => {
   socket.on("new-auc", data => {
-    console.log(data);
     io.sockets.emit("new-auc", data);
   });
 });
