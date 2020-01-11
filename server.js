@@ -48,5 +48,3 @@ io.on("connection", socket => {
     io.sockets.emit("new-auc", data);
   });
 });
-
-// exports.server = server;
