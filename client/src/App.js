@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import {
   Button,
   Form,
@@ -10,6 +10,7 @@ import {
   NavDropdown,
   FormControl
 } from "react-bootstrap";
+
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
 
@@ -19,7 +20,7 @@ import Home from "./components/home";
 
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
-import NavbarCategory from "./components/category/navBarCategory";
+import NavCategory from "./components/category/NavCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -37,7 +38,8 @@ class App extends React.Component {
         name: null
       },
       showModalSignUp: false,
-      showModalLogin: false
+      showModalLogin: false,
+      products: []
     };
     this.changeUserName = this.changeUserName.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -89,6 +91,14 @@ class App extends React.Component {
     });
   }
 
+  handleClickCategory(data) {
+
+    console.log('pppppppppppp>', data)
+    this.setState({
+      products: data[0].products
+    })
+    // 
+  }
   render() {
     return (
       <div>
@@ -137,23 +147,23 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                  <Nav>
-                    <Nav.Link
-                      onClick={() => {
-                        this.hundleSignOut();
-                      }}
-                    >
-                      SignOut
+                    <Nav>
+                      <Nav.Link
+                        onClick={() => {
+                          this.hundleSignOut();
+                        }}
+                      >
+                        SignOut
                     </Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.handleShow("SignUp");
-                      }}
-                    >
-                      {this.state.userInfo.name}
-                    </Nav.Link>
-                  </Nav>
-                )}
+                      <Nav.Link
+                        onClick={() => {
+                          this.handleShow("SignUp");
+                        }}
+                      >
+                        {this.state.userInfo.name}
+                      </Nav.Link>
+                    </Nav>
+                  )}
                 <Form inline>
                   <FormControl
                     type="text"
@@ -165,11 +175,11 @@ class App extends React.Component {
               </Navbar.Collapse>
             </Navbar>
           </Switch>
-          <NavbarCategory />
+          <NavCategory onClick={(data) => { this.handleClickCategory(data) }} />
         </Router>
 
         <Router>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={() => (<Home products={this.state.products} />)} />
           <Route
             path="/product"
             component={() => (
