@@ -1,11 +1,7 @@
 import React from "react";
-
-import productServices from '../../services/productService'
-import auctionServices from '../../services/auctionServices'
-
-
+import productServices from "../../services/productService";
+import auctionServices from "../../services/auctionServices";
 import ReactDOM from "react-dom";
-import openSocket from "socket.io-client";
 import {
   Card,
   Button,
@@ -33,7 +29,6 @@ class Auction extends React.Component {
         this.setState({ history: auc.participants });
       }
       console.log(auc);
-
     });
   }
 
@@ -50,7 +45,6 @@ class Auction extends React.Component {
     this.setState({ auctionPrice: 0 });
 
     if (price > this.state.product.last_auction_price) {
-<<<<<<< HEAD
       auctionServices
         .updateAuction(
           this.state.product._id,
@@ -65,7 +59,6 @@ class Auction extends React.Component {
           });
           this.state.socket.emit("new-auc", res.data);
         });
-
     } else {
       alert("noooooooooooooooooooooooo");
     }
@@ -74,7 +67,6 @@ class Auction extends React.Component {
   render() {
     return (
       <div>
-
         <Card bg="light" className="auction">
           <Card.Body>
             <Card.Title className="text-center">
@@ -95,7 +87,6 @@ class Auction extends React.Component {
                   {" "}
                   {this.state.product.last_auction_price} DT
                 </Card.Text>
-
               </Col>
               <Col className="text-right">
                 <Card.Text>Name.M </Card.Text>
