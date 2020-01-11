@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 let Product = mongoose.model("Product");
+let productDB = require('../Database/Product')
 let User = mongoose.model("user");
 const express = require("express");
 const app = express();
@@ -107,7 +108,7 @@ module.exports = app => {
   //     });
   //   });
   // });
-};
+
   // app.post("/api//update/:id", (req, res) => {   // this function should be reconsidered
   //   console.log("heheh");
   //   Product.findById(req.params.id, (err, product) => {
@@ -138,3 +139,16 @@ module.exports = app => {
   // });
 
   // update current price
+  app.get('/api/products/search',(req,res)=> {
+    console.log(req.body.descreption)
+    productDB.searchFilter(req.body.descreption, (err, data)=> {
+      if(err) res.status(404).send('not found')
+     
+      res.json(data)
+      
+    })
+  });
+
+
+
+};
