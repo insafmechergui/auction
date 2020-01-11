@@ -18,7 +18,7 @@ const productSchema = new Schema({
   last_auction_price: { type: Number },
   value: { type: Number },
   initial_date: { type: Date },
-  duration: { type: String },
+  duration: { type: Number },
   participants: [
     {
       user: { type: Schema.Types.ObjectId, ref: "user" },
@@ -32,7 +32,10 @@ const productSchema = new Schema({
 var Product = mongoose.model("Product", productSchema);
 
 var getAll = function (callback) {
-  Product.find((err, data) => {
+  console.log(new Date('2020-01-09T15:02:30.000+0000').getTime())
+  console.log(new Date())
+
+  Product.find({ initial_date: { $lte: new Date() } }, (err, data) => {
     if (err) {
       callback(err, null)
     } else {

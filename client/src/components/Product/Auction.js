@@ -63,7 +63,7 @@ class Auction extends React.Component {
       alert("noooooooooooooooooooooooo");
     }
   }
-  componentDidMount() { }
+
   render() {
     return (
       <div>
@@ -74,7 +74,7 @@ class Auction extends React.Component {
             </Card.Title>
             <Card.Header className="text-center timer">
               <Countdown
-                date={new Date(this.state.product.initil_date).getTime()}
+                date={new Date(this.state.product.initil_date).getTime() + this.state.product.duration}
                 onComplete={() => {
                   this.setState({ timer: "done" });
                 }}
