@@ -75,7 +75,6 @@ class Auction extends React.Component {
       }
     }
   }
-
   render() {
     return (
       <div>

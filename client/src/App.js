@@ -24,8 +24,10 @@ import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
-import Axios from "axios";
+import axios from "axios";
 import Product from "./components/Product/Product.js";
+import Admin from "./components/admin/Admin.js";
+
 class App extends React.Component {
   constructor() {
     super();
