@@ -30,3 +30,13 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
 });
+
+let io = socket(server);
+
+io.on("connection", socket => {
+  socket.on("new-auc", data => {
+    console.log('newwwwwwwwwwwww')
+    io.sockets.emit("new-auc", data);
+
+  });
+});

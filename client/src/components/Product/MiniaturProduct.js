@@ -8,11 +8,11 @@ class MiniaturProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: new Date(this.props.product.initil_date).getTime()//+duration // Date.now() should be fix for every product date retreav from database
+      timer: new Date(this.props.product.initil_date).getTime() + this.props.product.duration//+duration // Date.now() should be fix for every product date retreav from database
     };
   }
   componentDidMount() {
-
+    console.log(this.props.product)
   }
   render() {
     return (

@@ -46,7 +46,6 @@ module.exports = app => {
   // question if the admin make a mistake on adding a product can he update if ?????
 
   app.post("/api/addp", (req, res) => {
-    console.log(req.body)
     let product = new Product(req.body);
     product
       .save((err, result) => {
@@ -60,7 +59,7 @@ module.exports = app => {
 
   app.put("/api/updateAuction", (req, res) => {
     // the user should be provided for now his id is in the req
-    console.log(req.body)
+    console.log('auction update====> ', req.body)
     Product.findOneAndUpdate({ _id: req.body.id },
       {
         last_auction_price: req.body.price,
