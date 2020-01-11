@@ -38,6 +38,7 @@ class App extends React.Component {
       showModalLogin: false
     };
     this.changeUserName = this.changeUserName.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
 
   hundleSignOut() {
@@ -80,7 +81,7 @@ class App extends React.Component {
   }
 
   handleShow(target) {
-    console.log(target);
+    console.log(this.state);
     this.setState({
       [`showModal${target}`]: !this.state[`showModal${target}`]
     });
@@ -169,7 +170,12 @@ class App extends React.Component {
           <Route path="/" exact component={Home} />
           <Route
             path="/product"
-            component={() => <Product userInfo={this.state.userInfo} />}
+            component={() => (
+              <Product
+                userInfo={this.state.userInfo}
+                handleShow={this.handleShow}
+              />
+            )}
           />
         </Router>
       </div>
