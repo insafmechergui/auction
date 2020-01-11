@@ -24,8 +24,8 @@ class Auction extends React.Component {
       product: {},
       auctionPrice: 0,
 
-  
-      socket: openSocket("http://localhost:5000")
+
+      socket: openSocket("http://localhost:5000"),
 
       history: []
 
@@ -67,7 +67,7 @@ class Auction extends React.Component {
       alert("noooooooooooooooooooooooo");
     }
   }
-  componentDidMount() {}
+  // componentDidMount() { }
   render() {
     return (
       <div>
