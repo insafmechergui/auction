@@ -2,10 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const socket = require("socket.io");
-
-require("./Database/Product");
-
 const app = express();
+require("./Database/Product");
+require("./routes/UserRoute.js")(app);
+
+require("./routes/ProductRoute.js")(app);
+
+require("./routes/CategoryRoute.js")(app);
+
 
 mongoose.Promise = global.Promise;
 
@@ -22,11 +26,6 @@ db.once("open", () => console.log("mongoose is connected connected"));
 app.use(bodyParser.json());
 
 //exemple for useing routes files
-require("./routes/UserRoute.js")(app);
-
-require("./routes/ProductRoute.js")(app);
-
-require("./routes/CategoryRoute.js")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
