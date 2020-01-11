@@ -1,0 +1,618 @@
+{ 
+    "_id" : ObjectId("5e177fccf315d61b4c99da99"), 
+    "category" : [
+
+    ], 
+    "winner" : [
+
+    ], 
+    "name" : "Martin D-35 Dreadnought Acoustic Guitar", 
+    "descreption" : "Very similar in design to the legendary D-28 dreadnought, the Martin D-35 adds a three-piece back constructed from Indian Rosewood as well as a bound", 
+    "image" : "https://images.reverb.com/image/upload/s--hCvA1Gix--/f_auto,t_large/v1559759198/bghge6q0jidiwxumevwe.png", 
+    "last_auction_price" : NumberInt(2261), 
+    "value" : NumberInt(2885), 
+    "initial_date" : ISODate("2020-01-11T10:02:30.000+0000"), 
+    "duration" : NumberLong(2147480000), 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e199fd09066e40538becd8b"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(2261), 
+            "date" : ISODate("2020-01-11T10:13:36.402+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e199ec79066e40538becd8a"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(2251), 
+            "date" : ISODate("2020-01-11T10:09:11.817+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18d5a104de0635bcc30a9f"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2151)
+        }
+    ], 
+    "__v" : NumberInt(0), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000")
+}
+{ 
+    "_id" : ObjectId("5e178015f315d61b4c99da9a"), 
+    "category" : [
+
+    ], 
+    "winner" : [
+
+    ], 
+    "name" : "Martin D-35 Dreadnought Acoustic Guitar", 
+    "descreption" : "Very similar in design to the legendary ", 
+    "image" : "https://images.reverb.com/image/upload/s--hCvA1Gix--/f_auto,t_large/v1559759198/bghge6q0jidiwxumevwe.png", 
+    "last_auction_price" : NumberInt(2690), 
+    "value" : NumberInt(2885), 
+    "initial_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "duration" : NumberLong(50000000), 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e18d57904de0635bcc30a9c"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2690)
+        }, 
+        {
+            "_id" : ObjectId("5e18d57704de0635bcc30a9b"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2590)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3b35b163631c4fc0ca2"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2090)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3b55b163631c4fc0ca3"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2190)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3b85b163631c4fc0ca4"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2290)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3b95b163631c4fc0ca5"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2390)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3c8417f98380873dd9b"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2490)
+        }
+    ], 
+    "__v" : NumberInt(0), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000")
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a1413"), 
+    "name" : "Martin D-35 Dreadnought Acoustic Guitar", 
+    "descreption" : "Very similar in design to the legendary D-28 dreadnought, the Martin D-35 adds a three-piece back constructed from Indian Rosewood as well as a bound", 
+    "image" : "https://images.reverb.com/image/upload/s--hCvA1Gix--/f_auto,t_large/v1559759198/bghge6q0jidiwxumevwe.png", 
+    "last_auction_price" : NumberInt(2260), 
+    "value" : NumberInt(2885), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e18d62dc0181116547cbf88"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(2260)
+        }, 
+        {
+            "_id" : ObjectId("5e18d5d104de0635bcc30aa1"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(2160)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a1414"), 
+    "name" : "WOW FIND! 14K White Gold Diamond Ring", 
+    "descreption" : "5k diamond ring", 
+    "image" : "http://www.colombianemeralds.com/assets/images/09-09-2018_CEI_277067_0232_300dpi.jpg", 
+    "last_auction_price" : NumberInt(4064), 
+    "value" : NumberInt(4999), 
+    "initil_date" : ISODate("2020-01-05T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e199ba3e22ff10ea4236466"), 
+            "user" : null, 
+            "price" : NumberInt(4064), 
+            "date" : ISODate("2020-01-11T09:55:47.155+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1999d7e22ff10ea4236465"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(4062), 
+            "date" : ISODate("2020-01-11T09:48:07.451+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1999d5e22ff10ea4236464"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(4052), 
+            "date" : ISODate("2020-01-11T09:48:05.267+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1999d3e22ff10ea4236463"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(4051), 
+            "date" : ISODate("2020-01-11T09:48:03.732+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1999d0e22ff10ea4236462"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(4001), 
+            "date" : ISODate("2020-01-11T09:48:00.795+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e19910d0c91b41c244f2ec3"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(3901), 
+            "date" : ISODate("2020-01-11T09:10:37.249+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1990cb0c91b41c244f2ec2"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(3801), 
+            "date" : ISODate("2020-01-11T09:09:31.662+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1990c50c91b41c244f2ec1"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(3800), 
+            "date" : ISODate("2020-01-11T09:09:25.774+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1990c30c91b41c244f2ec0"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(3750), 
+            "date" : ISODate("2020-01-11T09:09:23.239+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1990be0c91b41c244f2ebf"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(3650), 
+            "date" : ISODate("2020-01-11T09:09:17.847+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1990ba0c91b41c244f2ebe"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(3700), 
+            "date" : ISODate("2020-01-11T09:09:14.526+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e198f3c01386004b44c2edb"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(3600), 
+            "date" : ISODate("2020-01-11T09:02:51.943+0000")
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a1415"), 
+    "name" : "PlayStation 4 Pro 1TB Gaming Console", 
+    "descreption" : "new playstation 4 pro 1TB", 
+    "image" : "https://www.adorama.com/images/Large/so3003346.jpg", 
+    "last_auction_price" : NumberInt(2122), 
+    "value" : NumberInt(384), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e199dd4780bcd1ba8f31c42"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(2122), 
+            "date" : ISODate("2020-01-11T10:05:08.426+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e19904b0c91b41c244f2eb9"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(472), 
+            "date" : ISODate("2020-01-11T09:07:23.039+0000")
+        }, 
+        {
+            "user" : "5e1639dba699a33b1087c2db"
+        }, 
+        {
+            "_id" : ObjectId("5e18cf33c19aff26c40a3480"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(302)
+        }, 
+        {
+            "_id" : ObjectId("5e18cf48dbf24b09c46cf7e6"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(312)
+        }, 
+        {
+            "_id" : ObjectId("5e18cf49dbf24b09c46cf7e7"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(322)
+        }, 
+        {
+            "_id" : ObjectId("5e18cf85239ee120786e0c3d"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(372)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a1416"), 
+    "name" : "Xbox One S All-Digital Edition", 
+    "descreption" : "new XBOX One S 1TB", 
+    "image" : "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3SQnt?ver=5797&q=90&m=6&h=1445&w=1849&b=%23FFFFFFFF&f=jpg&o=f&aim=true", 
+    "last_auction_price" : NumberInt(811), 
+    "value" : NumberInt(249), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e198eff01386004b44c2ed9"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(811), 
+            "date" : ISODate("2020-01-11T09:01:51.111+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18d945be08d41c684aa19f"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(711)
+        }, 
+        {
+            "_id" : ObjectId("5e18d912f2bf8625f060aa45"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(611)
+        }, 
+        {
+            "_id" : ObjectId("5e18d8a751a2a32e60670e2e"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(511)
+        }, 
+        {
+            "_id" : ObjectId("5e18d65e1af2072f9c12e3c6"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(411)
+        }, 
+        {
+            "_id" : ObjectId("5e18d58a04de0635bcc30a9e"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(311)
+        }, 
+        {
+            "_id" : ObjectId("5e18d58904de0635bcc30a9d"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(310)
+        }, 
+        {
+            "_id" : ObjectId("5e18c794507d6b2f246399d1"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(210)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a1417"), 
+    "name" : "Isla Verde Spa Relaxation Massage Course", 
+    "descreption" : "Wouldn't you just love to know how to do this incredible form of massage?, Well you can from best-selling massage course instructor", 
+    "image" : "https://i.udemycdn.com/course/750x422/293170_2550_2.jpg", 
+    "last_auction_price" : NumberInt(2101), 
+    "value" : NumberInt(2350), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e198ec701386004b44c2ed7"), 
+            "user" : null, 
+            "price" : NumberInt(2101), 
+            "date" : ISODate("2020-01-11T09:00:55.904+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18df7696b7c331883a2dbc"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(2001), 
+            "date" : ISODate("2020-01-10T20:32:54.905+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18dd5a96b7c331883a2dbb"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(1991), 
+            "date" : ISODate("2020-01-10T20:23:54.131+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18dd5596b7c331883a2dba"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(1941), 
+            "date" : ISODate("2020-01-10T20:23:49.194+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18dc0196b7c331883a2db9"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(1841), 
+            "date" : ISODate("2020-01-10T20:18:09.818+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18dbe196b7c331883a2db8"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(1840), 
+            "date" : ISODate("2020-01-10T20:17:37.595+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18dbde96b7c331883a2db7"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(1830), 
+            "date" : ISODate("2020-01-10T20:17:34.763+0000")
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a1418"), 
+    "name" : "LG Gram 17", 
+    "descreption" : "If a 3-pound weight and a big display are your laptop must-haves, the Gram 17 is your answer.", 
+    "image" : "https://cnet3.cbsistatic.com/img/J_O3BZs5jbl5QCe4fnppcKy-8Kc=/868x488/2019/06/13/c22649be-9ebe-49e1-b76f-65d9b3b66d56/01-lg-gram.jpg", 
+    "last_auction_price" : NumberInt(1811), 
+    "value" : NumberInt(1290), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e199548f9999a303c693c1e"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(1811), 
+            "date" : ISODate("2020-01-11T09:28:40.387+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e1991e1f9999a303c693c1d"), 
+            "user" : ObjectId("5e162c26bee62d0a6cc3bba3"), 
+            "price" : NumberInt(1761), 
+            "date" : ISODate("2020-01-11T09:14:09.210+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18e0cd96b7c331883a2dbe"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(1711), 
+            "date" : ISODate("2020-01-10T20:38:37.153+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18e0c696b7c331883a2dbd"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(1611), 
+            "date" : ISODate("2020-01-10T20:38:30.329+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18d28fa95cb6387cbf8aa9"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(710)
+        }, 
+        {
+            "_id" : ObjectId("5e18d291a95cb6387cbf8aaa"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(760)
+        }, 
+        {
+            "_id" : ObjectId("5e18d2efe9da70162c8dcaee"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(860)
+        }, 
+        {
+            "_id" : ObjectId("5e18d316f924573a74de5464"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(960)
+        }, 
+        {
+            "_id" : ObjectId("5e18d319f924573a74de5465"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1060)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3208b89ba39ac1b2b92"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1160)
+        }, 
+        {
+            "_id" : ObjectId("5e18d34d93a8563b20533015"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1260)
+        }, 
+        {
+            "_id" : ObjectId("5e18d358ada3512818af7771"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1360)
+        }, 
+        {
+            "_id" : ObjectId("5e18d36afd993e1d48689cb6"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1460)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3a35b163631c4fc0ca0"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1560)
+        }, 
+        {
+            "_id" : ObjectId("5e18d3a75b163631c4fc0ca1"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1610)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a1419"), 
+    "name" : "Redux Analogue Black", 
+    "descreption" : "Beautiful at first sight and breathtaking when adorned, the Designer collection of watches by REDUX are all about the added dose of charisma", 
+    "image" : "https://images-na.ssl-images-amazon.com/images/I/71gdBQP%2BqGL._UY550_.jpg", 
+    "last_auction_price" : NumberInt(2763), 
+    "value" : NumberInt(300), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e18c7b6507d6b2f246399d2"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(202)
+        }, 
+        {
+            "_id" : ObjectId("5e18cb97bac37a0ab8748bd2"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(2763)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a141a"), 
+    "name" : "Jordan 11 Bred", 
+    "descreption" : "hella kicks", 
+    "image" : "https://sneakernews.com/wp-content/uploads/2019/12/jordan-11-bred-buy-now.jpg", 
+    "last_auction_price" : NumberInt(360), 
+    "value" : NumberInt(450), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e18c74b507d6b2f246399ce"), 
+            "user" : null, 
+            "price" : NumberInt(360)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a141b"), 
+    "name" : "Lamborghini Urus", 
+    "descreption" : "laborghini urus 2019 Engine: 4.0-liter Twin-Turbo V8 Gas", 
+    "image" : "https://st.motortrend.com/uploads/sites/10/2018/06/2019-Lamborghini-Urus-Rosso-Anteros-front-three-quarter-01.jpg", 
+    "last_auction_price" : NumberInt(161036), 
+    "value" : NumberInt(200000), 
+    "initil_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10m", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e18dab074c69d2e4c2cbe40"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(161036), 
+            "date" : ISODate("2020-01-10T20:12:32.875+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18d9c7d41d2a264c0668f6"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(160936), 
+            "date" : ISODate("2020-01-10T20:08:39.723+0000")
+        }, 
+        {
+            "_id" : ObjectId("5e18d971de7be9342cd310fc"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(160836)
+        }, 
+        {
+            "_id" : ObjectId("5e18b44f4762c00cd48a67e8"), 
+            "user" : ObjectId("5e18b3cb4762c00cd48a67e4"), 
+            "price" : NumberInt(160375)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
+{ 
+    "_id" : ObjectId("5e1783deb33b7130276a141c"), 
+    "name" : "iPhone 11 Pro Clear Case", 
+    "descreption" : "Very similar in design to the legendary D-28 dreadnought, the Martin D-35 adds a three-piece back constructed from Indian Rosewood as well as a bound", 
+    "image" : "The Clear Case for iPhone 11 Pro lets the gorgeous colored finish of your iPhone 11 Pro shine through while providing the protection you want.", 
+    "last_auction_price" : NumberInt(1571), 
+    "value" : NumberInt(1200), 
+    "initial_date" : ISODate("2020-01-09T15:02:30.000+0000"), 
+    "Duration" : "10", 
+    "participants" : [
+        {
+            "_id" : ObjectId("5e18cfe3239ee120786e0c3e"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1010)
+        }, 
+        {
+            "_id" : ObjectId("5e18d07b239ee120786e0c3f"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1110)
+        }, 
+        {
+            "_id" : ObjectId("5e18d1705c553c2fa0f4707d"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1120)
+        }, 
+        {
+            "_id" : ObjectId("5e18d19ab7b709194cb42483"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1170)
+        }, 
+        {
+            "_id" : ObjectId("5e18d19fb7b709194cb42484"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1270)
+        }, 
+        {
+            "_id" : ObjectId("5e18d2164312f338a4a9b9b9"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1320)
+        }, 
+        {
+            "_id" : ObjectId("5e18d21b4312f338a4a9b9ba"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1321)
+        }, 
+        {
+            "_id" : ObjectId("5e18d23533f87d384cfd08ae"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1421)
+        }, 
+        {
+            "_id" : ObjectId("5e18d251a95cb6387cbf8aa7"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1471)
+        }, 
+        {
+            "_id" : ObjectId("5e18d255a95cb6387cbf8aa8"), 
+            "user" : ObjectId("5e17449652338303a8190adb"), 
+            "price" : NumberInt(1571)
+        }
+    ], 
+    "winner" : [
+
+    ], 
+    "duration" : NumberLong(5000000000000)
+}
