@@ -22,7 +22,9 @@ class Auction extends React.Component {
       product: {},
       auctionPrice: 0,
       history: [],
-      socket: openSocket("http://localhost:5000")
+      socket: openSocket("http://localhost:5000"),
+      timer: true,
+
     };
     this.state.socket.on("new-auc", auc => {
       if (auc._id === this.state.product._id) {
@@ -75,6 +77,22 @@ class Auction extends React.Component {
       }
     }
   }
+
+
+  handletimerComplete() {
+    this.setState({
+      timer: false
+    })
+    console.log(this.state.product._id)
+    auctionServices.getWinner(this.state.product._id).then((res) => {
+      // console.log(res.data.participants[0].user.name)
+      console.log(res.data[0].participants[0].user.name)
+
+      this.setState({
+        winer: `the winner :${res.data[0].participants[0].user.name}`
+      })
+    })
+  }
   render() {
     return (
       <div>
@@ -83,19 +101,22 @@ class Auction extends React.Component {
             <Card.Title className="text-center">
               <Card.Text>Value {this.state.product.value} DT</Card.Text>
             </Card.Title>
+
             <Card.Header className="text-center timer">
-              <Countdown
-                date={new Date(this.state.product.initil_date).getTime() + this.state.product.duration}
-                onComplete={() => {
-                  this.setState({ timer: "done" });
-                }}
-              />
+              {this.state.timer === true &&
+                <Countdown
+
+                  date={new Date(this.state.product.initial_date).getTime() + this.state.product.duration}
+                  onComplete={() => {
+                    this.handletimerComplete();
+                  }}
+                /> || <Card.Text >Auction closed :{this.state.winer}</Card.Text>}
             </Card.Header>
             <br />
             <Row>
               <Col className="text-left auctionPrice">
                 <Card.Text>
-                  {" "}
+
                   {this.state.product.last_auction_price} DT
                 </Card.Text>
               </Col>

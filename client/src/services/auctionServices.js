@@ -7,7 +7,16 @@ export default {
             .then(response => response)
             .catch(err => { throw err }
             );
+    },
+    getWinner: (idProduct) => {
+        return axios
+            .get("/api/getwinner", { params: { id: idProduct } })
+            .then(response => response)
+            .catch(err => { throw err }
+            );
     }
+
+
 
 };
 

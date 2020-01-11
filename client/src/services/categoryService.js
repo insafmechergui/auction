@@ -12,7 +12,7 @@ export default {
       });
   },
   getAllCategories: () => {
-    console.log("service cat");
+
     return axios
       .get("/api/categories")
       .then(response => response)
@@ -20,9 +20,9 @@ export default {
         throw err;
       });
   },
-  displayByCategory: () => {
+  displayByCategory: (category) => {
     return axios
-      .get("api/getProducts")
+      .get("api/getProducts", { params: { category: category } })
       .then(response => response)
       .catch(err => {
         throw err;

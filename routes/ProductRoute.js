@@ -74,20 +74,19 @@ module.exports = app => {
         });
   });
 
-  //declare a winner for an action
-  app.put("/api/win/:id", (req, res) => {
+
+  app.get("/api/getwinner", (req, res) => {
+    console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
     //they must be a function to validate id the intial time + duration has passed and there is no winner
-    Product.findById(req.params.id, (err, product) => {
-      if (err) res.json(err);
-      if (!product) res.status(404).send("hheey not found");
-      else {
-        product.winner = req.body.userId;
-        product.save(err => {
-          if (err) res.json(err);
-          res.json(product);
-        });
+    Products.findWinner(req.query.id, (err, product) => {
+      if (err) {
+        res.status(404).send(err)
       }
-    });
+      else {
+        res.status(200).send(product)
+        res.end()
+      }
+    })
   });
 
 
@@ -138,13 +137,13 @@ module.exports = app => {
   // });
 
   // update current price
-  app.get('/api/products/search',(req,res)=> {
+  app.get('/api/products/search', (req, res) => {
     console.log(req.body.descreption)
-    productDB.searchFilter(req.body.descreption, (err, data)=> {
-      if(err) res.status(404).send('not found')
-     
+    productDB.searchFilter(req.body.descreption, (err, data) => {
+      if (err) res.status(404).send('not found')
+
       res.json(data)
-      
+
     })
   });
 

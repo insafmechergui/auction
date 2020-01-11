@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
-const Product = require("./Product");
+// const Product = require("./Product");
 const { Schema } = mongoose;
 
 const categorySchema = new Schema({
   name: { type: String, unique: true },
-
   products: [{ type: Schema.Types.ObjectId, ref: "Product" }]
-
 });
 
 const Category = mongoose.model("Category", categorySchema);
 
-var createCategory = function(categoryData, callback) {
-  Category.create(categoryData, (err, data) => {
+var createCategory = function (categoryData, callback) {
+  var cat = new Category(categoryData)
+  cat.save(categoryData, (err, data) => {
     if (err) {
+      console.log(err)
       callback(err, null);
     } else {
       callback(null, data);
@@ -21,7 +21,7 @@ var createCategory = function(categoryData, callback) {
   });
 };
 
-var updateProductCategory = function(nameCategory, idProduct, callback) {
+var updateProductCategory = function (nameCategory, idProduct, callback) {
   Category.findOneAndUpdate(
     { name: nameCategory },
     { $addToSet: { products: idProduct } },
@@ -35,7 +35,7 @@ var updateProductCategory = function(nameCategory, idProduct, callback) {
     });
 };
 
-var deleteCategory = function(nameCategory, callback) {
+var deleteCategory = function (nameCategory, callback) {
   Category.deleteOne({ name: nameCategory }, (err, result) => {
     if (err) {
       callback(err, null);
@@ -45,7 +45,8 @@ var deleteCategory = function(nameCategory, callback) {
   });
 };
 
-var getAllProductByCategory = function(categoryName, callback) {
+var getAllProductByCategory = function (categoryName, callback) {
+  console.log(categoryName)
   Category.find({ name: categoryName })
     .populate("products")
     .exec((err, category) => {
