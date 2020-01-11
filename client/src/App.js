@@ -44,7 +44,6 @@ class App extends React.Component {
   }
 
   hundleSignOut() {
-    const token = localStorage.getItem("token");
     signOutService
       .signOut(this.state.userInfo.name)
       .then(res => {
@@ -83,7 +82,6 @@ class App extends React.Component {
   }
 
   handleShow(target) {
-    console.log(this.state);
     this.setState({
       [`showModal${target}`]: !this.state[`showModal${target}`]
     });
@@ -98,9 +96,11 @@ class App extends React.Component {
             onHide={() => {
               this.handleShow("SignUp");
             }}
+            handleShow={this.handleShow}
             changeUserName={this.changeUserName}
           />
           <LogIn
+            handleShow={this.handleShow}
             showModal={this.state.showModalLogin}
             onHide={() => {
               this.handleShow("Login");

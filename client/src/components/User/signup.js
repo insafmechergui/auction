@@ -10,8 +10,8 @@ class SignUp extends React.Component {
       email: "",
       password: "",
       show: false,
-      alert: 'success',
-      message: 'Email already exist',
+      alert: "success",
+      message: "Email already exist",
       showModal: true
     };
 
@@ -19,28 +19,24 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  hundleShowAlert() {
-
-  }
+  hundleShowAlert() {}
   handleSubmit(event) {
     event.preventDefault();
     signUpService.getAll(this.state).then(res => {
       if (res.data === "user already exists") {
-
         this.setState({
           show: true,
-          alert: 'danger',
-          message: 'Email already exist',
-        })
-      }
-      else {
-
+          alert: "danger",
+          message: "Email already exist"
+        });
+      } else {
         this.setState({
           show: true,
-          alert: 'success',
-          message: 'Sign up Successful'
-
-        })
+          alert: "success",
+          message: "Sign up Successful"
+        });
+        // this.props.changeUserName(res.data.user._id, res.data.user.name); // res.data is  json ??? problem in the back end i guess
+        this.props.handleShow("SignUp");
       }
     });
   }
@@ -50,21 +46,23 @@ class SignUp extends React.Component {
       [e.target.name]: e.target.value,
       show: false
     });
-
   }
   handleClose() {
-    this.setState({ showModal: false })
+    this.setState({ showModal: false });
   }
   render() {
     return (
       // <div className='signup'>
-
-      <Modal className='signup' show={this.props.showModal} onHide={() => { this.props.onHide() }}>
+      <Modal
+        className="signup"
+        show={this.props.showModal}
+        onHide={() => {
+          this.props.onHide();
+        }}
+      >
         <Form onSubmit={this.handleSubmit}>
           <Alert variant={this.state.alert} show={this.state.show} dismissible>
-
             {this.state.message}
-
           </Alert>
           <div id="dataError"></div>
           <Form.Group controlId="name">
@@ -91,7 +89,7 @@ class SignUp extends React.Component {
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
-          </Form.Text>
+            </Form.Text>
           </Form.Group>
 
           <Form.Group controlId="password">
@@ -108,7 +106,7 @@ class SignUp extends React.Component {
 
           <Button variant="primary" type="submit">
             SugnUp
-        </Button>
+          </Button>
         </Form>
       </Modal>
       // </div>
