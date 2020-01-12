@@ -28,54 +28,68 @@ const productSchema = new Schema({
   ],
   winner: [{ type: Schema.Types.ObjectId, ref: "user" }]
 });
-productSchema.index({descreption: 'text'});
+productSchema.index({ descreption: "text" });
 
 var Product = mongoose.model("Product", productSchema);
 
-var getAll = function (callback) {
-  console.log(new Date('2020-01-09T15:02:30.000+0000').getTime())
-  console.log(new Date())
-
+var getAll = function(callback) {
   Product.find({ initial_date: { $lte: new Date() } }, (err, data) => {
     if (err) {
-      callback(err, null)
+      callback(err, null);
     } else {
-      callback(null, data)
+      callback(null, data);
     }
+  });
+};
 
-  })
-}
-
-
-var getOne = function (id, callback) {
+var getOne = function(id, callback) {
   Product.findById(id)
     .populate("participants.user")
     // .populate("winner")
     .exec((err, product) => {
-      if (err) { callback(err, null) }
-      else {
-        callback(null, product)
-
-      }
-
-    })
-
-}
-
-var searchFilter = function(descriptionfilter, callback){
-  console.log(descriptionfilter)
-  // Product.find({$text: {$search: searchString}})
-  // "$text": {"$search": req.body.query}
-  // {$text: {$search: descriptionfilter}}
-    Product.find({$text: {$search: descriptionfilter}}, (err,data) => {
       if (err) {
         callback(err, null);
       } else {
-        callback(null, data);
+        callback(null, product);
       }
     });
-}
+};
 
+var searchFilter = function(descriptionfilter, callback) {
+  // Product.find({$text: {$search: searchString}})
+  // "$text": {"$search": req.body.query}
+  // {$text: {$search: descriptionfilter}}
+  Product.find({ $text: { $search: descriptionfilter } }, (err, data) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+// var updateWinner = function (idProduct, callback) {
+//   Product.findOneAndUpdate({ _id: idProduct }).populate('participants.user').exec(
+//     (err, product) => {
+//       if (err) { callback(err, null) }
+//       else {
+//         callback(null, product)
+//       }
+//     });
+// }
+
+var findWinner = function(idProduct, callback) {
+  Product.find({ _id: idProduct })
+    .populate("participants.user")
+    .exec((err, product) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, product);
+      }
+    });
+};
 module.exports.getAll = getAll;
 module.exports.getOne = getOne;
 module.exports.searchFilter = searchFilter;
+module.exports.findWinner = findWinner;

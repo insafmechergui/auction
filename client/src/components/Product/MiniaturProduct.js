@@ -8,20 +8,32 @@ class MiniaturProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: new Date(this.props.product.initil_date).getTime() + this.props.product.duration//+duration // Date.now() should be fix for every product date retreav from database
+      // this.props.product.initil_date).getTime() +
+      timer:
+        new Date(this.props.product.initial_date).getTime() +
+        this.props.product.duration
     };
   }
-  componentDidMount() {
-    console.log(this.props.product)
-  }
+
+  // componentDidMount() {
+  //   // console.log(new Date(this.props.product.initial_date).getTime())
+  //   console.log(Date.now())
+  //   console.log(new Date('2020-01-11T21:12:00.000+0000').getTime())
+  // }
   render() {
     return (
       <div onClick={this.props.onClick}>
         <Card bg="light" className="mProduct">
-          <Card.Img className='minImage' variant="top" src={this.props.product.image} />
+          <Card.Img
+            className="minImage"
+            variant="top"
+            src={this.props.product.image}
+          />
           {/*dimension photo   288x176*/}
           <Card.Body>
-            <Card.Title className='minTitle'>{this.props.product.name}</Card.Title>
+            <Card.Title className="minTitle">
+              {this.props.product.name}
+            </Card.Title>
             <Card.Text className="cardTextM">
               {this.props.product.descreption}
             </Card.Text>
@@ -42,9 +54,7 @@ class MiniaturProduct extends React.Component {
             </Row>
             <Row>
               {/* md={{ span: 4, offset: 8 }} */}
-              <Col className="price text-right" >
-                {this.props.product.value}
-              </Col>
+              <Col className="price text-right">{this.props.product.value}</Col>
             </Row>
           </Card.Body>
         </Card>

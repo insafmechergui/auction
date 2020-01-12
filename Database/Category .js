@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
-const Product = require("./Product");
+// const Product = require("./Product");
 const { Schema } = mongoose;
 
 const categorySchema = new Schema({
   name: { type: String, unique: true },
-
   products: [{ type: Schema.Types.ObjectId, ref: "Product" }]
-
 });
 
 const Category = mongoose.model("Category", categorySchema);
 
 var createCategory = function(categoryData, callback) {
-  Category.create(categoryData, (err, data) => {
+  var cat = new Category(categoryData);
+  cat.save(categoryData, (err, data) => {
     if (err) {
+      console.log(err);
       callback(err, null);
     } else {
       callback(null, data);
@@ -57,8 +57,7 @@ var getAllProductByCategory = function(categoryName, callback) {
     });
 };
 
-
-var getAll = function (callback) {
+var getAll = function(callback) {
   Category.find({}, (err, data) => {
     if (err) {
       callback(err, null);
@@ -72,5 +71,3 @@ module.exports.deleteCategory = deleteCategory;
 module.exports.createCategory = createCategory;
 module.exports.getAllProductByCategory = getAllProductByCategory;
 module.exports.getAll = getAll;
-
-

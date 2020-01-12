@@ -39,7 +39,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
 });
-;const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const Product = require("./Product");
 const { Schema } = mongoose;
 
@@ -110,7 +110,7 @@ module.exports.deleteCategory = deleteCategory;
 module.exports.createCategory = createCategory;
 module.exports.getAllProductByCategory = getAllProductByCategory;
 module.exports.getAll = getAll;
-;const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const validator = require("validator");
 
@@ -142,7 +142,7 @@ const productSchema = new Schema({
 
 mongoose.model("products", productSchema);
 //  function find make this
-;const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
@@ -208,48 +208,47 @@ exports.User = User;
 exports.createUser = createUser;
 exports.findUser = findUser;
 exports.generateAuthToken = generateAuthToken;
-;const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const Category = require("../Database/Category ");
 module.exports = app => {
+  app.post("/api/newCategory", (req, res) => {
+    Category.createCategory(req.body, (err, data) => {
+      if (err) {
+        res.status(404).send("duplicate key");
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  });
 
-    app.post('/api/newCategory', (req, res) => {
-        console.log(req.body)
-        Category.createCategory(req.body, (err, data) => {
-            if (err) {
-                res.status(404).send('duplicate key')
-            } else {
-                res.status(200).send(data)
-            }
-        })
-    })
+  app.delete("/api/deleteCategory", (req, res) => {
+    Category.deleteCategory(req.body.name, (err, result) => {
+      if (result) {
+        res.status(200).send("true");
+      } else {
+        res.status(404).send("false");
+      }
+    });
+  });
 
-    app.delete('/api/deleteCategory', (req, res) => {
-        Category.deleteCategory(req.body.name, (err, result) => {
-            if (result) {
-                res.status(200).send('true')
-            } else {
-                res.status(404).send('false')
-            }
-        });
-    })
+  app.get("/api/getProducts", (req, res) => {
+    Category.getAllProductByCategory(req.body.name, (err, data) => {
+      if (err) {
+        res.status(401).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  });
 
-    app.get('/api/getProducts', (req, res) => {
-        Category.getAllProductByCategory(req.body.name, (err, data) => {
-            if (err) {
-                res.status(401).send(err)
-            } else {
-                res.status(200).send(data)
-            }
-        })
-    })
-
-    app.get('/categories', (req, res) => {
-        Category.getAll((err, data) => {
-            if (err) res.status(404).send(err)
-            else res.status(200).send(data)
-        })
-    })
-};const jwt = require("jsonwebtoken");
+  app.get("/categories", (req, res) => {
+    Category.getAll((err, data) => {
+      if (err) res.status(404).send(err);
+      else res.status(200).send(data);
+    });
+  });
+};
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const userDataBase = require("../../Database/User");
 const User = mongoose.model("user");
@@ -279,7 +278,7 @@ const auth = (req, res, next) => {
   }
 };
 module.exports = auth;
-;const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 let Product = mongoose.model("products");
 let User = mongoose.model("user");
 const express = require("express");
@@ -298,7 +297,6 @@ module.exports = app => {
         console.log(err);
       } else {
         //
-        console.log(products);
         res.json(products);
       }
     });
@@ -411,7 +409,7 @@ module.exports = app => {
   //   });
   // });
 };
-;const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const UserDataBase = require("../Database/User");
 const bcrypt = require("bcryptjs");
 const User = mongoose.model("user");

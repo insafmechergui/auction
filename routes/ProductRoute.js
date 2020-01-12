@@ -43,7 +43,9 @@ module.exports = app => {
     let product = new Product(req.body);
     product
       .save((err, result) => {
+
         console.log(err, result);
+
         res.send(result);
       })
       .catch(err => {
@@ -53,7 +55,9 @@ module.exports = app => {
 
   app.put("/api/updateAuction", (req, res) => {
     // the user should be provided for now his id is in the req
+
     console.log("auction update====> ", req.body);
+
     Product.findOneAndUpdate(
       { _id: req.body.id },
       {
@@ -83,18 +87,14 @@ module.exports = app => {
       });
   });
 
-  //declare a winner for an action
-  app.put("/api/win/:id", (req, res) => {
+  app.get("/api/getwinner", (req, res) => {
     //they must be a function to validate id the intial time + duration has passed and there is no winner
-    Product.findById(req.params.id, (err, product) => {
-      if (err) res.json(err);
-      if (!product) res.status(404).send("hheey not found");
-      else {
-        product.winner = req.body.userId;
-        product.save(err => {
-          if (err) res.json(err);
-          res.json(product);
-        });
+    Products.findWinner(req.query.id, (err, product) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(product);
+        res.end();
       }
     });
   });
@@ -144,10 +144,12 @@ module.exports = app => {
   // });
 
   // update current price
+
   app.get("/api/productsearch", (req, res) => {
     productDB.searchFilter(req.query.descreption, (err, data) => {
       if (err) res.status(404).send("not found");
       res.send(data);
+
     });
   });
 };

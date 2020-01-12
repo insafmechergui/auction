@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import {
   Button,
   Form,
@@ -10,6 +16,7 @@ import {
   NavDropdown,
   FormControl
 } from "react-bootstrap";
+
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
 
@@ -19,7 +26,7 @@ import Home from "./components/home";
 
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
-import NavbarCategory from "./components/category/navBarCategory";
+import NavCategory from "./components/category/NavCategory";
 import checkToken from "./services/checkToken";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -41,9 +48,10 @@ class App extends React.Component {
       },
       showModalSignUp: false,
       showModalLogin: false,
-      // added
+
       products: [],
       description: null
+
     };
     this.changeUserName = this.changeUserName.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -51,7 +59,6 @@ class App extends React.Component {
   }
 
   hundleSignOut() {
-    const token = localStorage.getItem("token");
     signOutService
       .signOut(this.state.userInfo.name)
       .then(res => {
@@ -90,11 +97,11 @@ class App extends React.Component {
   }
 
   handleShow(target) {
-    console.log(this.state);
     this.setState({
       [`showModal${target}`]: !this.state[`showModal${target}`]
     });
   }
+
 
   // hold chage on the input
   onChange(e) {
@@ -122,6 +129,13 @@ class App extends React.Component {
       });
   }
 
+
+  handleClickCategory(data) {
+    this.setState({
+      products: data[0].products
+    });
+  }
+
   render() {
     return (
       <div>
@@ -131,9 +145,11 @@ class App extends React.Component {
             onHide={() => {
               this.handleShow("SignUp");
             }}
+            handleShow={this.handleShow}
             changeUserName={this.changeUserName}
           />
           <LogIn
+            handleShow={this.handleShow}
             showModal={this.state.showModalLogin}
             onHide={() => {
               this.handleShow("Login");
@@ -206,11 +222,19 @@ class App extends React.Component {
               </Navbar.Collapse>
             </Navbar>
           </Switch>
-          <NavbarCategory />
+          <NavCategory
+            onClick={data => {
+              this.handleClickCategory(data);
+            }}
+          />
         </Router>
 
         <Router>
-          <Route path="/" exact component={Home} />
+          <Route
+            path="/"
+            exact
+            component={() => <Home products={this.state.products} />}
+          />
           <Route
             path="/product"
             component={() => (
@@ -219,6 +243,10 @@ class App extends React.Component {
                 handleShow={this.handleShow}
               />
             )}
+          />
+          <Route
+            path="/admin"
+            component={() => <Admin userInfo={this.state.userInfo} />}
           />
         </Router>
       </div>
