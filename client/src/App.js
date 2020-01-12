@@ -248,7 +248,7 @@ class App extends React.Component {
             component={() => <Admin userInfo={this.state.userInfo} />}
           />
         </Router>
-      </div>
+      </div >
     );
   }
 }
