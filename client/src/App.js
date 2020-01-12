@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   Button,
   Form,
@@ -251,43 +245,4 @@ class App extends React.Component {
   }
 }
 
-{
-  /*
-  
-  
-    <Route path='/product'
-            component={Product}
-            userInfo={this.state.userInfo} />
-            
-            
-              <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                {!this.state.userName ? (
-                  <Route exact path="/">
-                    <li>
-                      <Button onClick={() => { this.hundleShowLogin() }} >Login</Button>
-                      <Link to="/Login">LogIn</Link>
-                    </li>
-                    <li>
-                      <Button onClick={() => { this.hundleShowSignUp() }} >signUp</Button>
-                      <Link to="/SignUp">signUp</Link>
-                    </li>
-                    <div>not logged in</div>
-                  </Route>
-                ) : (
-                    <div> {this.state.userName} </div>
-                  )}
-              </ul>
-            </nav>
-
-
-             <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
-            <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route> 
-
-          </div> */
-}
 export default App;

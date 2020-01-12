@@ -10,8 +10,7 @@ class MiniaturProduct extends React.Component {
     this.state = {
       // this.props.product.initil_date).getTime() +
       timer:
-        new Date(this.props.product.initial_date).getTime() +
-        this.props.product.duration
+        new Date(this.props.product.end_date)
     };
   }
 
