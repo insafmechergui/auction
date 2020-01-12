@@ -9,7 +9,8 @@ import {
   Col,
   Form,
   InputGroup,
-  Accordion
+  Accordion,
+  Alert
 } from "react-bootstrap";
 import Countdown from "react-countdown-now";
 import openSocket from "socket.io-client";
@@ -21,13 +22,14 @@ class Auction extends React.Component {
     this.state = {
       product: {},
       auctionPrice: 0,
-      history: [{ user: { name: '' }, date: '' }],
+      history: [{ user: { name: "" }, date: "" }],
       socket: openSocket("http://localhost:5000"),
-      timer: true
+      timer: true,
+      alerShow: false
     };
     this.state.socket.on("new-auc", auc => {
       if (auc._id === this.state.product._id) {
-        this.setState({ history: auc.participants });
+        this.setState({ product: auc, history: auc.participants });
       }
     });
   }
@@ -40,7 +42,6 @@ class Auction extends React.Component {
       handleShow: newProps.handleShow
     });
     //  console.log('---->', newProps.product.participants[0].date)
-
   }
 
   testLogIn() {
@@ -69,58 +70,66 @@ class Auction extends React.Component {
           .then(res => {
             this.setState({
               product: res.data,
-              history: res.data.participants
+              history: res.data.participants,
+              alerShow: false
             });
             this.state.socket.emit("new-auc", res.data);
           });
+
       } else {
-        alert("noooooooooooooooooooooooo");
+        this.setState({
+          alerShow: true
+        })
       }
     }
   }
 
-
   handletimerComplete() {
     this.setState({
       timer: false
-    })
-    console.log(this.state.product._id)
-    auctionServices.getWinner(this.state.product._id).then((res) => {
-      // console.log(res.data.participants[0].user.name)
-      console.log(res.data[0].participants[0].user.name)
-
+    });
+    auctionServices.getWinner(this.state.product._id).then(res => {
       this.setState({
         winer: `Winner :${res.data[0].participants[0].user.name}`
-      })
-    })
+      });
+    });
   }
   render() {
     return (
       <div>
+        <Alert variant='danger' show={this.state.alerShow} >
+          Please bet higher than: {this.state.product.last_auction_price}
+        </Alert>
         <Card bg="light" className="auction">
+
+
           <Card.Body>
             <Card.Title className="text-center">
               <Card.Text>Value {this.state.product.value} DT</Card.Text>
             </Card.Title>
 
             <Card.Header className="text-center timer">
-              {this.state.timer === true &&
+              {(this.state.timer === true && (
                 <Countdown
 
                   date={new Date(this.state.product.initial_date).getTime() + this.state.product.duration}
                   onComplete={() => {
                     this.handletimerComplete();
                   }}
-                /> || <Card.Text className='text-center'>Auction closed  <Row ><Col className='text-center winner'>{this.state.winer}</Col></Row>
+                />
+              )) || (
+                <Card.Text className="text-center">
+                  Auction closed{" "}
+                  <Row>
+                    <Col className="text-center winner">{this.state.winer}</Col>
+                  </Row>
                 </Card.Text>
-
-              }
+              )}
             </Card.Header>
             <br />
             <Row>
               <Col className="text-left auctionPrice">
                 <Card.Text>
-
                   {this.state.product.last_auction_price} DT
                 </Card.Text>
               </Col>
@@ -137,7 +146,6 @@ class Auction extends React.Component {
                 </Card.Text>
               </Col>
               <small className="text-muted">
-
                 {new Date(this.state.history[0].date).getFullYear() +
                   "-" +
                   (new Date(this.state.history[0].date).getMonth() + 1) +
@@ -149,7 +157,6 @@ class Auction extends React.Component {
                   new Date(this.state.history[0].date).getMinutes() +
                   ":" +
                   new Date(this.state.history[0].date).getSeconds()}
-
               </small>
             </Row>
 
@@ -172,7 +179,8 @@ class Auction extends React.Component {
 
             <Row className="item-left">
               <Col md={2}>
-                <Button disabled={!this.state.timer}
+                <Button
+                  disabled={!this.state.timer}
                   onClick={() => {
                     this.handleAuction(1);
                   }}
@@ -193,7 +201,8 @@ class Auction extends React.Component {
                 </Button>
               </Col>
               <Col md={2}>
-                <Button disabled={!this.state.timer}
+                <Button
+                  disabled={!this.state.timer}
                   onClick={() => {
                     this.handleAuction(50);
                   }}
@@ -203,7 +212,8 @@ class Auction extends React.Component {
                 </Button>
               </Col>
               <Col md={2}>
-                <Button disabled={!this.state.timer}
+                <Button
+                  disabled={!this.state.timer}
                   onClick={() => {
                     this.handleAuction(100);
                   }}
@@ -234,7 +244,11 @@ class Auction extends React.Component {
               </Col>
               <Col>
                 {" "}
-                <Button disabled={!this.state.timer} onClick={() => this.handleAuction()} variant="success">
+                <Button
+                  disabled={!this.state.timer}
+                  onClick={() => this.handleAuction()}
+                  variant="success"
+                >
                   Auctioning
                 </Button>
               </Col>
@@ -281,7 +295,7 @@ class Auction extends React.Component {
             </Accordion.Collapse>
           </Card>
         </Accordion>
-      </div >
+      </div>
     );
   }
 }

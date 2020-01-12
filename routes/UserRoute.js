@@ -36,7 +36,6 @@ module.exports = app => {
   });
 
   app.post("/api/logIn", (req, res) => {
-    console.log('---->', req.body)
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) throw err;
       if (!user) res.status(404).send("user is not found");
