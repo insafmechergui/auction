@@ -1,31 +1,32 @@
-
-import React from 'react';
-
-import AddProduct from '../Product/addProduct.js'
-import serviceProduct from '../../services/productService.js';
-import adminServices from './../../services/adminServices.js'
-import Table from 'react-bootstrap/Table'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { Button, Form, InputGroup ,Table} from "react-bootstrap";
+import AddProduct from "../Product/addProduct.js";
+import serviceProduct from "../../services/productService.js";
+import adminServices from "./../../services/adminServices.js";
 
 class Admin extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            products: []
-        }
-    }
-    checkauth(id) {
-        //call function from the admin service to check if can enter this page
-        adminServices.checkIfAdmin(id);
-    }
-    componentDidMount() {
-        this.checkauth(this.props.userInfo.id);
-        serviceProduct.getAll()
-            .then(res => { this.setState({ products: res.data }) }
-            ).then(res => { console.log('hello', this.state.products) }
-            )
-    }
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      products: []
+    };
+  }
+  checkauth(id) {
+    //call function from the admin service to check if can enter this page
+    adminServices.checkIfAdmin(id);
+  }
+  componentDidMount() {
+    this.checkauth(this.props.userInfo.id);
+    serviceProduct
+      .getAll()
+      .then(res => {
+        this.setState({ products: res.data });
+      })
+      .then(res => {
+        console.log("hello", this.state.products);
+      });
+  }
 
     render() {
         return (
@@ -60,5 +61,4 @@ class Admin extends React.Component {
     }
 
 }
-
 export default Admin;
