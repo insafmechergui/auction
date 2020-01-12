@@ -43,6 +43,7 @@ module.exports = app => {
 
   app.post("/api/addp", (req, res) => {
     console.log(req.body);
+    //.body.images = req.body.images.split(',')
     Product.create(req.body, (err, result) => {
       if (err) {
         res.status(400).send(err);
@@ -144,7 +145,8 @@ module.exports = app => {
 
   app.get("/api/productsearch", (req, res) => {
     Products.searchFilter(req.query.descreption, (err, data) => {
-      if (err) res.status(404).send("not found");
+      if (err)
+        res.status(404).send("not found");
       res.send(data);
     });
   });
