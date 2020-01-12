@@ -1,45 +1,39 @@
 const mongoose = require("mongoose");
 let Product = mongoose.model("Product");
-let productDB = require('../Database/Product')
+let productDB = require("../Database/Product");
 let User = mongoose.model("user");
 const express = require("express");
 const app = express();
 
 const cors = require("cors");
 
-const Products = require('../Database/Product')
-
+const Products = require("../Database/Product");
 
 app.use(cors());
 
 module.exports = app => {
-
-  app.get('/api/products', (req, res) => {
-
+  app.get("/api/products", (req, res) => {
     Products.getAll((err, data) => {
       if (err) {
-        res.status(404).send(err)
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(data);
+        res.end();
       }
-      else {
-        res.status(200).send(data)
-        res.end()
-      }
-    })
-  })
-
+    });
+  });
 
   //  product by id
   app.get("/api/product", (req, res) => {
     let id = req.query.id;
     Products.getOne(id, (err, data) => {
       if (err) {
-        res.status(404).send(err)
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(data);
+        res.end();
       }
-      else {
-        res.status(200).send(data)
-        res.end()
-      }
-    })
+    });
   });
 
   // just for admin add or update in case of error of insertion
@@ -49,8 +43,7 @@ module.exports = app => {
     let product = new Product(req.body);
     product
       .save((err, result) => {
-        console.log(err, result)
-        res.send(result)
+        res.send(result);
       })
       .catch(err => {
         res.status(400).send({ msg: "adding new product failed", err });
@@ -59,38 +52,46 @@ module.exports = app => {
 
   app.put("/api/updateAuction", (req, res) => {
     // the user should be provided for now his id is in the req
-    console.log('auction update====> ', req.body)
-    Product.findOneAndUpdate({ _id: req.body.id },
+    Product.findOneAndUpdate(
+      { _id: req.body.id },
       {
         last_auction_price: req.body.price,
-        $push: { participants: { $each: [{ user: req.body.idUser, price: req.body.price, date: req.body.date }], $position: 0 } },
-      },
-      { new: true }).populate('participants.user').exec(
-        (err, product) => {
-          if (err) { res.status(401).send(err) }
-          else {
-            res.status(200).send(product)
+        $push: {
+          participants: {
+            $each: [
+              {
+                user: req.body.idUser,
+                price: req.body.price,
+                date: req.body.date
+              }
+            ],
+            $position: 0
           }
-        });
+        }
+      },
+      { new: true }
+    )
+      .populate("participants.user")
+      .exec((err, product) => {
+        if (err) {
+          res.status(401).send(err);
+        } else {
+          res.status(200).send(product);
+        }
+      });
   });
 
-
   app.get("/api/getwinner", (req, res) => {
-
     //they must be a function to validate id the intial time + duration has passed and there is no winner
     Products.findWinner(req.query.id, (err, product) => {
       if (err) {
-        res.status(404).send(err)
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(product);
+        res.end();
       }
-      else {
-        res.status(200).send(product)
-        res.end()
-      }
-    })
+    });
   });
-
-
-
 
   // update availability
   // app.get("/api/product/:id", (req, res) => { this function might be moved too the front end
@@ -137,16 +138,12 @@ module.exports = app => {
   // });
 
   // update current price
-  app.get('/api/products/search', (req, res) => {
-    console.log(req.body.descreption)
+  app.get("/api/products/search", (req, res) => {
+    console.log(req.body.descreption);
     productDB.searchFilter(req.body.descreption, (err, data) => {
-      if (err) res.status(404).send('not found')
+      if (err) res.status(404).send("not found");
 
-      res.json(data)
-
-    })
+      res.json(data);
+    });
   });
-
-
-
 };

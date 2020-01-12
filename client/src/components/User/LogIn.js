@@ -13,13 +13,13 @@ class LogIn extends React.Component {
   }
 
   logIn() {
-    logInServices
-      .checkForLogIn(this.state)
-      .then(res => {
+    logInServices.checkForLogIn(this.state).then(res => {
+      if (res) {
         this.props.changeUserName(res.data.user._id, res.data.user.name);
         window.localStorage.setItem("token", res.data.token);
-      })
-      .then(() => this.props.handleShow("Login"));
+        this.props.handleShow("Login");
+      }
+    });
   }
 
   handleSubmit(e) {

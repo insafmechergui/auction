@@ -9,10 +9,12 @@ const auth = (req, res, next) => {
   if (token !== null) {
     //should be process.env.JWT_KEY
     jwt.verify(token, "private key", (err, decoded) => {
-      if (err)
+      if (err) {
         res
           .status(401)
-          .send({ error: "Not authorized to access this resource" });
+          .send({ error: "Not authorized to access this resource" })
+          .end();
+      }
       User.findOne({ _id: decoded._id, "tokens.token": token }, (err, user) => {
         if (err) console.log(err);
         if (!user) {

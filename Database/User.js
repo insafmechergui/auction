@@ -60,7 +60,13 @@ const generateAuthToken = (user, callback) => {
     }
   );
 };
+
+const findUserByID = (id, callback) => {
+  User.findById(id, callback);
+};
+
 exports.User = User;
 exports.createUser = createUser;
 exports.findUser = findUser;
+exports.findUserByID = findUserByID;
 exports.generateAuthToken = generateAuthToken;
