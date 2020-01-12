@@ -112,7 +112,7 @@ class Auction extends React.Component {
               {(this.state.timer === true && (
                 <Countdown
 
-                  date={new Date(this.state.product.initial_date).getTime() + this.state.product.duration}
+                  date={new Date(this.state.product.end_date)}
                   onComplete={() => {
                     this.handletimerComplete();
                   }}
