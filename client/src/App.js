@@ -1,7 +1,6 @@
 import React from "react";
 
-import { BrowserRouter as Router, Switch, Route,Link, } from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import {
   Button,
@@ -16,24 +15,22 @@ import {
 
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
-
-import signOutService from "./services/signOutServices";
-
 import Home from "./components/home";
-
 import AddProduct from "./components/Product/addProduct";
 import AddCategory from "./components/category/AddCategory";
 import NavCategory from "./components/category/NavCategory";
-import checkToken from "./services/checkToken";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import Product from "./components/Product/Product.js";
 import Admin from "./components/admin/Admin.js";
 
-// han
+import checkToken from "./services/checkToken";
+import signOutService from "./services/signOutServices";
 import productService from "./services/productService";
+
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-datepicker/dist/react-datepicker.css";
+
+// han
 
 class App extends React.Component {
   constructor() {
@@ -52,6 +49,27 @@ class App extends React.Component {
     this.changeUserName = this.changeUserName.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  /////////////////////// auth functions
+
+  changeUserName(id, name) {
+    //updates the page with the user
+    this.setState({
+      userInfo: {
+        id,
+        name
+      }
+    });
+  }
+
+  componentDidMount() {
+    //checks if the token is valid
+    checkToken.checkAuth(window.localStorage.getItem("token")).then(res => {
+      if (res) {
+        this.changeUserName(res.data._id, res.data.name);
+      }
+    });
   }
 
   hundleSignOut() {
@@ -73,56 +91,32 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  changeUserName(id, name) {
-    //updates the page with the user
-    this.setState({
-      userInfo: {
-        id,
-        name
-      }
-    });
-  }
-
-  componentDidMount() {
-    //checks if the token is valid
-    checkToken.checkAuth(window.localStorage.getItem("token")).then(res => {
-      if (res) {
-        this.changeUserName(res.data._id, res.data.name);
-      }
-    });
-  }
-
+  ////////////////////// view functions
   handleShow(target) {
     this.setState({
       [`showModal${target}`]: !this.state[`showModal${target}`]
     });
   }
-
-  // hold chage on the input
+  /////////////////////// search functions
   onChange(e) {
     this.setState({ description: e.target.value });
   }
-
+  ///////////////////////product functions
   // send a get request to ..../search
   filterProduct(e) {
     e.preventDefault();
-
     productService
       .search(this.state.description)
       .then(res => {
-        console.log("resssssssss", res);
         var result = res.data;
-        console.log("rrrrrrrrrrrr", result);
         for (var i = 0; i < result.length; i++) {
           this.state.products.push(result[i]);
         }
-
-        console.log("productssssss", this.state.products);
       })
-      .catch(err => {
-        console.log("myyyyyyyyyyysearch", err);
-      });
+      .catch(err => console.log(err));
   }
+
+  ////////////////////////  chategoies
 
   handleClickCategory(data) {
     this.setState({
@@ -175,18 +169,17 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-
-                    <Nav className="mr-auto">
-                      <Nav.Link>{this.state.userInfo.name}</Nav.Link>
-                      <Nav.Link
-                        onClick={() => {
-                          this.hundleSignOut();
-                        }}
-                      >
-                        SignOut
+                  <Nav className="mr-auto">
+                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleSignOut();
+                      }}
+                    >
+                      SignOut
                     </Nav.Link>
-                    </Nav>
-                  )}
+                  </Nav>
+                )}
                 <Form inline>
                   <FormControl
                     type="text"
@@ -212,8 +205,12 @@ class App extends React.Component {
             }}
           />
 
-          <Route exact path="/" component={() => <Home />} />
-          <div className='mainpro'>
+          <Route
+            exact
+            path="/"
+            component={() => <Home product={this.state.products} />}
+          />
+          <div className="mainpro">
             <Route
               exact
               path="/product"
@@ -231,7 +228,7 @@ class App extends React.Component {
             component={() => <Admin userInfo={this.state.userInfo} />}
           />
         </Router>
-      </div >
+      </div>
     );
   }
 }

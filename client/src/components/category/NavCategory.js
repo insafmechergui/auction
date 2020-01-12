@@ -2,9 +2,13 @@ import React from "react";
 
 import { Button, Form, Alert, Modal } from "react-bootstrap";
 import categoryService from "../../services/categoryService.js";
-import { BrowserRouter as Router, Switch, Redirect, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+  Link
+} from "react-router-dom";
 import { Navbar, Nav, NavDropdown, FormControl } from "react-bootstrap";
-
 
 class NavCategory extends React.Component {
   constructor(props) {
@@ -25,40 +29,39 @@ class NavCategory extends React.Component {
     });
   }
 
-
-
   handleClickCategory(category) {
-
-    categoryService.displayByCategory(category).then((res) => {
-
-      this.props.onClick(res.data)
-    })
+    categoryService.displayByCategory(category).then(res => {
+      this.props.onClick(res.data);
+    });
   }
 
   render() {
     return (
       <div>
-
-
         {/* navbar category change the sticky top */}
         <Navbar sticky="top">
           <Navbar.Brand>Category</Navbar.Brand>
           <Nav className="mr-auto">
             {this.state.categoryList.map(cat => {
-              return (<div>
-                {/* <Link onClick={(e) => { this.handleClickCategory(cat.name) }} >{cat.name}</Link> */}
-                {/* <Link to='/' > />555 </Link> */}
+              return (
+                <div>
+                  {/* <Link onClick={(e) => { this.handleClickCategory(cat.name) }} >{cat.name}</Link> */}
+                  {/* <Link to='/' > />555 </Link> */}
 
-
-                <Link onClick={(e) => { this.handleClickCategory(cat.name) }} > {cat.name} </Link>
-
-              </div>)
+                  <Link
+                    to="/"
+                    onClick={e => {
+                      this.handleClickCategory(cat.name);
+                    }}
+                  >
+                    {" "}
+                    {cat.name}{" "}
+                  </Link>
+                </div>
+              );
             })}
           </Nav>
         </Navbar>
-
-
-
       </div>
     );
   }

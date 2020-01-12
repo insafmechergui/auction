@@ -35,7 +35,7 @@ class Auction extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setState({
       product: newProps.product,
-      history: newProps.product.participants,
+      history: [{ user: { name: "" }, date: "" }], //newProps.product.participants || [],
       userInfo: newProps.userInfo,
       handleShow: newProps.handleShow
     });
