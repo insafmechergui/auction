@@ -28,6 +28,9 @@ import axios from "axios";
 import Product from "./components/Product/Product.js";
 import Admin from "./components/admin/Admin.js";
 
+// han
+import productService from "./services/productService";
+
 class App extends React.Component {
   constructor() {
     super();
@@ -37,10 +40,14 @@ class App extends React.Component {
         name: null
       },
       showModalSignUp: false,
-      showModalLogin: false
+      showModalLogin: false,
+      // added
+      products: [],
+      description: null
     };
     this.changeUserName = this.changeUserName.bind(this);
     this.handleShow = this.handleShow.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   hundleSignOut() {
@@ -87,6 +94,32 @@ class App extends React.Component {
     this.setState({
       [`showModal${target}`]: !this.state[`showModal${target}`]
     });
+  }
+
+  // hold chage on the input
+  onChange(e) {
+    this.setState({ description: e.target.value });
+  }
+
+  // send a get request to ..../search
+  filterProduct(e) {
+    e.preventDefault();
+
+    productService
+      .search(this.state.description)
+      .then(res => {
+        console.log("resssssssss", res);
+        var result = res.data;
+        console.log("rrrrrrrrrrrr", result);
+        for (var i = 0; i < result.length; i++) {
+          this.state.products.push(result[i]);
+        }
+
+        console.log("productssssss", this.state.products);
+      })
+      .catch(err => {
+        console.log("myyyyyyyyyyysearch", err);
+      });
   }
 
   render() {
@@ -159,8 +192,16 @@ class App extends React.Component {
                     type="text"
                     placeholder="Search"
                     className="mr-sm-2"
+                    onChange={e => {
+                      this.onChange(e);
+                    }}
                   />
-                  <Button variant="outline-success">Search</Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={e => this.filterProduct(e)}
+                  >
+                    Search
+                  </Button>
                 </Form>
               </Navbar.Collapse>
             </Navbar>

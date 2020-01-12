@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   add: product => {
     return axios
-      .post("/api/add", {
+      .post("/api/addp", {
         name: product.name,
         descreption: product.descreption,
         image: product.image,
@@ -16,22 +16,29 @@ export default {
       .catch(error => error);
   },
   getAll: () => {
-
     return axios
       .get("/api/products")
       .then(response => response)
-      .catch(err => { throw err }
-      );
+      .catch(err => {
+        throw err;
+      });
   },
-  getOne: (idp) => {
+  getOne: idp => {
     return axios
       .get("/api/product", { params: { id: idp } })
       .then(response => response)
-      .catch(err => { throw err }
-      );
+      .catch(err => {
+        throw err;
+      });
   },
 
-
-
+  // service search
+  search: desc => {
+    return axios
+      .get("/api/productsearch", { params: { descreption: desc } })
+      .then(response => response)
+      .catch(err => {
+        throw err;
+      });
+  }
 };
-
