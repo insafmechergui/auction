@@ -178,17 +178,17 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                  <Nav className="mr-auto">
-                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.hundleSignOut();
-                      }}
-                    >
-                      SignOut
+                    <Nav className="mr-auto">
+                      <Nav.Link>{this.state.userInfo.name}</Nav.Link>
+                      <Nav.Link
+                        onClick={() => {
+                          this.hundleSignOut();
+                        }}
+                      >
+                        SignOut
                     </Nav.Link>
-                  </Nav>
-                )}
+                    </Nav>
+                  )}
                 <Form inline>
                   <FormControl
                     type="text"
@@ -215,16 +215,18 @@ class App extends React.Component {
           />
 
           <Route exact path="/" component={() => <Home />} />
-          <Route
-            exact
-            path="/product"
-            component={() => (
-              <Product
-                userInfo={this.state.userInfo}
-                handleShow={this.handleShow}
-              />
-            )}
-          />
+          <div className='mainpro'>
+            <Route
+              exact
+              path="/product"
+              component={() => (
+                <Product
+                  userInfo={this.state.userInfo}
+                  handleShow={this.handleShow}
+                />
+              )}
+            />
+          </div>
           <Route
             exact
             path="/admin"

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -12,6 +13,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+body {
+  background: url('https://previews.123rf.com/images/dizanna/dizanna1705/dizanna170500425/78284847-auction-stamp-vector-words-cloud-business-concept-background.jpg');
+  background-size: cover;
+}
 
 .App-header {
   background-color: #282c34;
@@ -21,7 +26,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(12px + 2vmin);
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .App-link {
@@ -36,7 +41,13 @@
     transform: rotate(360deg);
   }
 }
+
+
 /********************************/
+
+.mainpro{
+ margin: 30px ;
+}
 .mProduct {
 
   transition: box-shadow 0.3s;
@@ -96,22 +107,21 @@
 /*************************************/
 
 .auction {
-  transition: box-shadow 0.3s;
-  width: 26rem;
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  width: 100%;
   height: 25rem;
   border: 1px solid #ccc;
   font-size: 1em;
-
   padding-left: 20px;
   margin: 10px;
 }
 
 .auctionHistory {
-  transition: box-shadow 0.3s;
-  width: 26rem;
+  width: 100%;
   height: 35rem;
-  padding-left: 20px;
+
   margin: 10px;
+    border-radius: 10px;
 }
 
 .historyPrice {
@@ -122,13 +132,21 @@
 .containerProduct {
   display: flex;
   flex-direction: row;
-  margin: 15px;
-  padding: 20px;
-  align-content: center;
+  background-color: #9ca5a5d1;
+  width: 100%;
+  height: 100%;
+  margin: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+
+  padding: 50px;
+
+
 }
 
 .slides {
-  width: 50rem;
+  width: 80%;
+
 }
 
 /*****************************************/
