@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 let Product = mongoose.model("Product");
-let productDB = require("../Database/Product");
+
 let User = mongoose.model("user");
 const express = require("express");
 const app = express();
@@ -141,12 +141,20 @@ module.exports = app => {
   //   });
   // });
 
-  // update current price
-
   app.get("/api/productsearch", (req, res) => {
-    productDB.searchFilter(req.query.descreption, (err, data) => {
+    Products.searchFilter(req.query.descreption, (err, data) => {
       if (err) res.status(404).send("not found");
       res.send(data);
+    });
+  });
+
+  app.get("/api/productWinner", (req, res) => {
+    Products.completedPro((err, data) => {
+      if (err) {
+        res.status(404).send("not found");
+      } else {
+        res.status(200).send(data);
+      }
     });
   });
 };
