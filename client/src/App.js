@@ -3,8 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect
+
 } from "react-router-dom";
 import {
   Button,
@@ -35,6 +34,9 @@ import axios from "axios";
 import Product from "./components/Product/Product.js";
 import Admin from "./components/admin/Admin.js";
 
+// han
+import productService from "./services/productService";
+
 class App extends React.Component {
   constructor() {
     super();
@@ -45,10 +47,14 @@ class App extends React.Component {
       },
       showModalSignUp: false,
       showModalLogin: false,
-      products: []
+
+      products: [],
+      description: null
+
     };
     this.changeUserName = this.changeUserName.bind(this);
     this.handleShow = this.handleShow.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   hundleSignOut() {
@@ -95,14 +101,47 @@ class App extends React.Component {
     });
   }
 
+
+  // hold chage on the input
+  onChange(e) {
+    this.setState({ description: e.target.value });
+  }
+
+  // send a get request to ..../search
+  filterProduct(e) {
+    e.preventDefault();
+
+    productService
+      .search(this.state.description)
+      .then(res => {
+        console.log("resssssssss", res);
+        var result = res.data;
+        console.log("rrrrrrrrrrrr", result);
+        for (var i = 0; i < result.length; i++) {
+          this.state.products.push(result[i]);
+        }
+
+        console.log("productssssss", this.state.products);
+      })
+      .catch(err => {
+        console.log("myyyyyyyyyyysearch", err);
+      });
+  }
+
+
   handleClickCategory(data) {
     this.setState({
       products: data[0].products
     });
   }
+
   render() {
     return (
       <div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4c9125b515fbcb584435f694d82cd70bf75251f5
         <Router>
           <SignUp
             showModal={this.state.showModalSignUp}
@@ -172,8 +211,16 @@ class App extends React.Component {
                     type="text"
                     placeholder="Search"
                     className="mr-sm-2"
+                    onChange={e => {
+                      this.onChange(e);
+                    }}
                   />
-                  <Button variant="outline-success">Search</Button>
+                  <Button
+                    variant="outline-success"
+                    onClick={e => this.filterProduct(e)}
+                  >
+                    Search
+                  </Button>
                 </Form>
               </Navbar.Collapse>
             </Navbar>
@@ -210,43 +257,5 @@ class App extends React.Component {
   }
 }
 
-{
-  /*
-  
-  
-    <Route path='/product'
-            component={Product}
-            userInfo={this.state.userInfo} />
-            
-            
-              <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                {!this.state.userName ? (
-                  <Route exact path="/">
-                    <li>
-                      <Button onClick={() => { this.hundleShowLogin() }} >Login</Button>
-                      <Link to="/Login">LogIn</Link>
-                    </li>
-                    <li>
-                      <Button onClick={() => { this.hundleShowSignUp() }} >signUp</Button>
-                      <Link to="/SignUp">signUp</Link>
-                    </li>
-                    <div>not logged in</div>
-                  </Route>
-                ) : (
-                    <div> {this.state.userName} </div>
-                  )}
-              </ul>
-            </nav>
 
-
-             <Route path="/SignUp" exact> <SignUp changeUserName={this.changeUserName} />  </Route>
-            <Route path="/Login" exact> <LogIn changeUserName={this.changeUserName} />  </Route> 
-
-          </div> */
-}
 export default App;

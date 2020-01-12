@@ -112,19 +112,19 @@ class Auction extends React.Component {
               {(this.state.timer === true && (
                 <Countdown
 
-                  date={new Date(this.state.product.initial_date).getTime() + this.state.product.duration}
+                  date={new Date(this.state.product.end_date)}
                   onComplete={() => {
                     this.handletimerComplete();
                   }}
                 />
               )) || (
-                <Card.Text className="text-center">
-                  Auction closed{" "}
-                  <Row>
-                    <Col className="text-center winner">{this.state.winer}</Col>
-                  </Row>
-                </Card.Text>
-              )}
+                  <Card.Text className="text-center">
+                    Auction closed{" "}
+                    <Row>
+                      <Col className="text-center winner">{this.state.winer}</Col>
+                    </Row>
+                  </Card.Text>
+                )}
             </Card.Header>
             <br />
             <Row>

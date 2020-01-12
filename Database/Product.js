@@ -18,7 +18,7 @@ const productSchema = new Schema({
   last_auction_price: { type: Number },
   value: { type: Number },
   initial_date: { type: Date },
-  duration: { type: Number },
+  end_date: { type: Date },
   participants: [
     {
       user: { type: Schema.Types.ObjectId, ref: "user" },
@@ -32,7 +32,7 @@ productSchema.index({ descreption: "text" });
 
 var Product = mongoose.model("Product", productSchema);
 
-var getAll = function(callback) {
+var getAll = function (callback) {
   Product.find({ initial_date: { $lte: new Date() } }, (err, data) => {
     if (err) {
       callback(err, null);
@@ -42,7 +42,7 @@ var getAll = function(callback) {
   });
 };
 
-var getOne = function(id, callback) {
+var getOne = function (id, callback) {
   Product.findById(id)
     .populate("participants.user")
     // .populate("winner")
@@ -55,7 +55,7 @@ var getOne = function(id, callback) {
     });
 };
 
-var searchFilter = function(descriptionfilter, callback) {
+var searchFilter = function (descriptionfilter, callback) {
   // Product.find({$text: {$search: searchString}})
   // "$text": {"$search": req.body.query}
   // {$text: {$search: descriptionfilter}}
@@ -78,7 +78,7 @@ var searchFilter = function(descriptionfilter, callback) {
 //     });
 // }
 
-var findWinner = function(idProduct, callback) {
+var findWinner = function (idProduct, callback) {
   Product.find({ _id: idProduct })
     .populate("participants.user")
     .exec((err, product) => {
