@@ -4,38 +4,41 @@ const userDataBase = require("../../Database/User");
 
 const authAdmin = (req, res, next) => {
   //compare the user's (from the data base) admin token to ours
+  const id = req.body.id;
+  req.body = {};
 
-  if (!req.body.id) {
-    res.end();
+  if (!id) {
+    return res.status(401).json({ auth: "denied", reason: "no id " });
   }
-  userDataBase.findUserByID(req.body.id, (err, admin) => {
+
+  userDataBase.findUserByID(id, (err, admin) => {
     if (err) {
-      res.status(400).json(err);
+      return res.status(401).json({ auth: "denied", reason: err });
     }
+
     if (!admin) {
-      console.log("not found");
-      res.end();
+      return res.status(401).json({ auth: "denied", reason: "not found" });
     }
-    console.log(admin);
+
     admin = JSON.parse(JSON.stringify(admin));
+
     if (!admin.isAdmin) {
-      console.log("not an admin");
-      res.end();
+      return res.status(401).json({ auth: "denied", reason: "not an admin" });
     }
+
     require("dotenv").config();
     bcrypt.compare(
-      admin.adminPass,
       process.env.ADMIN_PASS,
+      admin.adminPass,
       (err, comparisionRES) => {
         if (err) {
-          console.log(err);
-          res.end();
+          return res.status(401).json({ auth: "denied", reason: err });
         }
         if (!comparisionRES) {
-          console.log("wrong pass");
-          res.end();
+          return res.status(401).json({ auth: "denied", reason: "wrong pass" });
         }
-        res.status(200).send("autherized");
+
+        req.body = { auth: "autherized" };
         next();
       }
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, InputGroup ,Table} from "react-bootstrap";
+import { Button, Form, InputGroup, Table } from "react-bootstrap";
 import AddProduct from "../Product/addProduct.js";
 import serviceProduct from "../../services/productService.js";
 import adminServices from "./../../services/adminServices.js";
@@ -7,15 +7,54 @@ import adminServices from "./../../services/adminServices.js";
 class Admin extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      products: []
+      products: [],
+      render: <h1> you really shouldn't be here </h1>
     };
   }
   checkauth(id) {
     //call function from the admin service to check if can enter this page
-    adminServices.checkIfAdmin(id);
+    adminServices
+      .checkIfAdmin(id)
+      .then(res => {
+        if (res === true) {
+          this.setState({
+            render: (
+              <>
+                <div id="addProduct">
+                  <AddProduct />
+                </div>
+                <div id="productTable">
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Initial Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.products.map(product => {
+                        return (
+                          <tr>
+                            <td>{product._id}</td>
+                            <td>{product.name}</td>
+                            <td>{product.initial_date}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </div>
+              </>
+            )
+          });
+        }
+      })
+      .catch(err => console.log(err));
   }
+
   componentDidMount() {
     this.checkauth(this.props.userInfo.id);
     serviceProduct
@@ -23,42 +62,11 @@ class Admin extends React.Component {
       .then(res => {
         this.setState({ products: res.data });
       })
-      .then(res => {
-        console.log("hello", this.state.products);
-      });
+      .catch(err => console.log(err));
   }
 
-    render() {
-        return (
-            <React.Fragment >
-                <div id="addProduct">
-                    <AddProduct></AddProduct>
-                </div>
-                <div id="productTable">
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Initial Date</th>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-                            {this.state.products.map(product => {
-                                return (<tr>
-
-                                    <td>{product._id}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.initial_date}</td>
-                                </tr>)
-                            })}
-                        </tbody>
-                    </Table>
-
-                </div>
-            </React.Fragment>)
-    }
-
+  render() {
+    return <React.Fragment>{this.state.render}</React.Fragment>;
+  }
 }
 export default Admin;
