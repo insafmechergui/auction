@@ -18,7 +18,7 @@ class Auction extends React.Component {
     super(props);
 
     this.state = {
-      product: {},
+      product: { participants: [{ user: { name: "" }, date: "" }] },
       auctionPrice: 0,
       history: [{ user: { name: "" }, date: "" }],
       socket: openSocket("http://localhost:5000"),
@@ -33,12 +33,16 @@ class Auction extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
+    console.log(newProps)
+
     this.setState({
       product: newProps.product,
-      history: [{ user: { name: "" }, date: "" }], //newProps.product.participants || [],
+
+      history: newProps.product.participants || [],
       userInfo: newProps.userInfo,
       handleShow: newProps.handleShow
     });
+
   }
 
   testLogIn() {
@@ -111,13 +115,13 @@ class Auction extends React.Component {
                   }}
                 />
               )) || (
-                <Card.Text className="text-center">
-                  Auction closed{" "}
-                  <Row>
-                    <Col className="text-center winner">{this.state.winer}</Col>
-                  </Row>
-                </Card.Text>
-              )}
+                  <Card.Text className="text-center">
+                    Auction closed{" "}
+                    <Row>
+                      <Col className="text-center winner">{this.state.winer}</Col>
+                    </Row>
+                  </Card.Text>
+                )}
             </Card.Header>
             <br />
             <Row>
@@ -127,7 +131,8 @@ class Auction extends React.Component {
                 </Card.Text>
               </Col>
               <Col className="text-right">
-                <Card.Text>{this.state.history[0].user.name} </Card.Text>
+                <div>{this.state.history.length}</div>
+                {/* <Card.Text>{this.state.history[0].user.name} </Card.Text> */}
               </Col>
             </Row>
 
@@ -139,7 +144,8 @@ class Auction extends React.Component {
                 </Card.Text>
               </Col>
               <small className="text-muted">
-                {new Date(this.state.history[0].date).getFullYear() +
+                {(this.state.history[0] !== undefined) && (
+                  new Date(this.state.history[0].date).getFullYear() +
                   "-" +
                   (new Date(this.state.history[0].date).getMonth() + 1) +
                   "-" +
@@ -149,7 +155,8 @@ class Auction extends React.Component {
                   ":" +
                   new Date(this.state.history[0].date).getMinutes() +
                   ":" +
-                  new Date(this.state.history[0].date).getSeconds()}
+                  new Date(this.state.history[0].date).getSeconds()
+                )}
               </small>
             </Row>
 
