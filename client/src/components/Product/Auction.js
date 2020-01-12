@@ -9,7 +9,8 @@ import {
   Col,
   Form,
   InputGroup,
-  Accordion
+  Accordion,
+  Alert
 } from "react-bootstrap";
 import Countdown from "react-countdown-now";
 import openSocket from "socket.io-client";
@@ -23,7 +24,8 @@ class Auction extends React.Component {
       auctionPrice: 0,
       history: [{ user: { name: "" }, date: "" }],
       socket: openSocket("http://localhost:5000"),
-      timer: true
+      timer: true,
+      alerShow: false
     };
     this.state.socket.on("new-auc", auc => {
       if (auc._id === this.state.product._id) {
@@ -68,12 +70,16 @@ class Auction extends React.Component {
           .then(res => {
             this.setState({
               product: res.data,
-              history: res.data.participants
+              history: res.data.participants,
+              alerShow: false
             });
             this.state.socket.emit("new-auc", res.data);
           });
+
       } else {
-        alert("noooooooooooooooooooooooo");
+        this.setState({
+          alerShow: true
+        })
       }
     }
   }
@@ -91,7 +97,12 @@ class Auction extends React.Component {
   render() {
     return (
       <div>
+        <Alert variant='danger' show={this.state.alerShow} >
+          Please bet higher than: {this.state.product.last_auction_price}
+        </Alert>
         <Card bg="light" className="auction">
+
+
           <Card.Body>
             <Card.Title className="text-center">
               <Card.Text>Value {this.state.product.value} DT</Card.Text>
@@ -100,10 +111,8 @@ class Auction extends React.Component {
             <Card.Header className="text-center timer">
               {(this.state.timer === true && (
                 <Countdown
-                  date={
-                    new Date(this.state.product.initial_date).getTime() +
-                    this.state.product.duration
-                  }
+
+                  date={new Date(this.state.product.initial_date).getTime() + this.state.product.duration}
                   onComplete={() => {
                     this.handletimerComplete();
                   }}
