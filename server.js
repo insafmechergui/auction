@@ -3,14 +3,18 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const socket = require("socket.io");
 const app = express();
+
 app.use(bodyParser.json());
+
 require("./Database/Product");
+
 require("./routes/UserRoute.js")(app);
 
 require("./routes/ProductRoute.js")(app);
 
 require("./routes/CategoryRoute.js")(app);
 
+require("./routes/AdminRoute")(app);
 
 mongoose.Promise = global.Promise;
 
@@ -23,8 +27,6 @@ var db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => console.log("mongoose is connected connected"));
-
-
 
 //exemple for useing routes files
 
@@ -45,8 +47,6 @@ let io = socket(server);
 
 io.on("connection", socket => {
   socket.on("new-auc", data => {
-    console.log('newwwwwwwwwwwww')
     io.sockets.emit("new-auc", data);
-
   });
 });
