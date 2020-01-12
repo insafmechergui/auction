@@ -1,10 +1,11 @@
 
 import React from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+
 import AddProduct from '../Product/addProduct.js'
 import serviceProduct from '../../services/productService.js';
 import adminServices from './../../services/adminServices.js'
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import Table from 'react-bootstrap/Table'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Admin extends React.Component {
     constructor(props) {
@@ -28,16 +29,32 @@ class Admin extends React.Component {
 
     render() {
         return (
-            <React.Fragment className="admin">
+            <React.Fragment >
                 <div id="addProduct">
                     <AddProduct></AddProduct>
                 </div>
                 <div id="productTable">
-                    <BootstrapTable data={this.state.products} >
-                        <TableHeaderColumn isKey dataField='_id'>ID</TableHeaderColumn>
-                        <TableHeaderColumn dataField='name'>Name </TableHeaderColumn>
-                        <TableHeaderColumn dataField='initial_date'>Start Date</TableHeaderColumn>
-                    </BootstrapTable>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Initial Date</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            {this.state.products.map(product => {
+                                return (<tr>
+
+                                    <td>{product._id}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.initial_date}</td>
+                                </tr>)
+                            })}
+                        </tbody>
+                    </Table>
+
                 </div>
             </React.Fragment>)
     }

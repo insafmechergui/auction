@@ -138,10 +138,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4c9125b515fbcb584435f694d82cd70bf75251f5
         <Router>
           <SignUp
             showModal={this.state.showModalSignUp}
