@@ -176,13 +176,6 @@ class App extends React.Component {
                     >
                       Login
                     </Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.handleShow("Login");
-                      }}
-                    >
-                      Home
-                    </Nav.Link>
                   </Nav>
                 ) : (
                   <Nav>
@@ -193,13 +186,7 @@ class App extends React.Component {
                     >
                       SignOut
                     </Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.handleShow("SignUp");
-                      }}
-                    >
-                      {this.state.userInfo.name}
-                    </Nav.Link>
+                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
                   </Nav>
                 )}
                 <Form inline>
