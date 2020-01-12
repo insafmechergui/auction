@@ -10,7 +10,6 @@ class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // timer: '',// Date.now() + 50000000,// Date.now() should be fix for every product date retreav from database
       product: {}
     };
   }
@@ -24,14 +23,10 @@ class Product extends React.Component {
     });
   }
 
-  // componentWillReceiveProps(p) {
-  //   console.log(p.userInfo);
-  // }
-
   render() {
     return (
       <Row className="containerProduct">
-        <Col >
+        <Col>
           <div className="slides">
             <Carousel>
               <Carousel.Item>

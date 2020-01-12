@@ -37,6 +37,7 @@ class Auction extends React.Component {
 
     this.setState({
       product: newProps.product,
+
       history: newProps.product.participants || [],
       userInfo: newProps.userInfo,
       handleShow: newProps.handleShow
