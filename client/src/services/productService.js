@@ -47,6 +47,7 @@ export default {
       .get("/api/productWinner")
       .then(response => {
         console.log("sssssssssss", response);
+
         return response;
       })
 

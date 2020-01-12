@@ -18,15 +18,16 @@ class AllWinner extends React.Component {
 
   componentDidMount() {
     // this.checkauth(this.props.userInfo.id);
-    serviceProduct
-      .winner()
-      .then(res => {
-        console.log("ffffffffffffffffffffffff", res);
-        this.setState({ products: res.data });
-      })
-      .then(res => {
-        console.log("prrrrooowiin", res.data);
-      });
+
+    serviceProduct.winner().then(res => {
+      console.log("ffffffffffffffffffffffff", res);
+      if (res) {
+        this.setState({ products: res.data || [] });
+      }
+    });
+    //   .then(res => {
+    //     console.log("prrrrooowiin", res.data);
+    //   });
   }
 
   render() {
@@ -46,7 +47,9 @@ class AllWinner extends React.Component {
                 <tr>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
-                  <td>{product.participants[0]._id}</td>
+                  {(product.participants[0] !== undefined && (
+                    <td>{product.participants[0]._id}</td>
+                  )) || <td>No winner</td>}
                 </tr>
               );
             })}
