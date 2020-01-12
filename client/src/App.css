@@ -14,7 +14,7 @@
   }
 }
 body {
-  background: url('https://previews.123rf.com/images/dizanna/dizanna1705/dizanna170500425/78284847-auction-stamp-vector-words-cloud-business-concept-background.jpg');
+  background: url('http://www.sothebys.com/content/dam/stb/lots/L17/L17021/285L17021_9CBZZ.jpg');
   background-size: cover;
 }
 .link{
@@ -25,10 +25,14 @@ body {
  background-color: #ece8e5;
  
 }
-.navcategory{
+.test{
 
+  height: 50px;
+  width: 1100px;
+  background-size: cover;
   
 }
+
 
 .App-header {
   background-color: #282c34;

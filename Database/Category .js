@@ -47,7 +47,14 @@ var deleteCategory = function (nameCategory, callback) {
 
 var getAllProductByCategory = function (categoryName, callback) {
   Category.find({ name: categoryName })
-    .populate("products")
+    .populate(
+      {
+        path: "products",
+        match: {
+          initial_date: { $lte: new Date() },
+          end_date: { $gte: new Date() }
+        }
+      })
     .exec((err, category) => {
       if (err) {
         callback(err, null);
