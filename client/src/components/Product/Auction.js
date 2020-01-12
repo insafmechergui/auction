@@ -21,7 +21,7 @@ class Auction extends React.Component {
     this.state = {
       product: {},
       auctionPrice: 0,
-      history: [],
+      history: [{ user: { name: '' }, date: '' }],
       socket: openSocket("http://localhost:5000"),
       timer: true
     };
@@ -39,6 +39,8 @@ class Auction extends React.Component {
       userInfo: newProps.userInfo,
       handleShow: newProps.handleShow
     });
+    //  console.log('---->', newProps.product.participants[0].date)
+
   }
 
   testLogIn() {
@@ -83,9 +85,9 @@ class Auction extends React.Component {
     });
     auctionServices.getWinner(this.state.product._id).then(res => {
       this.setState({
-        winer: `the winner :${res.data[0].participants[0].user.name}`
-      });
-    });
+        winer: `Winner :${res.data[0].participants[0].user.name}`
+      })
+    })
   }
   render() {
     return (
@@ -106,8 +108,10 @@ class Auction extends React.Component {
                   onComplete={() => {
                     this.handletimerComplete();
                   }}
-                />
-              )) || <Card.Text>Auction closed :{this.state.winer}</Card.Text>}
+                /> || <Card.Text className='text-center'>Auction closed  <Row ><Col className='text-center winner'>{this.state.winer}</Col></Row>
+                </Card.Text>
+
+              }
             </Card.Header>
             <br />
             <Row>
@@ -117,7 +121,7 @@ class Auction extends React.Component {
                 </Card.Text>
               </Col>
               <Col className="text-right">
-                <Card.Text>Name.M </Card.Text>
+                <Card.Text>{this.state.history[0].user.name} </Card.Text>
               </Col>
             </Row>
 
@@ -128,7 +132,21 @@ class Auction extends React.Component {
                   <small className="text-muted"> 100 dt per person </small>
                 </Card.Text>
               </Col>
-              <small className="text-muted"> 1/06/2020 </small>
+              <small className="text-muted">
+
+                {new Date(this.state.history[0].date).getFullYear() +
+                  "-" +
+                  (new Date(this.state.history[0].date).getMonth() + 1) +
+                  "-" +
+                  new Date(this.state.history[0].date).getDate() +
+                  " " +
+                  new Date(this.state.history[0].date).getHours() +
+                  ":" +
+                  new Date(this.state.history[0].date).getMinutes() +
+                  ":" +
+                  new Date(this.state.history[0].date).getSeconds()}
+
+              </small>
             </Row>
 
             <Row>
