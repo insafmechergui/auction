@@ -103,7 +103,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Admin userInfo={this.state.userInfo} />
         <Router>
           <SignUp
             showModal={this.state.showModalSignUp}
