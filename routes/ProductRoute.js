@@ -43,6 +43,9 @@ module.exports = app => {
     let product = new Product(req.body);
     product
       .save((err, result) => {
+
+        console.log(err, result);
+
         res.send(result);
       })
       .catch(err => {
@@ -52,6 +55,9 @@ module.exports = app => {
 
   app.put("/api/updateAuction", (req, res) => {
     // the user should be provided for now his id is in the req
+
+    console.log("auction update====> ", req.body);
+
     Product.findOneAndUpdate(
       { _id: req.body.id },
       {
@@ -138,12 +144,12 @@ module.exports = app => {
   // });
 
   // update current price
-  app.get("/api/products/search", (req, res) => {
-    console.log(req.body.descreption);
-    productDB.searchFilter(req.body.descreption, (err, data) => {
-      if (err) res.status(404).send("not found");
 
-      res.json(data);
+  app.get("/api/productsearch", (req, res) => {
+    productDB.searchFilter(req.query.descreption, (err, data) => {
+      if (err) res.status(404).send("not found");
+      res.send(data);
+
     });
   });
 };

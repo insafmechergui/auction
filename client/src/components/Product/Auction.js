@@ -118,13 +118,13 @@ class Auction extends React.Component {
                   }}
                 />
               )) || (
-                <Card.Text className="text-center">
-                  Auction closed{" "}
-                  <Row>
-                    <Col className="text-center winner">{this.state.winer}</Col>
-                  </Row>
-                </Card.Text>
-              )}
+                  <Card.Text className="text-center">
+                    Auction closed{" "}
+                    <Row>
+                      <Col className="text-center winner">{this.state.winer}</Col>
+                    </Row>
+                  </Card.Text>
+                )}
             </Card.Header>
             <br />
             <Row>
