@@ -3,10 +3,9 @@ const Category = require("../Database/Category ");
 module.exports = app => {
 
     app.post('/api/AddCategory', (req, res) => {
-        console.log(req.body)
+
         Category.createCategory(req.body, (err, data) => {
             if (err) {
-
                 res.status(404).send(err)
                 console.log('duplicate key')
             } else {

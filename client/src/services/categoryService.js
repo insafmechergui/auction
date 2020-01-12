@@ -12,7 +12,6 @@ export default {
       });
   },
   getAllCategories: () => {
-
     return axios
       .get("/api/categories")
       .then(response => response)
