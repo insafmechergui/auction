@@ -178,7 +178,8 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                  <Nav>
+                  <Nav className="mr-auto">
+                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
                     <Nav.Link
                       onClick={() => {
                         this.hundleSignOut();
@@ -186,7 +187,6 @@ class App extends React.Component {
                     >
                       SignOut
                     </Nav.Link>
-                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
                   </Nav>
                 )}
                 <Form inline>
