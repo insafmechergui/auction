@@ -22,7 +22,7 @@ class Home extends React.Component {
     const { id } = queryString.parse(window.location.search);
   }
   componentDidMount() {
-    if (this.props.products.length > 0 && this.props.products !== undefined) {
+    if (this.props.products !== undefined && this.props.products.length > 0) {
       this.setState({
         products: this.props.products
       });
@@ -35,25 +35,25 @@ class Home extends React.Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({ products: newProps.products });
-
-  }
+  // componentWillReceiveProps(newProps) {
+  //   this.setState({ products: newProps.products });
+  // }
 
   render() {
     return (
-      <Container className="home">
-        {this.state.products.map(product => {
-          return (
-            // <MiniaturProduct product={product} />
-            <Link to={`/Product?id=${product._id}`}>
-              {" "}
-              <MiniaturProduct product={product} />{" "}
-            </Link>
-          );
-        })}
-        <AddProduct />
-      </Container>
+      <div style={{ backgroundColor: 'red' }}>
+        <Container >
+          {this.state.products.map(product => {
+            return (
+              // <MiniaturProduct product={product} />
+              <Link to={`/Product?id=${product._id}`}>
+                {" "}
+                <MiniaturProduct product={product} />{" "}
+              </Link>
+            );
+          })}
+        </Container>
+      </div>
     );
   }
 }

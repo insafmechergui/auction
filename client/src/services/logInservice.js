@@ -5,8 +5,6 @@ export default {
     return axios
       .post("/api/logIn", { email, password })
       .then(res => res)
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => err.response);
   }
 };

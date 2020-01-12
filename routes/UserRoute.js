@@ -37,21 +37,22 @@ module.exports = app => {
 
   app.post("/api/logIn", (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
-      if (err) throw err;
-      if (!user) res.status(404).send("user is not found");
+      if (err) {
+        console.log("err in api/login", err);
+        return res.status(505).send("problem with the server wait");
+      }
+      if (!user) {
+        return res.status(404).send("user no found");
+      }
       bcrypt
         .compare(req.body.password, user.password)
         .then(comparisonRes => {
-          if (comparisonRes) {
-            UserDataBase.generateAuthToken(user, (user, token) =>
-              res
-                .status(200)
-
-                .send({ user, token })
-            );
-          } else {
-            res.send("not match");
+          if (!comparisonRes) {
+            return res.status(404).send("wrong credentials");
           }
+          UserDataBase.generateAuthToken(user, (user, token) =>
+            res.status(200).send({ user, token })
+          );
         })
         .catch(err => err);
     });
@@ -61,6 +62,7 @@ module.exports = app => {
     // View logged in user profile
     res.send(req.user);
   });
+
   app.post("/api/signOut", (req, res) => {
     User.findOne({ name: req.body.userName }, (err, data) => {
       if (err) res.json(err);

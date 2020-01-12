@@ -41,9 +41,9 @@ class MiniaturProduct extends React.Component {
                 {" "}
                 <Countdown
                   date={this.state.timer}
-                  onComplete={() => {
-                    alert("done");
-                  }}
+                // onComplete={() => {
+                //   alert("done");
+                // }}
                 />
               </Col>
               {/* xs={6} */}

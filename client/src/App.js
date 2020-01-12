@@ -1,5 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import { BrowserRouter as Router, Switch, Route,Link, } from "react-router-dom";
+
+
 import {
   Button,
   Form,
@@ -149,7 +152,9 @@ class App extends React.Component {
           />
           <Switch>
             <Navbar bg="light" expand="lg">
-              <Navbar.Brand>RBK Auction</Navbar.Brand>
+              <Link to="/">
+                <Navbar.Brand>RBK Auction</Navbar.Brand>
+              </Link>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 {!this.state.userInfo.name ? (
@@ -168,32 +173,20 @@ class App extends React.Component {
                     >
                       Login
                     </Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.handleShow("Login");
-                      }}
-                    >
-                      Home
-                    </Nav.Link>
                   </Nav>
                 ) : (
-                  <Nav>
-                    <Nav.Link
-                      onClick={() => {
-                        this.hundleSignOut();
-                      }}
-                    >
-                      SignOut
+
+                    <Nav className="mr-auto">
+                      <Nav.Link>{this.state.userInfo.name}</Nav.Link>
+                      <Nav.Link
+                        onClick={() => {
+                          this.hundleSignOut();
+                        }}
+                      >
+                        SignOut
                     </Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.handleShow("SignUp");
-                      }}
-                    >
-                      {this.state.userInfo.name}
-                    </Nav.Link>
-                  </Nav>
-                )}
+                    </Nav>
+                  )}
                 <Form inline>
                   <FormControl
                     type="text"
@@ -218,29 +211,27 @@ class App extends React.Component {
               this.handleClickCategory(data);
             }}
           />
-        </Router>
 
-        <Router>
+          <Route exact path="/" component={() => <Home />} />
+          <div className='mainpro'>
+            <Route
+              exact
+              path="/product"
+              component={() => (
+                <Product
+                  userInfo={this.state.userInfo}
+                  handleShow={this.handleShow}
+                />
+              )}
+            />
+          </div>
           <Route
-            path="/"
             exact
-            component={() => <Home products={this.state.products} />}
-          />
-          <Route
-            path="/product"
-            component={() => (
-              <Product
-                userInfo={this.state.userInfo}
-                handleShow={this.handleShow}
-              />
-            )}
-          />
-          <Route
             path="/admin"
             component={() => <Admin userInfo={this.state.userInfo} />}
           />
         </Router>
-      </div>
+      </div >
     );
   }
 }

@@ -33,7 +33,7 @@ productSchema.index({ descreption: "text" });
 var Product = mongoose.model("Product", productSchema);
 
 var getAll = function (callback) {
-  Product.find({ initial_date: { $lte: new Date() } }, (err, data) => {
+  Product.find({ initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } }, (err, data) => {
     if (err) {
       callback(err, null);
     } else {
