@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import {
   Button,
   Form,
@@ -90,12 +96,9 @@ class App extends React.Component {
   }
 
   handleClickCategory(data) {
-
-    console.log('pppppppppppp>', data)
     this.setState({
       products: data[0].products
-    })
-    // 
+    });
   }
   render() {
     return (
@@ -147,23 +150,23 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                    <Nav>
-                      <Nav.Link
-                        onClick={() => {
-                          this.hundleSignOut();
-                        }}
-                      >
-                        SignOut
+                  <Nav>
+                    <Nav.Link
+                      onClick={() => {
+                        this.hundleSignOut();
+                      }}
+                    >
+                      SignOut
                     </Nav.Link>
-                      <Nav.Link
-                        onClick={() => {
-                          this.handleShow("SignUp");
-                        }}
-                      >
-                        {this.state.userInfo.name}
-                      </Nav.Link>
-                    </Nav>
-                  )}
+                    <Nav.Link
+                      onClick={() => {
+                        this.handleShow("SignUp");
+                      }}
+                    >
+                      {this.state.userInfo.name}
+                    </Nav.Link>
+                  </Nav>
+                )}
                 <Form inline>
                   <FormControl
                     type="text"
@@ -175,11 +178,19 @@ class App extends React.Component {
               </Navbar.Collapse>
             </Navbar>
           </Switch>
-          <NavCategory onClick={(data) => { this.handleClickCategory(data) }} />
+          <NavCategory
+            onClick={data => {
+              this.handleClickCategory(data);
+            }}
+          />
         </Router>
 
         <Router>
-          <Route path="/" exact component={() => (<Home products={this.state.products} />)} />
+          <Route
+            path="/"
+            exact
+            component={() => <Home products={this.state.products} />}
+          />
           <Route
             path="/product"
             component={() => (
@@ -188,6 +199,10 @@ class App extends React.Component {
                 handleShow={this.handleShow}
               />
             )}
+          />
+          <Route
+            path="/admin"
+            component={() => <Admin userInfo={this.state.userInfo} />}
           />
         </Router>
       </div>
