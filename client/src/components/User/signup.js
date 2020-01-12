@@ -10,8 +10,8 @@ class SignUp extends React.Component {
       email: "",
       password: "",
       show: false,
-      alert: "success",
-      message: "Email already exist",
+      alert: "",
+      message: "",
       showModal: true
     };
 
@@ -19,7 +19,6 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  hundleShowAlert() {}
   handleSubmit(event) {
     event.preventDefault();
     signUpService.getAll(this.state).then(res => {
@@ -47,12 +46,13 @@ class SignUp extends React.Component {
       show: false
     });
   }
+
   handleClose() {
     this.setState({ showModal: false });
   }
+
   render() {
     return (
-      // <div className='signup'>
       <Modal
         className="signup"
         show={this.props.showModal}
@@ -105,7 +105,7 @@ class SignUp extends React.Component {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            SugnUp
+            SignUp
           </Button>
         </Form>
       </Modal>
