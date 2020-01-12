@@ -1,7 +1,5 @@
 import React from "react";
-import productServices from "../../services/productService";
 import auctionServices from "../../services/auctionServices";
-import ReactDOM from "react-dom";
 import {
   Card,
   Button,
@@ -41,7 +39,6 @@ class Auction extends React.Component {
       userInfo: newProps.userInfo,
       handleShow: newProps.handleShow
     });
-    //  console.log('---->', newProps.product.participants[0].date)
   }
 
   testLogIn() {
@@ -75,11 +72,10 @@ class Auction extends React.Component {
             });
             this.state.socket.emit("new-auc", res.data);
           });
-
       } else {
         this.setState({
           alerShow: true
-        })
+        });
       }
     }
   }
@@ -97,12 +93,10 @@ class Auction extends React.Component {
   render() {
     return (
       <div>
-        <Alert variant='danger' show={this.state.alerShow} >
+        <Alert variant="danger" show={this.state.alerShow}>
           Please bet higher than: {this.state.product.last_auction_price}
         </Alert>
         <Card bg="light" className="auction">
-
-
           <Card.Body>
             <Card.Title className="text-center">
               <Card.Text>Value {this.state.product.value} DT</Card.Text>
@@ -111,20 +105,19 @@ class Auction extends React.Component {
             <Card.Header className="text-center timer">
               {(this.state.timer === true && (
                 <Countdown
-
                   date={new Date(this.state.product.end_date)}
                   onComplete={() => {
                     this.handletimerComplete();
                   }}
                 />
               )) || (
-                  <Card.Text className="text-center">
-                    Auction closed{" "}
-                    <Row>
-                      <Col className="text-center winner">{this.state.winer}</Col>
-                    </Row>
-                  </Card.Text>
-                )}
+                <Card.Text className="text-center">
+                  Auction closed{" "}
+                  <Row>
+                    <Col className="text-center winner">{this.state.winer}</Col>
+                  </Row>
+                </Card.Text>
+              )}
             </Card.Header>
             <br />
             <Row>
