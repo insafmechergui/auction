@@ -41,17 +41,19 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Container className="home">
-        {this.state.products.map(product => {
-          return (
-            // <MiniaturProduct product={product} />
-            <Link to={`/Product?id=${product._id}`}>
-              {" "}
-              <MiniaturProduct product={product} />{" "}
-            </Link>
-          );
-        })}
-      </Container>
+      <div style={{ backgroundColor: 'red' }}>
+        <Container >
+          {this.state.products.map(product => {
+            return (
+              // <MiniaturProduct product={product} />
+              <Link to={`/Product?id=${product._id}`}>
+                {" "}
+                <MiniaturProduct product={product} />{" "}
+              </Link>
+            );
+          })}
+        </Container>
+      </div>
     );
   }
 }

@@ -31,7 +31,7 @@ class Product extends React.Component {
   render() {
     return (
       <Row className="containerProduct">
-        <Col>
+        <Col >
           <div className="slides">
             <Carousel>
               <Carousel.Item>
