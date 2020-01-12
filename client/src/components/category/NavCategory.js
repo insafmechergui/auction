@@ -37,29 +37,47 @@ class NavCategory extends React.Component {
 
   render() {
     return (
-      <div>
+
+      // <div className='navcategory'>
+      //   <Nav >
+      //     <Navbar.Brand>Categories</Navbar.Brand>
+      //     {this.state.categoryList.map((cat) => {
+
+      //       return (
+      //         <Nav.Item>
+      //           <Nav.Link to="/"
+      //             onClick={e => {
+      //               this.handleClickCategory(cat.name);
+      //             }}>{cat.name}
+      //           </Nav.Link>
+      //         </Nav.Item>
+      //       )
+      //     })
+      //     }
+      //   </Nav>
+      // </div>
+
+
+      <div className='navcategory'>
         {/* navbar category change the sticky top */}
         <Navbar sticky="top">
           <Navbar.Brand>Category</Navbar.Brand>
-          <Nav className="mr-auto">
-            {this.state.categoryList.map(cat => {
-              return (
-                <div>
-                  {/* <Link onClick={(e) => { this.handleClickCategory(cat.name) }} >{cat.name}</Link> */}
-                  {/* <Link to='/' > />555 </Link> */}
-
-                  <Link
-                    to="/"
-                    onClick={e => {
-                      this.handleClickCategory(cat.name);
-                    }}
-                  >
-                    {" "}
-                    {cat.name}{" "}
-                  </Link>
-                </div>
-              );
-            })}
+          <Nav className="mr-auto ">
+            <div className='link' >
+              {this.state.categoryList.map(cat => {
+                return (
+                  <div >
+                    <Link className='link'
+                      to="/"
+                      onClick={e => {
+                        this.handleClickCategory(cat.name);
+                      }}
+                    >
+                      {cat.name}
+                    </Link>
+                  </div>
+                );
+              })}</div>
           </Nav>
         </Navbar>
       </div>

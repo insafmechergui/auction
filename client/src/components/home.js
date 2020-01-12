@@ -14,14 +14,12 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: props.products
     };
   }
 
-  componentWillMount() {
-    const { id } = queryString.parse(window.location.search);
-  }
   componentDidMount() {
+    console.log('home compenent====>hhh', this.state.products)
     if (this.props.products !== undefined && this.props.products.length > 0) {
       this.setState({
         products: this.props.products
@@ -35,9 +33,10 @@ class Home extends React.Component {
     }
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   this.setState({ products: newProps.products });
-  // }
+  componentWillReceiveProps(newProps) {
+    console.log('home compenent====>', newProps)
+    this.setState({ products: newProps.products });
+  }
 
   render() {
     return (

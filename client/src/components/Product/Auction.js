@@ -33,7 +33,7 @@ class Auction extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps)
+    //console.log(newProps)
 
     this.setState({
       product: newProps.product,
@@ -131,8 +131,8 @@ class Auction extends React.Component {
                 </Card.Text>
               </Col>
               <Col className="text-right">
-                <div>{this.state.history.length}</div>
-                {/* <Card.Text>{this.state.history[0].user.name} </Card.Text> */}
+                {(this.state.history[0] !== undefined) &&
+                  <Card.Text>{this.state.history[0].user.name} </Card.Text>}
               </Col>
             </Row>
 
