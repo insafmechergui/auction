@@ -10,7 +10,7 @@ export default {
         category: product.category,
         value: product.value,
         initial_date: product.initial_date,
-        duration: product.duration
+        end_date: product.end_date
       })
       .then(response => response)
       .catch(error => error);

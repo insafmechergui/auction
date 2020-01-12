@@ -1,11 +1,8 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+
+import { BrowserRouter as Router, Switch, Route,Link, } from "react-router-dom";
+
+
 import {
   Button,
   Form,
@@ -178,6 +175,7 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
+
                     <Nav className="mr-auto">
                       <Nav.Link>{this.state.userInfo.name}</Nav.Link>
                       <Nav.Link

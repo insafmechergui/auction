@@ -18,7 +18,7 @@ class AddProduct extends React.Component {
       initial_date: "",
       end_date: "",
       itemsCategory: [],
-      duration: "",
+
       show: false
     };
 
@@ -51,14 +51,13 @@ class AddProduct extends React.Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
     console.log("ffffffff", e.target.value);
-    console.log("duuuurraaation", this.state.duration);
   }
   onChangeEndDate(e) {
     this.setState({
-      end_date: e.target.value,
-      duration:
-        new Date(e.target.value).getTime() -
-        new Date(this.state.initial_date).getTime()
+      end_date: e.target.value
+      // duration:
+      //   new Date(e.target.value).getTime() -
+      //   new Date(this.state.initial_date).getTime()
     });
   }
 

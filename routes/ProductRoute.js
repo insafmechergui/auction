@@ -43,9 +43,7 @@ module.exports = app => {
     let product = new Product(req.body);
     product
       .save((err, result) => {
-
         console.log(err, result);
-
         res.send(result);
       })
       .catch(err => {
@@ -149,7 +147,6 @@ module.exports = app => {
     productDB.searchFilter(req.query.descreption, (err, data) => {
       if (err) res.status(404).send("not found");
       res.send(data);
-
     });
   });
 };
