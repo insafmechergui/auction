@@ -2,7 +2,7 @@ import React from "react";
 
 import productServices from "../../services/productService";
 import queryString from "query-string";
-import { Row, Col, Carousel, Container } from "react-bootstrap";
+import { Row, Col, Carousel, Container, Card } from "react-bootstrap";
 
 import Auction from "./Auction";
 
@@ -20,48 +20,48 @@ class Product extends React.Component {
       this.setState({
         product: res.data
       });
+      console.log('product', res.data)
     });
   }
 
   render() {
     return (
-      <Row className="containerProduct">
-        <Col>
-          <div className="slides">
-            <Carousel>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="slide1.webp"
-                  alt="First slide"
-                />
-                <Carousel.Caption>
+      <div>
+        <Row ><Card.Text className='productTitle px-5'>{this.state.product.descreption}</Card.Text></Row>
+        <Row className="containerProduct">
+          <Col>
 
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="slide2.webp"
-                  alt="Third slide"
-                />
+            <div className="slides">
 
-                <Carousel.Caption>
-                  <h3></h3>
-                  <p>
 
-                  </p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            </Carousel>
-          </div>
-        </Col>
-        <Auction
-          userInfo={this.props.userInfo}
-          product={this.state.product}
-          handleShow={this.props.handleShow}
-        ></Auction>
-      </Row>
+              <Carousel>
+
+                <br></br>
+                {this.state.product.images !== undefined && this.state.product.images.map((image) =>
+
+                  < Carousel.Item >
+                    <img
+                      className="d-block w-100"
+                      src={image}
+                      alt="First slide"
+                    />
+                    <Carousel.Caption>
+
+                    </Carousel.Caption>
+                  </Carousel.Item>
+
+                )}
+
+              </Carousel>
+            </div>
+          </Col>
+          <Auction
+            userInfo={this.props.userInfo}
+            product={this.state.product}
+            handleShow={this.props.handleShow}
+          ></Auction>
+        </Row >
+      </div>
     );
   }
 }

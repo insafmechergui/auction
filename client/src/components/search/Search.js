@@ -8,7 +8,7 @@ import {
     Redirect,
     Link
 } from "react-router-dom";
-import { Navbar, Nav, NavDropdown, FormControl } from "react-bootstrap";
+import { FormControl } from "react-bootstrap";
 
 class Search extends React.Component {
     constructor(props) {
