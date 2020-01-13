@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const userSchema = new Schema({
   name: { type: String, required: true },
@@ -43,10 +44,9 @@ const findUser = (userEmail, callback) => {
 };
 
 const generateAuthToken = (user, callback) => {
-  // prive key should be  {process.env.JWT_KEY}
   jwt.sign(
     { _id: user._id },
-    "private key",
+    process.env.JWT_KEY,
     { expiresIn: "90m" },
     (err, token) => {
       if (err) throw err;
