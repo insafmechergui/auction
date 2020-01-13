@@ -32,7 +32,10 @@ db.once("open", () => console.log("mongoose is connected connected"));
 
 //exemple for useing routes files
 
+let PORT = 5000;
 if (process.env.NODE_ENV === "production") {
+  PORT = process.env.PORT || 5000;
+
   app.use(express.static("client/build"));
 
   const path = require("path");
@@ -41,7 +44,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
 });
