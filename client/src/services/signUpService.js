@@ -9,6 +9,6 @@ export default {
         password: user.password
       })
       .then(response => response)
-      .catch(error => error);
+      .catch(error => error.response);
   }
 };

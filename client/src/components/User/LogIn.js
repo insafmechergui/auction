@@ -38,7 +38,10 @@ class LogIn extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value,
+      alert: { ...this.state.alert, state: false }
+    });
   }
 
   render() {
@@ -54,7 +57,6 @@ class LogIn extends React.Component {
           <Alert
             variant={this.state.alert.variant}
             show={this.state.alert.state}
-            dismissible
           >
             {this.state.alert.text}
           </Alert>
@@ -78,9 +80,6 @@ class LogIn extends React.Component {
               placeholder="Password"
               onChange={this.handleChange}
             />
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
           <Form.Group className="text-center">
             <Button variant="primary" type="submit">
