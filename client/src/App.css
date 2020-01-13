@@ -78,6 +78,10 @@ body {
   padding-bottom:15px;
 }
 
+#productTable{
+  background-color: #918982;
+}
+
 /* 
 .productTitle{
   overflow: hidden;
@@ -241,10 +245,13 @@ margin: 40px;
   border: 1px solid #ccc;
   float: left;
   font-size: 1em;
+  background-color: #918982;
 }
 
 .addProduct form{
   padding: 20px;
+ 
+
 }
 
 .winner{

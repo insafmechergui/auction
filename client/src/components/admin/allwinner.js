@@ -32,7 +32,9 @@ class AllWinner extends React.Component {
 
   render() {
     return (
+
       <div id="productTable">
+
         <Table striped bordered hover>
           <thead>
             <tr>
