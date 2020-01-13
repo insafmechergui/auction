@@ -5,7 +5,6 @@ import productService from "../../services/productService.js";
 import categoryService from "../../services/categoryService.js";
 import AddCategory from "../category/AddCategory";
 
-
 class AddProduct extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +12,7 @@ class AddProduct extends React.Component {
       name: "",
       descreption: "",
       image: "",
+      images: "",
       category: "",
       value: "",
       initial_date: "",
@@ -50,7 +50,6 @@ class AddProduct extends React.Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-
   }
   onChangeEndDate(e) {
     this.setState({
@@ -163,6 +162,19 @@ class AddProduct extends React.Component {
                 this.onChange(e);
               }}
               placeholder="image"
+            />
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlImages">
+            <Form.Label>Images</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="3"
+              name="images"
+              placeholder="Other images"
+              value={this.state.images}
+              onChange={e => {
+                this.onChange(e);
+              }}
             />
           </Form.Group>
 

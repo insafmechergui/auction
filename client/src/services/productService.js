@@ -7,6 +7,7 @@ export default {
         name: product.name,
         descreption: product.descreption,
         image: product.image,
+        images: product.images,
         category: product.category,
         value: product.value,
         initial_date: product.initial_date,
