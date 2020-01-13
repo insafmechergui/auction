@@ -77,6 +77,7 @@ class Admin extends React.Component {
           <div id="productTable">
             <Table striped bordered hover>
               <thead>
+                <caption>capppp</caption>
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
