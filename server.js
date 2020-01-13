@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const socket = require("socket.io");
+
+require("dotenv").config();
 const app = express();
 
 app.use(bodyParser.json());
@@ -38,6 +40,8 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+console.log(process.env.PORT);
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
