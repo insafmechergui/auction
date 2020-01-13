@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 let Product = mongoose.model("Product");
-let productDB = require("../Database/Product");
+
 let User = mongoose.model("user");
 const express = require("express");
 const app = express();
@@ -8,10 +8,12 @@ const app = express();
 const cors = require("cors");
 
 const Products = require("../Database/Product");
+const Category = require("../Database/Category ");
 
 app.use(cors());
 
 module.exports = app => {
+
   app.get("/api/products", (req, res) => {
     Products.getAll((err, data) => {
       if (err) {
@@ -40,21 +42,21 @@ module.exports = app => {
   // question if the admin make a mistake on adding a product can he update if ?????
 
   app.post("/api/addp", (req, res) => {
-    let product = new Product(req.body);
-    product
-      .save((err, result) => {
-        console.log(err, result);
-        res.send(result);
-      })
-      .catch(err => {
-        res.status(400).send({ msg: "adding new product failed", err });
-      });
+    console.log(req.body);
+    //.body.images = req.body.images.split(',')
+    Product.create(req.body, (err, result) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(result);
+        Category.updateProductCategory(result.category, result._id)
+        res.end()
+      }
+    })
   });
 
   app.put("/api/updateAuction", (req, res) => {
     // the user should be provided for now his id is in the req
-
-    console.log("auction update====> ", req.body);
 
     Product.findOneAndUpdate(
       { _id: req.body.id },
@@ -141,12 +143,21 @@ module.exports = app => {
   //   });
   // });
 
-  // update current price
-
   app.get("/api/productsearch", (req, res) => {
-    productDB.searchFilter(req.query.descreption, (err, data) => {
-      if (err) res.status(404).send("not found");
+    Products.searchFilter(req.query.descreption, (err, data) => {
+      if (err)
+        res.status(404).send("not found");
       res.send(data);
+    });
+  });
+
+  app.get("/api/productWinner", (req, res) => {
+    Products.completedPro((err, data) => {
+      if (err) {
+        res.status(404).send("not found");
+      } else {
+        res.status(200).send(data);
+      }
     });
   });
 };

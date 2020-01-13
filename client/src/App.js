@@ -10,14 +10,17 @@ import {
   Navbar,
   Nav,
   NavDropdown,
-  FormControl
+  FormControl,
+  Carousel,
+  Jumbotron
 } from "react-bootstrap";
 
 import LogIn from "./components/User/LogIn.js";
 import SignUp from "./components/User/signup";
 import Home from "./components/home";
-import AddProduct from "./components/Product/addProduct";
-import AddCategory from "./components/category/AddCategory";
+
+import Search from './components/search/Search';
+
 import NavCategory from "./components/category/NavCategory";
 import Product from "./components/Product/Product.js";
 import Admin from "./components/admin/Admin.js";
@@ -103,26 +106,23 @@ class App extends React.Component {
   }
   ///////////////////////product functions
   // send a get request to ..../search
-  filterProduct(e) {
-    e.preventDefault();
-    productService
-      .search(this.state.description)
-      .then(res => {
-        var result = res.data;
-        for (var i = 0; i < result.length; i++) {
-          this.state.products.push(result[i]);
-        }
-      })
-      .catch(err => console.log(err));
-  }
+
 
   ////////////////////////  chategoies
 
   handleClickCategory(data) {
+
     this.setState({
       products: data[0].products
     });
   }
+  onClickSearch(data) {
+    console.log('category data======>', data[0].products)
+    this.setState({
+      products: data
+    });
+  }
+
 
   render() {
     return (
@@ -169,66 +169,84 @@ class App extends React.Component {
                     </Nav.Link>
                   </Nav>
                 ) : (
-                  <Nav className="mr-auto">
-                    <Nav.Link>{this.state.userInfo.name}</Nav.Link>
-                    <Nav.Link
-                      onClick={() => {
-                        this.hundleSignOut();
-                      }}
-                    >
-                      SignOut
+                    <Nav className="mr-auto">
+                      <Nav.Link>{this.state.userInfo.name}</Nav.Link>
+                      <Nav.Link
+                        onClick={() => {
+                          this.hundleSignOut();
+                        }}
+                      >
+                        SignOut
                     </Nav.Link>
-                  </Nav>
-                )}
-                <Form inline>
-                  <FormControl
-                    type="text"
-                    placeholder="Search"
-                    className="mr-sm-2"
-                    onChange={e => {
-                      this.onChange(e);
-                    }}
-                  />
-                  <Button
-                    variant="outline-success"
-                    onClick={e => this.filterProduct(e)}
-                  >
-                    Search
-                  </Button>
-                </Form>
+                    </Nav>
+                  )}
+
+
+                <Search onClick={(data) => this.onClickSearch(data)}></Search>
               </Navbar.Collapse>
             </Navbar>
+
           </Switch>
-          <NavCategory
-            onClick={data => {
-              this.handleClickCategory(data);
-            }}
-          />
+
+          <div>
+            <Jumbotron>
+              {/* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img class="img-fluid test" src="http://auctionfire.com/wp-content/uploads/2017/12/Understand-How-The-Auctions-Come-About.png" alt="First slide" />
+                  </div>
+                  <div class="carousel-item">
+                    <img class="img-fluid" src="..." alt="Second slide" />
+                  </div>
+                  <div class="carousel-item">
+                    <img class="img-fluid" src="..." alt="Third slide" />
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div> */}
+            </Jumbotron>
+            <NavCategory
+              onClick={data => {
+                this.handleClickCategory(data);
+              }}
+            />
+          </div>
+
+
+
 
           <Route
             exact
             path="/"
-            component={() => <Home product={this.state.products} />}
+            component={() => <Home products={this.state.products} />}
           />
-          <div className="mainpro">
-            <Route
-              exact
-              path="/product"
-              component={() => (
-                <Product
-                  userInfo={this.state.userInfo}
-                  handleShow={this.handleShow}
-                />
-              )}
-            />
-          </div>
+
+
+          <Route
+            exact
+            path="/product"
+            component={() => (
+              <Product
+                userInfo={this.state.userInfo}
+                handleShow={this.handleShow}
+              />
+            )}
+          />
+
           <Route
             exact
             path="/admin"
             component={() => <Admin userInfo={this.state.userInfo} />}
           />
         </Router>
-      </div>
+      </div >
     );
   }
 }

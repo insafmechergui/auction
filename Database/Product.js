@@ -15,7 +15,7 @@ const productSchema = new Schema({
     }
   },
   category: [{ type: Schema.Types.ObjectId, ref: "Categorie" }],
-  last_auction_price: { type: Number },
+  last_auction_price: { type: Number, default: '0' },
   value: { type: Number },
   initial_date: { type: Date },
   end_date: { type: Date },
@@ -33,13 +33,16 @@ productSchema.index({ descreption: "text" });
 var Product = mongoose.model("Product", productSchema);
 
 var getAll = function (callback) {
-  Product.find({ initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } }, (err, data) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, data);
+  Product.find(
+    { initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } },
+    (err, data) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
     }
-  });
+  );
 };
 
 var getOne = function (id, callback) {
@@ -59,7 +62,7 @@ var searchFilter = function (descriptionfilter, callback) {
   // Product.find({$text: {$search: searchString}})
   // "$text": {"$search": req.body.query}
   // {$text: {$search: descriptionfilter}}
-  Product.find({ $text: { $search: descriptionfilter } }, (err, data) => {
+  Product.find({ $text: { $search: descriptionfilter }, initial_date: { $lte: new Date() }, end_date: { $gte: new Date() } }, (err, data) => {
     if (err) {
       callback(err, null);
     } else {
@@ -89,7 +92,19 @@ var findWinner = function (idProduct, callback) {
       }
     });
 };
+
+var completedPro = function (callback) {
+  Product.find({ end_date: { $lte: new Date() } }, (err, data) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, data);
+
+    }
+  });
+};
 module.exports.getAll = getAll;
 module.exports.getOne = getOne;
 module.exports.searchFilter = searchFilter;
 module.exports.findWinner = findWinner;
+module.exports.completedPro = completedPro;

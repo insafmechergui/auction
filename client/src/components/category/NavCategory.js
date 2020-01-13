@@ -37,32 +37,80 @@ class NavCategory extends React.Component {
 
   render() {
     return (
-      <div>
-        {/* navbar category change the sticky top */}
-        <Navbar sticky="top">
-          <Navbar.Brand>Category</Navbar.Brand>
+
+      // <div className='navcategory'>
+      //   <Nav >
+      //     <Navbar.Brand>Categories</Navbar.Brand>
+      //     {this.state.categoryList.map((cat) => {
+
+      //       return (
+      //         <Nav.Item>
+      //           <Nav.Link to="/"
+      //             onClick={e => {
+      //               this.handleClickCategory(cat.name);
+      //             }}>{cat.name}
+      //           </Nav.Link>
+      //         </Nav.Item>
+      //       )
+      //     })
+      //     }
+      //   </Nav>
+      // </div>
+
+
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand >Categories</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
+
             {this.state.categoryList.map(cat => {
               return (
-                <div>
-                  {/* <Link onClick={(e) => { this.handleClickCategory(cat.name) }} >{cat.name}</Link> */}
-                  {/* <Link to='/' > />555 </Link> */}
-
-                  <Link
+                <Nav.Link>
+                  <Link className="text-decoration-none text-white"
                     to="/"
                     onClick={e => {
                       this.handleClickCategory(cat.name);
                     }}
                   >
-                    {" "}
-                    {cat.name}{" "}
-                  </Link>
-                </div>
+                    {cat.name}
+                  </Link></Nav.Link>
+
               );
             })}
           </Nav>
-        </Navbar>
-      </div>
+          {/* <Nav>
+            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+              Dank memes
+      </Nav.Link>
+          </Nav> */}
+        </Navbar.Collapse>
+      </Navbar>
+
+      // <div className='navcategory'>
+      //   {/* navbar category change the sticky top */}
+      //   <Navbar sticky="top">
+      //     <Navbar.Brand>Category</Navbar.Brand>
+      //     <Nav className="mr-auto ">
+      //       <div className='link' >
+      //         {this.state.categoryList.map(cat => {
+      //           return (
+      //             <div >
+      //               <Link className='link'
+      //                 to="/"
+      //                 onClick={e => {
+      //                   this.handleClickCategory(cat.name);
+      //                 }}
+      //               >
+      //                 {cat.name}
+      //               </Link>
+      //             </div>
+      //           );
+      //         })}</div>
+      //     </Nav>
+      //   </Navbar>
+      // </div>
     );
   }
 }

@@ -4,7 +4,7 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import productService from "../../services/productService.js";
 import categoryService from "../../services/categoryService.js";
 import AddCategory from "../category/AddCategory";
-import DatePicker from "react-datepicker";
+
 
 class AddProduct extends React.Component {
   constructor(props) {
@@ -25,10 +25,10 @@ class AddProduct extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
   componentDidMount() {
-    this.hundleGetAllCategories();
+    this.handleGetAllCategories();
   }
 
-  hundleGetAllCategories() {
+  handleGetAllCategories() {
     categoryService.getAllCategories().then(res => {
       this.setState({
         itemsCategory: res.data
@@ -50,7 +50,7 @@ class AddProduct extends React.Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log("ffffffff", e.target.value);
+
   }
   onChangeEndDate(e) {
     this.setState({
@@ -77,7 +77,7 @@ class AddProduct extends React.Component {
     this.setState({
       show: false
     });
-    this.hundleGetAllCategories();
+    this.handleGetAllCategories();
   }
   render() {
     return (

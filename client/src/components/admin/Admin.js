@@ -3,6 +3,7 @@ import { Button, Form, InputGroup, Table } from "react-bootstrap";
 import AddProduct from "../Product/addProduct.js";
 import serviceProduct from "../../services/productService.js";
 import adminServices from "./../../services/adminServices.js";
+import AllWinner from "./allwinner";
 
 class Admin extends React.Component {
   constructor(props) {
@@ -66,7 +67,39 @@ class Admin extends React.Component {
   }
 
   render() {
-    return <React.Fragment>{this.state.render}</React.Fragment>;
+    // return <React.Fragment>{this.state.render}</React.Fragment>;
+    return (
+      <React.Fragment>
+        <>
+          <div id="addProduct">
+            <AddProduct />
+          </div>
+          <div id="productTable">
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Initial Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.products.map(product => {
+                  return (
+                    <tr>
+                      <td>{product._id}</td>
+                      <td>{product.name}</td>
+                      <td>{product.initial_date}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+          <AllWinner></AllWinner>
+        </>
+      </React.Fragment>
+    );
   }
 }
 export default Admin;
