@@ -189,8 +189,8 @@ class App extends React.Component {
           </Switch>
 
           <div>
-            <Jumbotron>
-              {/* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            {/* <Jumbotron> */}
+            {/* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img class="img-fluid test" src="http://auctionfire.com/wp-content/uploads/2017/12/Understand-How-The-Auctions-Come-About.png" alt="First slide" />
@@ -211,7 +211,7 @@ class App extends React.Component {
                   <span class="sr-only">Next</span>
                 </a>
               </div> */}
-            </Jumbotron>
+            {/* </Jumbotron> */}
             <NavCategory
               onClick={data => {
                 this.handleClickCategory(data);

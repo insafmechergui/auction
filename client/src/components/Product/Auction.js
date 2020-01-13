@@ -100,8 +100,10 @@ class Auction extends React.Component {
         <Alert variant="danger" show={this.state.alerShow}>
           Please bet higher than: {this.state.product.last_auction_price}
         </Alert>
+
         <Card bg="light" className="auction">
           <Card.Body>
+
             <Card.Title className="text-center">
               <Card.Text>Value {this.state.product.value} DT</Card.Text>
             </Card.Title>
