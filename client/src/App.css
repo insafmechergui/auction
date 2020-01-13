@@ -73,6 +73,10 @@ body {
   padding-bottom: 15px;
 }
 
+#productTable {
+  background-color: #918982;
+}
+
 /* 
 .productTitle{
   overflow: hidden;
@@ -201,9 +205,9 @@ body {
 .signup {
   transition: 0.2s;
   /* width: 100%; */
-  height: 945px;
+  height: 94555555px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 30rem;
+  /* width: 30rem; */
   border-radius: 10px;
   border: 1px solid #ccc;
   float: left;
@@ -227,7 +231,7 @@ body {
   border: 1px solid #ccc;
   float: left;
   font-size: 1em;
-  background-color: white;
+  background-color: #918982;
 }
 
 .addProduct form {
@@ -237,8 +241,4 @@ body {
 .winner {
   color: green;
   font-size: 1.1em;
-}
-
-#productTable table {
-  background-color: white;
 }

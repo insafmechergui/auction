@@ -1,13 +1,12 @@
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const User = mongoose.model("user");
+require("dotenv").config();
 
 const auth = (req, res, next) => {
-  // const token = req.header("Authorization").replace("Bearer ", "");
   const token = req.body.token;
   if (token !== null) {
-    //should be process.env.JWT_KEY
-    jwt.verify(token, "private key", (err, decoded) => {
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
       if (err) {
         return res
           .status(401)

@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, Form, InputGroup, Table } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Card,
+  Table,
+  Row,
+  Col,
+  Accordion
+} from "react-bootstrap";
 import AddProduct from "../Product/addProduct.js";
 import serviceProduct from "../../services/productService.js";
 import adminServices from "./../../services/adminServices.js";
@@ -22,33 +30,77 @@ class Admin extends React.Component {
         if (res === true) {
           this.setState({
             render: (
-              <>
-                <div id="addProduct">
-                  <AddProduct />
-                </div>
-                <div id="productTable">
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Initial Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.products.map(product => {
-                        return (
-                          <tr>
-                            <td>{product._id}</td>
-                            <td>{product.name}</td>
-                            <td>{product.initial_date}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </div>
-              </>
+              <div>
+                <Row>
+                  <Col>
+                    <div id="addProduct">
+                      <AddProduct />
+                    </div>
+                  </Col>
+
+                  <Col>
+                    <Accordion defaultActiveKey="0">
+                      <Card>
+                        <Card.Header>
+                          <Accordion.Toggle
+                            as={Button}
+                            variant="link"
+                            eventKey="0"
+                          >
+                            <center>
+                              <h1>Closed Auctions</h1>
+                            </center>
+                          </Accordion.Toggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                          <AllWinner></AllWinner>
+                        </Accordion.Collapse>
+                      </Card>
+
+                      <Card>
+                        <Card.Header>
+                          <Accordion.Toggle
+                            as={Button}
+                            variant="link"
+                            eventKey="1"
+                          >
+                            <center>
+                              <h1>Current Auctions</h1>
+                            </center>
+                          </Accordion.Toggle>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="1">
+                          <div id="productTable">
+                            <center>
+                              <h1>Current Auctions </h1>
+                            </center>
+                            <Table striped bordered hover>
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Name</th>
+                                  <th>Initial Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {this.state.products.map(product => {
+                                  return (
+                                    <tr>
+                                      <td>{product._id}</td>
+                                      <td>{product.name}</td>
+                                      <td>{product.initial_date}</td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </Table>
+                          </div>
+                        </Accordion.Collapse>
+                      </Card>
+                    </Accordion>
+                  </Col>
+                </Row>
+              </div>
             )
           });
         }
@@ -67,40 +119,7 @@ class Admin extends React.Component {
   }
 
   render() {
-    // return <React.Fragment>{this.state.render}</React.Fragment>;
-    return (
-      <React.Fragment>
-        <>
-          <div id="addProduct">
-            <AddProduct />
-          </div>
-          <div id="productTable">
-            <Table striped bordered hover>
-              <thead>
-                <caption>capppp</caption>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Initial Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.products.map(product => {
-                  return (
-                    <tr>
-                      <td>{product._id}</td>
-                      <td>{product.name}</td>
-                      <td>{product.initial_date}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          </div>
-          <AllWinner></AllWinner>
-        </>
-      </React.Fragment>
-    );
+    return <React.Fragment>{this.state.render}</React.Fragment>;
   }
 }
 export default Admin;
