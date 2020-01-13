@@ -21,7 +21,7 @@ require("./routes/AdminRoute")(app);
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://localhost:27017/auctionProject`,
+  process.env.MONGODB_URI, // || `mongodb://localhost:27017/auctionProject`,
   { useUnifiedTopology: true, useNewUrlParser: true }
 );
 
@@ -41,7 +41,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-console.log(process.env.PORT);
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`);
