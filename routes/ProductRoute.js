@@ -13,7 +13,6 @@ const Category = require("../Database/Category ");
 app.use(cors());
 
 module.exports = app => {
-
   app.get("/api/products", (req, res) => {
     Products.getAll((err, data) => {
       if (err) {
@@ -43,16 +42,20 @@ module.exports = app => {
 
   app.post("/api/addp", (req, res) => {
     console.log(req.body);
-    //.body.images = req.body.images.split(',')
+
+    // images
+    req.body.images = req.body.images.split(",");
+
+
     Product.create(req.body, (err, result) => {
       if (err) {
         res.status(400).send(err);
       } else {
         res.status(200).send(result);
-        Category.updateProductCategory(result.category, result._id)
-        res.end()
+        Category.updateProductCategory(result.category, result._id);
+        res.end();
       }
-    })
+    });
   });
 
   app.put("/api/updateAuction", (req, res) => {
