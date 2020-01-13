@@ -40,5 +40,19 @@ export default {
       .catch(err => {
         throw err;
       });
+  },
+  // service get winner
+  winner: () => {
+    return axios
+      .get("/api/productWinner")
+      .then(response => {
+        console.log("sssssssssss", response);
+
+        return response;
+      })
+
+      .catch(err => {
+        console.log("rrrrrrrrrrrrrr", err);
+      });
   }
 };
