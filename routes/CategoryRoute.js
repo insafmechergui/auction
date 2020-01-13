@@ -22,14 +22,24 @@ module.exports = app => {
     });
   });
 
-  app.get("/api/getProducts", (req, res) => {
-    console.log(req.query.category);
-    Category.getAllProductByCategory(req.query.category, (err, data) => {
-      if (err) {
-        res.status(401).send(err);
+  app.delete("/api/deleteCategory", (req, res) => {
+    Category.deleteCategory(req.body.name, (err, result) => {
+      if (result) {
+        res.status(200).send("true");
       } else {
-        res.status(200).send(data);
+        res.status(404).send("false");
       }
+    });
+
+    app.get("/api/categories", (req, res) => {
+      Category.getAll((err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.status(200).send(data);
+          res.end();
+        }
+      });
     });
   });
 

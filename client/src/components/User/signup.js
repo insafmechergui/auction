@@ -9,9 +9,7 @@ class SignUp extends React.Component {
       name: "",
       email: "",
       password: "",
-      show: false,
-      alert: "success",
-      message: "Email already exist",
+      alert: { state: false, text: "", variant: "" },
       showModal: true
     };
 
@@ -19,23 +17,28 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  hundleShowAlert() {}
   handleSubmit(event) {
     event.preventDefault();
     signUpService.getAll(this.state).then(res => {
-      if (res.data === "user already exists") {
+      if (res.status === 404) {
         this.setState({
-          show: true,
-          alert: "danger",
-          message: "Email already exist"
+          alert: {
+            state: true,
+            text: res.data._message || res.data,
+            variant: "danger"
+          }
         });
-      } else {
+      }
+      if (res.status === 200) {
         this.setState({
-          show: true,
-          alert: "success",
-          message: "Sign up Successful"
+          alert: {
+            state: true,
+            variant: "success",
+            text: "Sign up Successful wait to be reddirected "
+          }
         });
         // this.props.changeUserName(res.data.user._id, res.data.user.name); // res.data is  json ??? problem in the back end i guess
+
         this.props.handleShow("SignUp");
       }
     });
@@ -44,15 +47,16 @@ class SignUp extends React.Component {
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
-      show: false
+      alert: { ...this.state.alert, state: false }
     });
   }
+
   handleClose() {
     this.setState({ showModal: false });
   }
+
   render() {
     return (
-      // <div className='signup'>
       <Modal
         className="signup"
         show={this.props.showModal}
@@ -61,8 +65,11 @@ class SignUp extends React.Component {
         }}
       >
         <Form onSubmit={this.handleSubmit}>
-          <Alert variant={this.state.alert} show={this.state.show} dismissible>
-            {this.state.message}
+          <Alert
+            variant={this.state.alert.variant}
+            show={this.state.alert.state}
+          >
+            {this.state.alert.text}
           </Alert>
           <div id="dataError"></div>
           <Form.Group controlId="name">
@@ -105,7 +112,7 @@ class SignUp extends React.Component {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            SugnUp
+            SignUp
           </Button>
         </Form>
       </Modal>
