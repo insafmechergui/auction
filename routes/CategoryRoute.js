@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 const Category = require("../Database/Category ");
 module.exports = app => {
-
-
-
     app.post('/api/AddCategory', (req, res) => {
 
         Category.createCategory(req.body, (err, data) => {
@@ -15,6 +12,7 @@ module.exports = app => {
             }
         })
     })
+
 
     app.delete("/api/deleteCategory", (req, res) => {
         Category.deleteCategory(req.body.name, (err, result) => {
@@ -39,6 +37,7 @@ module.exports = app => {
     });
 
 
+
     app.get("/api/categories", (req, res) => {
         Category.getAll((err, data) => {
             if (err) {
@@ -48,6 +47,7 @@ module.exports = app => {
                 res.end();
             }
         });
+
     });
 }
 
