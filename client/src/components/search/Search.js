@@ -15,7 +15,7 @@ class Search extends React.Component {
         super(props);
         this.state = {
             products: [],
-            text: false
+            text: ''
         };
     }
     componentDidMount() {
@@ -37,10 +37,13 @@ class Search extends React.Component {
 
     filterProduct(e) {
         e.preventDefault();
-        productService.search(this.state.text).then(res => {
-            console.log(res.data)
-            this.props.onClick(res.data)
-        })
+        if (this.state.text !== '') {
+            productService.search(this.state.text).then(res => {
+                console.log(res.data)
+                if (res.data.length !== 0)
+                    this.props.onClick(res.data)
+            })
+        }
     }
 
 
@@ -52,6 +55,7 @@ class Search extends React.Component {
                     type="text"
                     placeholder="Search"
                     className="mr-sm-2"
+                    required
                     onChange={e => {
                         this.onChange(e);
                     }}
