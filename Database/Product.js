@@ -28,7 +28,6 @@ const productSchema = new Schema({
   ],
   // add imgs schema
   images: [],
-  winner: [{ type: Schema.Types.ObjectId, ref: "user" }]
 });
 productSchema.index({ descreption: "text" });
 
