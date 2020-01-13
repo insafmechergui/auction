@@ -1,0 +1,72 @@
+{ 
+    "_id" : ObjectId("5e1a1cecbf9edf1aa8d756a0"), 
+    "products" : [
+        ObjectId("5e1c2c2214d18732a8a7118a")
+    ], 
+    "name" : "mehdi", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c337b09922209b82e34cb"), 
+    "products" : [
+        ObjectId("5e1c338c09922209b82e34cd"), 
+        ObjectId("5e1c3fcf09922209b82e34df")
+    ], 
+    "name" : "Tourism", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c362109922209b82e34ce"), 
+    "products" : [
+        ObjectId("5e1c369009922209b82e34d0")
+    ], 
+    "name" : "Technology", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c388f09922209b82e34d1"), 
+    "products" : [
+        ObjectId("5e1c389509922209b82e34d3"), 
+        ObjectId("5e1c416c09922209b82e34e0")
+    ], 
+    "name" : "Sport", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c39c409922209b82e34d4"), 
+    "products" : [
+        ObjectId("5e1c39cc09922209b82e34d6")
+    ], 
+    "name" : "Home", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c3a0109922209b82e34d7"), 
+    "products" : [], 
+    "name" : "Appliances", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c3a8f09922209b82e34d9"), 
+    "products" : [ObjectId("5e1c3b9e09922209b82e34db")], 
+    "name" : "Cars", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c3e1009922209b82e34dc"), 
+    "products" : [ObjectId("5e1c3e1709922209b82e34de")], 
+    "name" : "Arts", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c43af09922209b82e34e1"), 
+    "products" : [ObjectId("5e1c43b909922209b82e34e3")], 
+    "name" : "Education", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e1c469a09922209b82e34e4"), 
+    "products" : [ObjectId("5e1c46a909922209b82e34e6")], 
+    "name" : "Games", 
+    "__v" : NumberInt(0)
+}

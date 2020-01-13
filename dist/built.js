@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 require("./Database/Product");
+require("dotenv").config();
 
 const app = express();
 
@@ -187,10 +188,9 @@ const findUser = (userEmail, callback) => {
 };
 
 const generateAuthToken = (user, callback) => {
-  // prive key should be  {process.env.JWT_KEY}
   jwt.sign(
     { _id: user._id },
-    "private key",
+    process.env.JWT_KEY,
     { expiresIn: "5m" },
     (err, token) => {
       if (err) throw err;
@@ -257,8 +257,7 @@ const auth = (req, res, next) => {
   // const token = req.header("Authorization").replace("Bearer ", "");
   const token = req.body.token;
   if (token !== null) {
-    //should be process.env.JWT_KEY
-    jwt.verify(token, "private key", (err, decoded) => {
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
       if (err)
         res
           .status(401)
